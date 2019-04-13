@@ -14,7 +14,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Sign Up</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -30,7 +30,12 @@ class Register extends Component {
             />
           </div>
           <div className="form-group">
-            <input type="submit" value="Register" onSubmit={this.onSubmit} />
+            <input
+              type="submit"
+              className="btn btn-primary"
+              value="Register"
+              onSubmit={this.onSubmit}
+            />
           </div>
         </form>
       </div>

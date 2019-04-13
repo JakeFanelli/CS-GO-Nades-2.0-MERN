@@ -7,11 +7,11 @@ import Recoils from "./Recoils";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
 
-const MenuBar = props => (
+const MenuBar = () => (
   <Router>
     <div>
       <Navbar bg="dark" expand="lg" variant="dark">
-        <Link to="/" class="navbar-brand">
+        <Link to="/" className="navbar-brand">
           CSGO NAYDESSS
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,8 +20,11 @@ const MenuBar = props => (
             <Link to="/maps" className="nav-link">
               Maps
             </Link>
-            <Link to="/recoils" class="nav-link">
+            <Link to="/recoils" className="nav-link">
               Recoil Patterns
+            </Link>
+            <Link to="/register" className="nav-link">
+              Register
             </Link>
           </Nav>
         </Navbar.Collapse>
