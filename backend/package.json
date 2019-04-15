@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,13 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "es6-promisify": "^6.0.1",
     "express": "^4.16.4",
-    "mongoose": "^5.5.1"
+    "md5": "^2.2.1",
+    "mongoose": "^5.5.1",
+    "mongoose-mongodb-errors": "0.0.2",
+    "nodemon": "^1.18.11",
+    "passport-local-mongoose": "^5.0.1",
+    "validator": "^10.11.0"
   }
 }
