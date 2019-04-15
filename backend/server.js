@@ -32,10 +32,10 @@ routes.route("/users").get(function(req, res) {
   });
 });
 
-routes.route("/register").post = async (req, res) => {
+routes.route("/register").post(async function(req, res) {
   let user = new User({ email: req.body.email, name: req.body.name });
   console.log(user);
-  const register = promisify(User.register, User);
+  const register = (User.register, User);
   await register(user, req.body.password);
   user
     .save()
@@ -45,7 +45,7 @@ routes.route("/register").post = async (req, res) => {
     .catch(err => {
       res.status(400).send(`Registration failed - ${err.message}`);
     });
-};
+});
 
 app.use("/react-node", routes);
 
