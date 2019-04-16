@@ -8,12 +8,14 @@ class Register extends Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      passwordConfirm: ""
     };
   }
 
@@ -22,24 +24,30 @@ class Register extends Component {
     const newUser = {
       name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm
     };
 
     axios
       .post("http://localhost:4000/react-node/register", newUser)
       .then(res => {
-        console.log(res.data);
+        console.log("NO ERRORS");
+        //console.log(res.errors);
+        //res.data.map(err => console.log(err));
       })
       .catch(error => {
         if (error.response) {
-          console.log(error.response.data);
+          //console.log(error.response.data.errors);
+          error.response.data.errors.map(err => console.log(err.msg));
+          //console.log(error.response.data.errors);
         }
       });
 
     this.setState({
       name: "",
       email: "",
-      password: ""
+      password: "",
+      passwordConfirm: ""
     });
   }
 
@@ -58,6 +66,11 @@ class Register extends Component {
       password: e.target.value
     });
   }
+  onChangePasswordConfirm(e) {
+    this.setState({
+      passwordConfirm: e.target.value
+    });
+  }
 
   render() {
     return (
@@ -68,17 +81,19 @@ class Register extends Component {
             <label>Name</label>
             <input
               type="text"
+              name="name"
               className="form-control"
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChangeName}
-              //required
+              required
             />
           </div>
           <div className="form-group">
             <label>Email</label>
             <input
               type="email"
+              name="email"
               className="form-control"
               placeholder="Email"
               value={this.state.email}
@@ -90,10 +105,23 @@ class Register extends Component {
             <label>Password</label>
             <input
               type="password"
+              name="password"
               className="form-control"
               placeholder="Password"
               value={this.state.password}
               onChange={this.onChangePassword}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="passwordConfirm"
+              className="form-control"
+              placeholder="Password"
+              value={this.state.passwordConfirm}
+              onChange={this.onChangePasswordConfirm}
               required
             />
           </div>

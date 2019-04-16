@@ -3,26 +3,28 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const promisify = require("es6-promisify");
-const routes = express.Router();
-
+const { promisify } = require("es6-promisify");
+const router = express.Router();
+require("./models/User");
+const userController = require("./controllers/userController");
 const PORT = 4000;
-
-let User = require("./models/Users");
+const User = require("./models/User");
+const expressValidator = require("express-validator");
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(expressValidator());
 
 mongoose.connect("mongodb://127.0.0.1:27017/react-node", {
   useNewUrlParser: true
 });
+mongoose.Promise = global.Promise;
 const connection = mongoose.connection;
-
 connection.once("open", function() {
   console.log("MongoDB connection established successfully.");
 });
 
-routes.route("/users").get(function(req, res) {
+router.route("/users").get(function(req, res) {
   User.find(function(err, users) {
     if (err) {
       console.log(err);
@@ -32,11 +34,14 @@ routes.route("/users").get(function(req, res) {
   });
 });
 
-routes.route("/register").post(async function(req, res) {
-  let user = new User({ email: req.body.email, name: req.body.name });
-  console.log(user);
+router.post(
+  "/register",
+  userController.validateRegister,
+  userController.register
+);
+/*let user = new User({ email: req.body.email, name: req.body.name });
   const register = (User.register, User);
-  await register(user, req.body.password);
+  register(user, req.body.password);
   user
     .save()
     .then(user => {
@@ -45,9 +50,9 @@ routes.route("/register").post(async function(req, res) {
     .catch(err => {
       res.status(400).send(`Registration failed - ${err.message}`);
     });
-});
+});*/
 
-app.use("/react-node", routes);
+app.use("/react-node", router);
 
 app.listen(PORT, function() {
   console.log(`Server is running on Port: ${PORT}`);

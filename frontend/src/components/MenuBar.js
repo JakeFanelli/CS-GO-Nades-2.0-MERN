@@ -4,6 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import Index from "./Index";
 import Maps from "./Maps";
 import Recoils from "./Recoils";
+import Login from "./Login";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
 
@@ -23,6 +24,9 @@ const MenuBar = () => (
             <Link to="/recoils" className="nav-link">
               Recoil Patterns
             </Link>
+            <Link to="/login" className="nav-link">
+              Login
+            </Link>
             <Link to="/register" className="nav-link">
               Register
             </Link>
@@ -35,6 +39,7 @@ const MenuBar = () => (
       <Route path="/maps" component={Maps} />
       <Route path="/maps/:id" component={Maps} />
       <Route path="/recoils" component={Recoils} />
+      <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route component={NoMatch} />
     </Switch>
