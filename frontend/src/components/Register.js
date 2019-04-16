@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
 
 class Register extends Component {
   constructor(props) {
@@ -31,15 +32,28 @@ class Register extends Component {
     axios
       .post("http://localhost:4000/react-node/register", newUser)
       .then(res => {
-        console.log("NO ERRORS");
-        //console.log(res.errors);
-        //res.data.map(err => console.log(err));
+        //success
+        NotificationManager.success(
+          "Account successfully created",
+          "Success!",
+          4000,
+          () => {},
+          false
+        );
       })
       .catch(error => {
-        if (error.response) {
-          //console.log(error.response.data.errors);
-          error.response.data.errors.map(err => console.log(err.msg));
-          //console.log(error.response.data.errors);
+        if (error.response.data.errors) {
+          error.response.data.errors.map(err => {
+            NotificationManager.error(err.msg, "Error", 4000, () => {}, false);
+          });
+        } else {
+          NotificationManager.error(
+            error.toString(),
+            "Error",
+            4000,
+            () => {},
+            false
+          );
         }
       });
 
@@ -86,7 +100,6 @@ class Register extends Component {
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChangeName}
-              required
             />
           </div>
           <div className="form-group">
