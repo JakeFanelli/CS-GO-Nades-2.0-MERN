@@ -39,18 +39,6 @@ router.post(
   userController.validateRegister,
   userController.register
 );
-/*let user = new User({ email: req.body.email, name: req.body.name });
-  const register = (User.register, User);
-  register(user, req.body.password);
-  user
-    .save()
-    .then(user => {
-      res.status(200).json({ user: "Registration successful" });
-    })
-    .catch(err => {
-      res.status(400).send(`Registration failed - ${err.message}`);
-    });
-});*/
 
 app.use("/react-node", router);
 
