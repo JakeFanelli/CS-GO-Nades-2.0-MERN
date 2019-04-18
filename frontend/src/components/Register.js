@@ -100,6 +100,7 @@ class Register extends Component {
               placeholder="Name"
               value={this.state.name}
               onChange={this.onChangeName}
+              required
             />
           </div>
           <div className="form-group">
