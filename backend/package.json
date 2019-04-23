@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
     "es6-promisify": "^6.0.1",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",

@@ -10,12 +10,13 @@ const userController = require("./controllers/userController");
 const PORT = 4000;
 const User = require("./models/User");
 const expressValidator = require("express-validator");
+require("dotenv").config({ path: "variables.env" });
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-mongoose.connect("mongodb://127.0.0.1:27017/react-node", {
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true
 });
 mongoose.Promise = global.Promise;
