@@ -7,7 +7,6 @@ const { promisify } = require("es6-promisify");
 const router = express.Router();
 require("./models/User");
 const userController = require("./controllers/userController");
-const PORT = 4000;
 const User = require("./models/User");
 const expressValidator = require("express-validator");
 require("dotenv").config({ path: "variables.env" });
@@ -42,7 +41,7 @@ router.post(
 );
 
 app.use("/react-node", router);
-
-app.listen(PORT, function() {
-  console.log(`Server is running on Port: ${PORT}`);
+app.set("port", process.env.PORT || 7777);
+const server = app.listen(app.get("port"), () => {
+  console.log(`Server is running on Port: ${server.address().port}`);
 });
