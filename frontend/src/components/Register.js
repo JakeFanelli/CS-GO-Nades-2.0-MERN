@@ -30,7 +30,7 @@ class Register extends Component {
     };
 
     axios
-      .post("http://localhost:4000/react-node/register", newUser)
+      .post("http://localhost:7777/react-node/register", newUser)
       .then(res => {
         //success
         NotificationManager.success(
