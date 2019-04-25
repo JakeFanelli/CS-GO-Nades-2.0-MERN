@@ -42,7 +42,13 @@ class Register extends Component {
           () => {},
           false
         );
-        this.setState({ redirectToLogin: true });
+        this.setState({
+          name: "",
+          email: "",
+          password: "",
+          passwordConfirm: "",
+          redirectToLogin: true
+        });
       })
       .catch(error => {
         if (error.response.data.errors) {
@@ -59,13 +65,6 @@ class Register extends Component {
           );
         }
       });
-
-    this.setState({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: ""
-    });
   }
 
   onChangeName(e) {
