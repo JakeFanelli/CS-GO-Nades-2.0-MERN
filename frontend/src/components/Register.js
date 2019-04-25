@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
+import { Redirect } from "react-router-dom";
 
 class Register extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class Register extends Component {
       name: "",
       email: "",
       password: "",
-      passwordConfirm: ""
+      passwordConfirm: "",
+      redirectToLogin: false
     };
   }
 
@@ -40,6 +42,7 @@ class Register extends Component {
           () => {},
           false
         );
+        this.setState({ redirectToLogin: true });
       })
       .catch(error => {
         if (error.response.data.errors) {
@@ -87,6 +90,9 @@ class Register extends Component {
   }
 
   render() {
+    if (this.state.redirectToLogin === true) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="container">
         <h3>Register</h3>

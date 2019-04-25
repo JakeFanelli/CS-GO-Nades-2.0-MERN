@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { promisify } = require("es6-promisify");
 
+let regexLower = new RegExp("^(?=.*[a-z])");
+let regexUpper = new RegExp("^(?=.*[A-Z])");
+let regexNum = new RegExp("^(?=.*[0-9])");
+let regexLength = new RegExp("^(?=.{8,})");
+
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody("name");
   req.checkBody("name", "You must supply a name!").notEmpty();
@@ -19,7 +24,23 @@ exports.validateRegister = (req, res, next) => {
     .checkBody("passwordConfirm", "Oops! Your passwords do not match")
     .equals(req.body.password);
 
-  const errors = req.validationErrors();
+  req
+    .check("password")
+    .custom(value => (regexLower.test(value) ? true : false))
+    .withMessage("Your password must contain 1 lowercase letter.");
+  req
+    .check("password")
+    .custom(value => (regexUpper.test(value) ? true : false))
+    .withMessage("Your password must contain 1 uppercase letter.");
+  req
+    .check("password")
+    .custom(value => (regexNum.test(value) ? true : false))
+    .withMessage("Your password must contain 1 number.");
+  req
+    .check("password")
+    .custom(value => (regexLength.test(value) ? true : false))
+    .withMessage("Your password must be 8 characters or longer.");
+  let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });
   } else {
@@ -30,6 +51,6 @@ exports.validateRegister = (req, res, next) => {
 exports.register = async (req, res, next) => {
   const user = new User({ email: req.body.email, name: req.body.name });
   User.register(user, req.body.password, function(err, user) {
-    res.status(200).send("OK");
+    res.sendStatus(200);
   });
 };
