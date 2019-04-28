@@ -12,28 +12,30 @@ const MenuBar = () => (
   <Router>
     <div>
       <Navbar bg="dark" expand="lg" variant="dark">
-        <Link to="/" className="navbar-brand">
-          CS:GO Nades
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Link to="/maps" className="nav-link">
-              Maps
-            </Link>
-            <Link to="/recoils" className="nav-link">
-              Recoil Patterns
-            </Link>
-          </Nav>
-          <Nav>
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-            <Link to="/register" className="nav-link">
-              Register
-            </Link>
-          </Nav>
-        </Navbar.Collapse>
+        <div className="container">
+          <Link to="/" className="navbar-brand">
+            CS:GO Nades
+          </Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Link to="/maps" className="nav-link">
+                Maps
+              </Link>
+              <Link to="/recoils" className="nav-link">
+                Recoil Patterns
+              </Link>
+            </Nav>
+            <Nav>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+        </div>
       </Navbar>
     </div>
     <Switch>

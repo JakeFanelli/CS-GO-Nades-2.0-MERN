@@ -45,7 +45,7 @@ export const ConfirmPasswordReqs = props => {
   if (
     props.passwordConfirm &&
     props.password &&
-    props.passwordConfirm != props.password
+    props.passwordConfirm !== props.password
   ) {
     return <p>Passwords do not match!</p>;
   } else {
