@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { promisify } = require("es6-promisify");
-
-let regexLower = new RegExp("^(?=.*[a-z])");
-let regexUpper = new RegExp("^(?=.*[A-Z])");
-let regexNum = new RegExp("^(?=.*[0-9])");
-let regexLength = new RegExp("^(?=.{8,})");
+const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody("name");
