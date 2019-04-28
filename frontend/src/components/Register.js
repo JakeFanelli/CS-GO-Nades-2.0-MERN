@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { PasswordReqs, ConfirmPasswordReqs } from "./PasswordReqs";
 import { NotificationManager } from "react-notifications";
 import { Redirect } from "react-router-dom";
+import {
+  regexHasLower,
+  regexHasUpper,
+  regexHasNum,
+  regexHasLength
+} from "../helpers";
 
 class Register extends Component {
   constructor(props) {
@@ -18,7 +25,11 @@ class Register extends Component {
       email: "",
       password: "",
       passwordConfirm: "",
-      redirectToLogin: false
+      redirectToLogin: false,
+      hasLowerChars: false,
+      hasUpperChars: false,
+      hasNumChars: false,
+      hasLength: false
     };
   }
 
@@ -38,9 +49,7 @@ class Register extends Component {
         NotificationManager.success(
           "Account successfully created",
           "Success!",
-          4000,
-          () => {},
-          false
+          4000
         );
         this.setState({
           name: "",
@@ -53,16 +62,10 @@ class Register extends Component {
       .catch(error => {
         if (error.response.data.errors) {
           error.response.data.errors.map(err => {
-            NotificationManager.error(err.msg, "Error", 4000, () => {}, false);
+            NotificationManager.error(err.msg, "Error", 4000);
           });
         } else {
-          NotificationManager.error(
-            error.toString(),
-            "Error",
-            4000,
-            () => {},
-            false
-          );
+          NotificationManager.error(error.toString(), "Error", 4000);
         }
       });
   }
@@ -81,15 +84,33 @@ class Register extends Component {
     this.setState({
       password: e.target.value
     });
+    this.testCases(e.target.value);
   }
   onChangePasswordConfirm(e) {
     this.setState({
       passwordConfirm: e.target.value
     });
   }
+  testCases(value) {
+    regexHasLower.test(value)
+      ? this.setState({ hasLowerChars: true })
+      : this.setState({ hasLowerChars: false });
+
+    regexHasUpper.test(value)
+      ? this.setState({ hasUpperChars: true })
+      : this.setState({ hasUpperChars: false });
+
+    regexHasNum.test(value)
+      ? this.setState({ hasNumChars: true })
+      : this.setState({ hasNumChars: false });
+
+    regexHasLength.test(value)
+      ? this.setState({ hasLength: true })
+      : this.setState({ hasLength: false });
+  }
 
   render() {
-    if (this.state.redirectToLogin === true) {
+    if (this.state.redirectToLogin) {
       return <Redirect to="/login" />;
     }
     return (
@@ -132,6 +153,13 @@ class Register extends Component {
               required
             />
           </div>
+          <PasswordReqs
+            password={this.state.password}
+            hasLowerChars={this.state.hasLowerChars}
+            hasUpperChars={this.state.hasUpperChars}
+            hasNumChars={this.state.hasNumChars}
+            hasLength={this.state.hasLength}
+          />
           <div className="form-group">
             <label>Confirm Password</label>
             <input
@@ -144,6 +172,10 @@ class Register extends Component {
               required
             />
           </div>
+          <ConfirmPasswordReqs
+            password={this.state.password}
+            passwordConfirm={this.state.passwordConfirm}
+          />
           <div className="form-group">
             <input
               type="submit"
