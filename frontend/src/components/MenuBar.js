@@ -13,7 +13,7 @@ const MenuBar = () => (
     <div>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Link to="/" className="navbar-brand">
-          CSGO NAYDESSS
+          CS:GO Nades
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

@@ -8,6 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 class App extends Component {
+  componentDidMount() {
+    document.title = "CS:GO Nades";
+  }
+
   render() {
     return (
       <div>
