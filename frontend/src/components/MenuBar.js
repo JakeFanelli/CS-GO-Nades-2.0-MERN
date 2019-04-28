@@ -24,6 +24,8 @@ const MenuBar = () => (
             <Link to="/recoils" className="nav-link">
               Recoil Patterns
             </Link>
+          </Nav>
+          <Nav>
             <Link to="/login" className="nav-link">
               Login
             </Link>
