@@ -7,7 +7,8 @@ import {
   regexHasLower,
   regexHasUpper,
   regexHasNum,
-  regexHasLength
+  regexHasLength,
+  URL
 } from "../helpers";
 
 class Register extends Component {
@@ -43,7 +44,7 @@ class Register extends Component {
     };
 
     axios
-      .post("http://localhost:7777/react-node/register", newUser)
+      .post(`${URL}/register`, newUser)
       .then(res => {
         //success
         NotificationManager.success(

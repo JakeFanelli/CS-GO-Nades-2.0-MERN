@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { NotificationManager } from "react-notifications";
+import { URL } from "../helpers";
 
 class Login extends Component {
   constructor(props) {
@@ -16,6 +19,41 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    axios
+      .post(`${URL}/login`, user)
+      .then(res => {
+        //success
+        NotificationManager.success("Successully logged in!", "Success!", 4000);
+        this.props.loggedInUpdate();
+        //loggedIn: true
+        //   name: "",
+        //   email: "",
+        //   password: "",
+        //   passwordConfirm: "",
+        //   redirectToLogin: true
+        //});
+      })
+      .catch(error => {
+        if (error.response) {
+          if (error.response.data.errors) {
+            error.response.data.errors.map(err => {
+              NotificationManager.error(err.msg, "Error", 4000);
+            });
+          } else if (error.response.status === 401) {
+            NotificationManager.error(
+              "Sorry, we couldn't find an account with that email and password.",
+              "Error",
+              4000
+            );
+          }
+        } else {
+          NotificationManager.error(error.toString(), "Error", 4000);
+        }
+      });
   }
   onChangeEmail(e) {
     this.setState({

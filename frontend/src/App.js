@@ -12,10 +12,21 @@ class App extends Component {
     document.title = "CS:GO Nades";
   }
 
+  state = {
+    loggedIn: false
+  };
+
+  loggedInUpdate = () => {
+    this.setState({ loggedIn: true });
+  };
+
   render() {
     return (
       <div>
-        <MenuBar />
+        <MenuBar
+          loggedIn={this.state.loggedIn}
+          loggedInUpdate={this.loggedInUpdate}
+        />
         <NotificationContainer />
       </div>
     );

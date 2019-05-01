@@ -1,15 +1,19 @@
 const express = require("express");
+const session = require("express-session");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo")(session);
 const { promisify } = require("es6-promisify");
 const router = express.Router();
 require("./models/User");
 const userController = require("./controllers/userController");
-const User = require("./models/User");
+const authController = require("./controllers/authController");
 const expressValidator = require("express-validator");
+const passport = require("passport");
 require("dotenv").config({ path: "variables.env" });
+require("./handlers/passport");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,21 +28,28 @@ connection.once("open", function() {
   console.log("MongoDB connection established successfully.");
 });
 
-router.route("/users").get(function(req, res) {
-  User.find(function(err, users) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(users);
-    }
-  });
-});
+app.use(
+  session({
+    secret: process.env.SECRET,
+    key: process.env.KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 router.post(
   "/register",
   userController.validateRegister,
   userController.register
 );
+
+router.post("/login", passport.authenticate("local", {}), function(req, res) {
+  res.sendStatus(200);
+});
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);
