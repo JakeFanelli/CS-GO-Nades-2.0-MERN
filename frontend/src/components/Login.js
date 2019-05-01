@@ -29,13 +29,6 @@ class Login extends Component {
         //success
         NotificationManager.success("Successully logged in!", "Success!", 4000);
         this.props.loggedInUpdate();
-        //loggedIn: true
-        //   name: "",
-        //   email: "",
-        //   password: "",
-        //   passwordConfirm: "",
-        //   redirectToLogin: true
-        //});
       })
       .catch(error => {
         if (error.response) {
