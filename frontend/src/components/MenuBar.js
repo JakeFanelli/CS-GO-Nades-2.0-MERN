@@ -7,6 +7,8 @@ import Recoils from "./Recoils";
 import Login from "./Login";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
+import LoggedInOrOut from "./LoggedInOrOut";
+import Account from "./Account";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -43,7 +45,10 @@ class MenuBar extends Component {
                     Recoil Patterns
                   </Link>
                 </Nav>
-                <LoggedInOrOut loggedIn={this.props.loggedIn} />
+                <LoggedInOrOut
+                  loggedIn={this.props.loggedIn}
+                  loggedInUpdate={this.props.loggedInUpdate}
+                />
               </Navbar.Collapse>
             </div>
           </Navbar>
@@ -64,37 +69,17 @@ class MenuBar extends Component {
             )}
           />
           <Route path="/register" component={Register} />
+          <Route
+            path="/account"
+            render={props => (
+              <Account {...props} loggedIn={this.props.loggedIn} />
+            )}
+          />
           <Route component={NoMatch} />
         </Switch>
       </Router>
     );
   }
 }
-
-const LoggedInOrOut = props => {
-  if (props.loggedIn) {
-    return (
-      <Nav>
-        <Link to="/account" className="nav-link">
-          My Account
-        </Link>
-        <Link to="/logout" className="nav-link">
-          Logout
-        </Link>
-      </Nav>
-    );
-  } else {
-    return (
-      <Nav>
-        <Link to="/login" className="nav-link">
-          Login
-        </Link>
-        <Link to="/register" className="nav-link">
-          Register
-        </Link>
-      </Nav>
-    );
-  }
-};
 
 export default MenuBar;

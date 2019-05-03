@@ -56,3 +56,6 @@
     }
   }
 }
+.logout {
+  cursor: pointer;
+}

@@ -51,6 +51,8 @@ router.post("/login", passport.authenticate("local", {}), function(req, res) {
   res.sendStatus(200);
 });
 
+router.post("/logout", authController.logout);
+
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);
 const server = app.listen(app.get("port"), () => {

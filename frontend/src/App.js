@@ -17,7 +17,9 @@ class App extends Component {
   };
 
   loggedInUpdate = () => {
-    this.setState({ loggedIn: true });
+    let loggedIn = this.state.loggedIn;
+    loggedIn = !loggedIn;
+    this.setState({ loggedIn });
   };
 
   render() {

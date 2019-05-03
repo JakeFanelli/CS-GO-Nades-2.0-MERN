@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
 import { URL } from "../helpers";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -10,11 +11,19 @@ class Login extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.redirectToHomeState = this.redirectToHomeState.bind(this);
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      redirectToHome: false
     };
+  }
+
+  redirectToHomeState() {
+    let redirectToHome = this.state.redirectToHome;
+    redirectToHome = true;
+    this.setState({ redirectToHome });
   }
 
   onSubmit(e) {
@@ -28,6 +37,7 @@ class Login extends Component {
       .then(res => {
         //success
         NotificationManager.success("Successully logged in!", "Success!", 4000);
+        this.redirectToHomeState();
         this.props.loggedInUpdate();
       })
       .catch(error => {
@@ -60,6 +70,12 @@ class Login extends Component {
   }
 
   render() {
+    if (this.state.redirectToHome) {
+      return <Redirect to="/" />;
+    }
+    if (this.props.loggedIn) {
+      return <Redirect to="/account" />;
+    }
     return (
       <div className="container">
         <h3>Login</h3>
