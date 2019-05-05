@@ -6,3 +6,9 @@ exports.logout = (req, res) => {
   req.logout();
   res.sendStatus(200);
 };
+
+exports.validateSession = (req, res) => {
+  if (req.isAuthenticated()) {
+    res.sendStatus(200);
+  }
+};

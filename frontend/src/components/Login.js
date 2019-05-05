@@ -32,8 +32,12 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios
-      .post(`${URL}/login`, user)
+
+    axios(`${URL}/login`, {
+      method: "post",
+      withCredentials: true,
+      data: user
+    })
       .then(res => {
         //success
         NotificationManager.success("Successully logged in!", "Success!", 4000);

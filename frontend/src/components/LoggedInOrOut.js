@@ -11,7 +11,10 @@ class LoggedInOrOut extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick() {
-    axios.post(`${URL}/logout`).then(res => {
+    axios(`${URL}/logout`, {
+      method: "post",
+      withCredentials: true
+    }).then(res => {
       //success
       NotificationManager.success("Successully logged out!", "Success!", 4000);
       this.props.loggedInUpdate();
@@ -22,12 +25,12 @@ class LoggedInOrOut extends Component {
     if (this.props.loggedIn) {
       return (
         <Nav>
+          <Link to="/" className="nav-link logout" onClick={this.handleClick}>
+            Logout
+          </Link>
           <Link to="/account" className="nav-link">
             My Account
           </Link>
-          <span className="nav-link logout" onClick={this.handleClick}>
-            Logout
-          </span>
         </Nav>
       );
     } else {

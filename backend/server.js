@@ -1,11 +1,11 @@
 const express = require("express");
-const session = require("express-session");
-const app = express();
-const bodyParser = require("body-parser");
 const cors = require("cors");
+const app = express();
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
-const { promisify } = require("es6-promisify");
 const router = express.Router();
 require("./models/User");
 const userController = require("./controllers/userController");
@@ -15,7 +15,8 @@ const passport = require("passport");
 require("dotenv").config({ path: "variables.env" });
 require("./handlers/passport");
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(expressValidator());
 
@@ -32,14 +33,17 @@ app.use(
   session({
     secret: process.env.SECRET,
     key: process.env.KEY,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { secure: false, httpOnly: false }
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+router.get("/user", authController.validateSession);
 
 router.post(
   "/register",

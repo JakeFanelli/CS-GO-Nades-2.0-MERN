@@ -61,10 +61,12 @@ class Register extends Component {
         });
       })
       .catch(error => {
-        if (error.response.data.errors) {
-          error.response.data.errors.map(err => {
-            NotificationManager.error(err.msg, "Error", 4000);
-          });
+        if (error.response) {
+          if (error.response.data.errors) {
+            error.response.data.errors.map(err => {
+              NotificationManager.error(err.msg, "Error", 4000);
+            });
+          }
         } else {
           NotificationManager.error(error.toString(), "Error", 4000);
         }
