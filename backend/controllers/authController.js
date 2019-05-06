@@ -4,7 +4,14 @@ const User = mongoose.model("User");
 
 exports.logout = (req, res) => {
   req.logout();
-  res.sendStatus(200);
+  req.session.destroy(function(err) {
+    if (!err) {
+      res.clearCookie(process.env.KEY, {
+        path: "/"
+      });
+      res.sendStatus(200);
+    }
+  });
 };
 
 exports.validateSession = (req, res) => {

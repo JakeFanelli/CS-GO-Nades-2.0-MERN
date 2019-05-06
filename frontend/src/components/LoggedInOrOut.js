@@ -8,9 +8,9 @@ import axios from "axios";
 class LoggedInOrOut extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
-  handleClick() {
+  handleLogoutClick() {
     axios(`${URL}/logout`, {
       method: "post",
       withCredentials: true
@@ -25,7 +25,11 @@ class LoggedInOrOut extends Component {
     if (this.props.loggedIn) {
       return (
         <Nav>
-          <Link to="/" className="nav-link logout" onClick={this.handleClick}>
+          <Link
+            to="/"
+            className="nav-link logout"
+            onClick={this.handleLogoutClick}
+          >
             Logout
           </Link>
           <Link to="/account" className="nav-link">

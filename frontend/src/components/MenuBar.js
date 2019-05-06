@@ -68,7 +68,12 @@ class MenuBar extends Component {
               />
             )}
           />
-          <Route path="/register" component={Register} />
+          <Route
+            path="/register"
+            render={props => (
+              <Register {...props} loggedInUpdate={this.props.loggedInUpdate} />
+            )}
+          />
           <Route
             path="/account"
             render={props => (

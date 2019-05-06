@@ -26,7 +26,7 @@ class Register extends Component {
       email: "",
       password: "",
       passwordConfirm: "",
-      redirectToLogin: false,
+      redirectToHome: false,
       hasLowerChars: false,
       hasUpperChars: false,
       hasNumChars: false,
@@ -43,8 +43,11 @@ class Register extends Component {
       passwordConfirm: this.state.passwordConfirm
     };
 
-    axios
-      .post(`${URL}/register`, newUser)
+    axios(`${URL}/register`, {
+      method: "post",
+      withCredentials: true,
+      data: newUser
+    })
       .then(res => {
         //success
         NotificationManager.success(
@@ -52,12 +55,13 @@ class Register extends Component {
           "Success!",
           4000
         );
+        this.props.loggedInUpdate();
         this.setState({
           name: "",
           email: "",
           password: "",
           passwordConfirm: "",
-          redirectToLogin: true
+          redirectToHome: true
         });
       })
       .catch(error => {
@@ -113,8 +117,8 @@ class Register extends Component {
   }
 
   render() {
-    if (this.state.redirectToLogin) {
-      return <Redirect to="/login" />;
+    if (this.state.redirectToHome) {
+      return <Redirect to="/" />;
     }
     return (
       <div className="container">

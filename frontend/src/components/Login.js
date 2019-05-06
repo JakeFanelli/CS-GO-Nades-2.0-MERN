@@ -41,7 +41,6 @@ class Login extends Component {
       .then(res => {
         //success
         NotificationManager.success("Successully logged in!", "Success!", 4000);
-        this.redirectToHomeState();
         this.props.loggedInUpdate();
       })
       .catch(error => {
@@ -78,7 +77,7 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
     if (this.props.loggedIn) {
-      return <Redirect to="/account" />;
+      return <Redirect to="/" />;
     }
     return (
       <div className="container">
