@@ -36,7 +36,11 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { secure: false, httpOnly: false }
+    cookie: {
+      secure: false,
+      httpOnly: false,
+      expires: new Date(Date.now() + 1209600)
+    }
   })
 );
 
