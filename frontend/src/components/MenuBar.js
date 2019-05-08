@@ -77,7 +77,11 @@ class MenuBar extends Component {
           <Route
             path="/account"
             render={props => (
-              <Account {...props} loggedIn={this.props.loggedIn} />
+              <Account
+                {...props}
+                loggedIn={this.props.loggedIn}
+                user={this.props.user}
+              />
             )}
           />
           <Route component={NoMatch} />

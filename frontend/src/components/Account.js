@@ -9,6 +9,8 @@ class Account extends Component {
     return (
       <div className="container">
         <h3>My Account</h3>
+        <p>hello {this.props.user.name}</p>
+        <p>email: {this.props.user.email}</p>
       </div>
     );
   }

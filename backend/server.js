@@ -33,13 +33,13 @@ app.use(
   session({
     secret: process.env.SECRET,
     key: process.env.KEY,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: {
       secure: false,
       httpOnly: false,
-      expires: new Date(Date.now() + 1209600)
+      expires: new Date(Date.now() + 1.21e9)
     }
   })
 );
@@ -47,7 +47,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-router.get("/user", authController.validateSession);
+router.get("/validateSession", authController.validateSession);
+
+router.get("/user", userController.getUser);
 
 router.post(
   "/register",

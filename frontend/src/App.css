@@ -60,6 +60,10 @@
   cursor: pointer;
 }
 
+/*later if i need a dropdown in navbar .dropdown-menu {
+  background-color: #343a40;
+}*/
+
 .notification-container {
   top: 55px;
 }

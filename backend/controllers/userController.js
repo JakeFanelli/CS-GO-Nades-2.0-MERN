@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const passport = require("passport");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
@@ -47,5 +48,16 @@ exports.register = async (req, res, next) => {
   const user = new User({ email: req.body.email, name: req.body.name });
   User.register(user, req.body.password, function(err, user) {
     next();
+  });
+};
+
+exports.getUser = (req, res) => {
+  const email = req.session.passport.user;
+  User.findOne({ email: email }, function(err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.status(200).send(result);
+    }
   });
 };
