@@ -8,7 +8,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 class App extends Component {
-  componentDidMount() {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: "",
+      user: {}
+    };
     document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
       method: "get",
@@ -26,11 +31,6 @@ class App extends Component {
         });
       });
   }
-
-  state = {
-    loggedIn: false,
-    user: {}
-  };
 
   loggedInUpdate = () => {
     let loggedIn = this.state.loggedIn;

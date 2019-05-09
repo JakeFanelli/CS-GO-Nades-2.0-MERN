@@ -22,7 +22,7 @@ class LoggedInOrOut extends Component {
   }
 
   render() {
-    if (this.props.loggedIn) {
+    if (this.props.loggedIn === true) {
       return (
         <Nav>
           <Link
@@ -37,7 +37,7 @@ class LoggedInOrOut extends Component {
           </Link>
         </Nav>
       );
-    } else {
+    } else if (this.props.loggedIn === false) {
       return (
         <Nav>
           <Link to="/login" className="nav-link">
@@ -48,6 +48,8 @@ class LoggedInOrOut extends Component {
           </Link>
         </Nav>
       );
+    } else {
+      return null;
     }
   }
 }
