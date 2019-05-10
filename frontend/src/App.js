@@ -20,14 +20,20 @@ class App extends Component {
       withCredentials: true
     })
       .then(res => {
-        this.setState({ loggedIn: true });
+        if (res.data.msg === "yes") {
+          this.setState({ loggedIn: true });
+        } else if (res.data.msg === "no") {
+          this.setState({ loggedIn: false });
+        }
       })
       .then(res => {
         axios(`${URL}/user`, {
           method: "get",
           withCredentials: true
         }).then(res => {
-          this.setState({ user: res.data });
+          if (res.data.email) {
+            this.setState({ user: res.data });
+          }
         });
       });
   }

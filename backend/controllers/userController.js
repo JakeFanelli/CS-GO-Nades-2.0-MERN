@@ -51,13 +51,17 @@ exports.register = async (req, res, next) => {
   });
 };
 
-exports.getUser = (req, res) => {
-  const email = req.session.passport.user;
-  User.findOne({ email: email }, function(err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).send(result);
-    }
-  });
+exports.getUser = (req, res, next) => {
+  if (req.session.passport) {
+    const email = req.session.passport.user;
+    User.findOne({ email: email }, function(err, result) {
+      if (err) {
+        res.sendStatus(401);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  } else {
+    res.status(200).send({ msg: "no" });
+  }
 };

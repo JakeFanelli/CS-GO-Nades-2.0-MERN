@@ -16,6 +16,8 @@ exports.logout = (req, res) => {
 
 exports.validateSession = (req, res) => {
   if (req.isAuthenticated()) {
-    res.sendStatus(200);
+    res.status(200).send({ msg: "yes" });
+  } else {
+    res.status(200).send({ msg: "no" });
   }
 };
