@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-const passport = require("passport");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
@@ -51,7 +50,7 @@ exports.register = async (req, res, next) => {
   });
 };
 
-exports.getUser = (req, res, next) => {
+exports.getUser = (req, res) => {
   if (req.session.passport) {
     const email = req.session.passport.user;
     User.findOne({ email: email }, function(err, result) {
