@@ -19,27 +19,28 @@ class Login extends Component {
       redirectToHome: false
     };
   }
-
+  //when user logs in we set this to true and this sets the flag to
+  //redirect them to home page
   redirectToHomeState() {
     let redirectToHome = this.state.redirectToHome;
     redirectToHome = true;
     this.setState({ redirectToHome });
   }
-
+  //When user clicks Log In button
   onSubmit(e) {
     e.preventDefault();
     const user = {
       email: this.state.email,
       password: this.state.password
     };
-
+    //API endpoint call to log in our user
     axios(`${URL}/login`, {
       method: "post",
       withCredentials: true,
       data: user
     })
       .then(res => {
-        //success
+        //success and setting loggedIn state to true with loggedInUpdate()
         NotificationManager.success("Successully logged in!", "Success!", 4000);
         this.props.loggedInUpdate();
       })
@@ -73,10 +74,7 @@ class Login extends Component {
   }
 
   render() {
-    if (this.state.redirectToHome) {
-      return <Redirect to="/" />;
-    }
-    if (this.props.loggedIn) {
+    if (this.state.redirectToHome || this.props.loggedIn) {
       return <Redirect to="/" />;
     }
     return (

@@ -34,19 +34,21 @@ class Register extends Component {
     };
   }
 
+  //When user clicks Register button on Register Page
   onSubmit(e) {
     e.preventDefault();
-    const newUser = {
+    //User object based on the fields on the form
+    const user = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm
     };
-
+    //API endpoint call to register our user in our mongoDB
     axios(`${URL}/register`, {
       method: "post",
       withCredentials: true,
-      data: newUser
+      data: user
     })
       .then(res => {
         //success
@@ -55,6 +57,7 @@ class Register extends Component {
           "Success!",
           4000
         );
+        //set loggedIn to true and reset the form & make sure user is redirected to Home Page
         this.props.loggedInUpdate();
         this.setState({
           name: "",
@@ -107,6 +110,7 @@ class Register extends Component {
       passwordConfirm: e.target.value
     });
   }
+  //checking if the form fields meet requirements
   testCases(value) {
     regexHasLower.test(value)
       ? this.setState({ hasLowerChars: true })
@@ -126,83 +130,86 @@ class Register extends Component {
   }
 
   render() {
-    if (this.state.redirectToHome) {
+    if (this.state.redirectToHome || this.props.loggedIn === true) {
       return <Redirect to="/" />;
+    } else if (this.props.loggedIn === false) {
+      return (
+        <div className="container">
+          <h3>Register</h3>
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                placeholder="Name"
+                value={this.state.name}
+                onChange={this.onChangeName}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.onChangeEmail}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+                required
+              />
+            </div>
+            <PasswordReqs
+              password={this.state.password}
+              hasLowerChars={this.state.hasLowerChars}
+              hasUpperChars={this.state.hasUpperChars}
+              hasNumChars={this.state.hasNumChars}
+              hasLength={this.state.hasLength}
+            />
+            <div className="form-group">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                name="passwordConfirm"
+                className="form-control"
+                placeholder="Password"
+                value={this.state.passwordConfirm}
+                onChange={this.onChangePasswordConfirm}
+                required
+              />
+            </div>
+            <ConfirmPasswordReqs
+              password={this.state.password}
+              passwordConfirm={this.state.passwordConfirm}
+            />
+            <div className="form-group">
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value="Register"
+                onSubmit={this.onSubmit}
+              />
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      return null;
     }
-    return (
-      <div className="container">
-        <h3>Register</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              placeholder="Name"
-              value={this.state.name}
-              onChange={this.onChangeName}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.onChangeEmail}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Password"
-              value={this.state.password}
-              onChange={this.onChangePassword}
-              required
-            />
-          </div>
-          <PasswordReqs
-            password={this.state.password}
-            hasLowerChars={this.state.hasLowerChars}
-            hasUpperChars={this.state.hasUpperChars}
-            hasNumChars={this.state.hasNumChars}
-            hasLength={this.state.hasLength}
-          />
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              name="passwordConfirm"
-              className="form-control"
-              placeholder="Password"
-              value={this.state.passwordConfirm}
-              onChange={this.onChangePasswordConfirm}
-              required
-            />
-          </div>
-          <ConfirmPasswordReqs
-            password={this.state.password}
-            passwordConfirm={this.state.passwordConfirm}
-          />
-          <div className="form-group">
-            <input
-              type="submit"
-              className="btn btn-primary"
-              value="Register"
-              onSubmit={this.onSubmit}
-            />
-          </div>
-        </form>
-      </div>
-    );
   }
 }
 

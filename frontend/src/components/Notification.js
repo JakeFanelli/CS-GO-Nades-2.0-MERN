@@ -62,7 +62,6 @@ class Notification extends React.Component {
         >
           Error
         </button>
-
         <NotificationContainer />
       </div>
     );

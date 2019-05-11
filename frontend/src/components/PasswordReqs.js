@@ -1,33 +1,28 @@
 import React from "react";
 
+//Check whether the password meets our requirements (1 lowercase, 1 uppercase, 1 number, and 8 characters)
 export const PasswordReqs = props => {
   let message = `Your password requires:`;
-
   if (!props.hasLowerChars) {
     message = `${message} 1 lowercase character`;
   }
   if (!props.hasUpperChars) {
-    if (!props.hasLowerChars) {
-      message = `${message}, 1 uppercase character`;
-    } else {
-      message = `${message} 1 uppercase character`;
-    }
+    props.hasLowerChars
+      ? (message = `${message} 1 uppercase character`)
+      : (message = `${message}, 1 uppercase character`);
   }
   if (!props.hasNumChars) {
-    if (!props.hasLowerChars || !props.hasUpperChars) {
-      message = `${message}, 1 number`;
-    } else {
-      message = `${message} 1 number`;
-    }
+    !props.hasLowerChars || !props.hasUpperChars
+      ? (message = `${message}, 1 number`)
+      : (message = `${message} 1 number`);
   }
   if (!props.hasLength) {
-    if (!props.hasLowerChars || !props.hasUpperChars || !props.hasNumChars) {
-      message = `${message}, and at least 8 characters`;
-    } else {
-      message = `${message} at least 8 characters`;
-    }
+    !props.hasLowerChars || !props.hasUpperChars || !props.hasNumChars
+      ? (message = `${message}, and at least 8 characters`)
+      : (message = `${message} at least 8 characters`);
   }
   message = `${message}.`;
+
   return props.password &&
     !(
       props.hasLowerChars &&
@@ -41,14 +36,13 @@ export const PasswordReqs = props => {
   );
 };
 
+//Check whether the password & confirm password match
 export const ConfirmPasswordReqs = props => {
-  if (
-    props.passwordConfirm &&
+  return props.passwordConfirm &&
     props.password &&
-    props.passwordConfirm !== props.password
-  ) {
-    return <p>Passwords do not match!</p>;
-  } else {
-    return <p />;
-  }
+    props.passwordConfirm !== props.password ? (
+    <p>Passwords do not match!</p>
+  ) : (
+    ""
+  );
 };

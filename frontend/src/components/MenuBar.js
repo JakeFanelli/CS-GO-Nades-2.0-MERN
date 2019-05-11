@@ -15,7 +15,7 @@ class MenuBar extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-
+  //animate nav links when clicking hamburger menu
   handleClick() {
     const navLinks = document.querySelectorAll(".navbar-collapse a");
     navLinks.forEach((link, index) => {
@@ -71,7 +71,11 @@ class MenuBar extends Component {
           <Route
             path="/register"
             render={props => (
-              <Register {...props} loggedInUpdate={this.props.loggedInUpdate} />
+              <Register
+                {...props}
+                loggedInUpdate={this.props.loggedInUpdate}
+                loggedIn={this.props.loggedIn}
+              />
             )}
           />
           <Route
