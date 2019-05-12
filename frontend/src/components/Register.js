@@ -201,7 +201,6 @@ class Register extends Component {
                 type="submit"
                 className="btn btn-primary"
                 value="Register"
-                onSubmit={this.onSubmit}
               />
             </div>
           </form>

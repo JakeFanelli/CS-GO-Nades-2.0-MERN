@@ -106,12 +106,7 @@ class Login extends Component {
             />
           </div>
           <div className="form-group">
-            <input
-              type="submit"
-              className="btn btn-primary"
-              value="Log In"
-              onSubmit={this.onSubmit}
-            />
+            <input type="submit" className="btn btn-primary" value="Log In" />
           </div>
         </form>
       </div>
