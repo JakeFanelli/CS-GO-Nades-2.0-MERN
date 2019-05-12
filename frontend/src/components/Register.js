@@ -138,12 +138,12 @@ class Register extends Component {
           <h3>Register</h3>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <label>Name</label>
+              <label>Username</label>
               <input
                 type="text"
                 name="name"
                 className="form-control"
-                placeholder="Name"
+                placeholder="Username"
                 value={this.state.name}
                 onChange={this.onChangeName}
                 required
