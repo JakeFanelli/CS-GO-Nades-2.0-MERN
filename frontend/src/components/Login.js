@@ -8,8 +8,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.redirectToHomeState = this.redirectToHomeState.bind(this);
 
@@ -21,13 +20,13 @@ class Login extends Component {
   }
   //when user logs in we set this to true and this sets the flag to
   //redirect them to home page
-  redirectToHomeState() {
+  redirectToHomeState = () => {
     let redirectToHome = this.state.redirectToHome;
     redirectToHome = true;
     this.setState({ redirectToHome });
-  }
+  };
   //When user clicks Log In button
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
     const user = {
       email: this.state.email,
@@ -61,17 +60,11 @@ class Login extends Component {
           NotificationManager.error(error.toString(), "Error", 4000);
         }
       });
-  }
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
+  };
+
+  handleChange = e => {
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+  };
 
   render() {
     if (this.state.redirectToHome || this.props.loggedIn) {
@@ -89,7 +82,7 @@ class Login extends Component {
               className="form-control"
               placeholder="Email"
               value={this.state.email}
-              onChange={this.onChangeEmail}
+              onChange={this.handleChange}
               required
             />
           </div>
@@ -101,7 +94,7 @@ class Login extends Component {
               className="form-control"
               placeholder="Password"
               value={this.state.password}
-              onChange={this.onChangePassword}
+              onChange={this.handleChange}
               required
             />
           </div>

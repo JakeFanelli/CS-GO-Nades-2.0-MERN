@@ -15,10 +15,7 @@ class Register extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -35,7 +32,7 @@ class Register extends Component {
   }
 
   //When user clicks Register button on Register Page
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
     //User object based on the fields on the form
     const user = {
@@ -87,31 +84,17 @@ class Register extends Component {
           NotificationManager.error(error.toString(), "Error", 4000);
         }
       });
-  }
+  };
 
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value
-    });
-  }
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-    this.testCases(e.target.value);
-  }
-  onChangePasswordConfirm(e) {
-    this.setState({
-      passwordConfirm: e.target.value
-    });
-  }
+  handleChange = e => {
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+    if (e.currentTarget.name === "password") {
+      this.testCases(e.currentTarget.value);
+    }
+  };
+
   //checking if the form fields meet requirements
-  testCases(value) {
+  testCases = value => {
     regexHasLower.test(value)
       ? this.setState({ hasLowerChars: true })
       : this.setState({ hasLowerChars: false });
@@ -127,7 +110,7 @@ class Register extends Component {
     regexHasLength.test(value)
       ? this.setState({ hasLength: true })
       : this.setState({ hasLength: false });
-  }
+  };
 
   render() {
     if (this.state.redirectToHome || this.props.loggedIn === true) {
@@ -145,7 +128,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Username"
                 value={this.state.name}
-                onChange={this.onChangeName}
+                onChange={this.handleChange}
                 required
               />
             </div>
@@ -157,7 +140,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Email"
                 value={this.state.email}
-                onChange={this.onChangeEmail}
+                onChange={this.handleChange}
                 required
               />
             </div>
@@ -169,7 +152,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Password"
                 value={this.state.password}
-                onChange={this.onChangePassword}
+                onChange={this.handleChange}
                 required
               />
             </div>
@@ -188,7 +171,7 @@ class Register extends Component {
                 className="form-control"
                 placeholder="Password"
                 value={this.state.passwordConfirm}
-                onChange={this.onChangePasswordConfirm}
+                onChange={this.handleChange}
                 required
               />
             </div>
