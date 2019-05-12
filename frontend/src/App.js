@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import MenuBar from "./components/MenuBar";
+import axios from "axios";
 import { NotificationContainer } from "react-notifications";
 import { URL } from "./helpers";
-import axios from "axios";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "react-notifications/lib/notifications.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
+library.add(faEdit);
 
 class App extends Component {
   constructor() {
@@ -36,6 +40,17 @@ class App extends Component {
           }
         });
       });
+  }
+
+  componentDidUpdate() {
+    axios(`${URL}/user`, {
+      method: "get",
+      withCredentials: true
+    }).then(res => {
+      if (res.data.email) {
+        this.setState({ user: res.data });
+      }
+    });
   }
 
   loggedInUpdate = () => {

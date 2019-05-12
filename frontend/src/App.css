@@ -67,3 +67,18 @@
 .notification-container {
   top: 55px;
 }
+
+.editIcon {
+  float: right;
+}
+.editIcon:hover {
+  cursor: pointer;
+}
+.save-button {
+  margin-right: 1em;
+  width: 83px;
+}
+.label {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
