@@ -11,7 +11,7 @@ class LoggedInOrOut extends Component {
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
   //API endpoint call to logout our user
-  handleLogoutClick() {
+  handleLogoutClick = () => {
     axios(`${URL}/logout`, {
       method: "post",
       withCredentials: true
@@ -20,7 +20,7 @@ class LoggedInOrOut extends Component {
       NotificationManager.success("Successully logged out!", "Success!", 4000);
       this.props.loggedInUpdate();
     });
-  }
+  };
 
   //if user is logged in we'll show them Logout and My Account, and if
   //not we'll show them Login and Register, otherwise be blank
