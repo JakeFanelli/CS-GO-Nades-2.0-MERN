@@ -50,15 +50,12 @@ app.use(passport.session());
 router.get("/validateSession", authController.validateSession);
 
 router.get("/user", userController.getUser);
+router.post("/userId", userController.getUserId);
 
 router.post(
   "/register",
   userController.validateRegister,
-  userController.register,
-  passport.authenticate("local", {}),
-  function(req, res) {
-    res.sendStatus(200);
-  }
+  userController.register
 );
 
 router.post("/login", passport.authenticate("local", {}), function(req, res) {
@@ -66,6 +63,8 @@ router.post("/login", passport.authenticate("local", {}), function(req, res) {
 });
 
 router.post("/logout", authController.logout);
+
+router.post("/updateUser", userController.updateUser);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);

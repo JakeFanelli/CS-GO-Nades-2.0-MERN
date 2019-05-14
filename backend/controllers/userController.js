@@ -3,8 +3,8 @@ const User = mongoose.model("User");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
-  req.sanitizeBody("name");
-  req.checkBody("name", "You must supply a name!").notEmpty();
+  req.sanitizeBody("username");
+  req.checkBody("username", "You must supply a username!").notEmpty();
   req.checkBody("email", "That Email is not valid!").isEmail();
   req.sanitizeBody("email").normalizeEmail({
     gmail_remove_dots: false,
@@ -44,20 +44,23 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
-  const user = new User({ email: req.body.email, name: req.body.name });
+  const user = new User({
+    email: req.body.email,
+    username: req.body.username
+  });
   User.register(user, req.body.password, function(err, user) {
     if (err) {
       res.status(400).send({ err });
     } else {
-      next();
+      res.status(200).send(user);
     }
   });
 };
 
 exports.getUser = (req, res) => {
   if (req.session.passport) {
-    const email = req.session.passport.user;
-    User.findOne({ email: email }, function(err, result) {
+    const id = req.session.passport.user;
+    User.findOne({ _id: id }, function(err, result) {
       if (err) {
         res.sendStatus(401);
       } else {
@@ -67,4 +70,37 @@ exports.getUser = (req, res) => {
   } else {
     res.status(200).send({ msg: "no" });
   }
+};
+
+exports.getUserId = async (req, res, next) => {
+  if (req.body.email) {
+    User.findOne({ email: req.body.email }, function(err, result) {
+      if (err) {
+        res.sendStatus(401);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  } else {
+    res.sendStatus(200).send({ msg: "no" });
+  }
+};
+
+exports.updateUser = (req, res, next) => {
+  console.log(req.session);
+  User.findOneAndUpdate(
+    { _id: req.body.id },
+    { $set: { username: req.body.username, email: req.body.email } },
+    function(err, user) {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        user.save(function(err) {
+          if (!err) {
+            res.sendStatus(200);
+          }
+        });
+      }
+    }
+  );
 };

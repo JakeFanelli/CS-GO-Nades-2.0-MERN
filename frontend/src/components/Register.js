@@ -19,7 +19,7 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      name: "",
+      username: "",
       email: "",
       password: "",
       passwordConfirm: "",
@@ -36,7 +36,7 @@ class Register extends Component {
     e.preventDefault();
     //User object based on the fields on the form
     const user = {
-      name: this.state.name,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
       passwordConfirm: this.state.passwordConfirm
@@ -49,6 +49,25 @@ class Register extends Component {
     })
       .then(res => {
         //success
+        const userObj = {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          passwordConfirm: this.state.passwordConfirm,
+          _id: res.data._id
+        };
+        axios(`${URL}/login`, {
+          method: "post",
+          withCredentials: true,
+          data: userObj
+        }).then(res => {
+          //success and setting loggedIn state to true with loggedInUpdate()
+          NotificationManager.success(
+            "Successully logged in!",
+            "Success!",
+            4000
+          );
+        });
         NotificationManager.success(
           "Account successfully created",
           "Success!",
@@ -57,7 +76,7 @@ class Register extends Component {
         //set loggedIn to true and reset the form & make sure user is redirected to Home Page
         this.props.loggedInUpdate();
         this.setState({
-          name: "",
+          username: "",
           email: "",
           password: "",
           passwordConfirm: "",
@@ -70,15 +89,19 @@ class Register extends Component {
             error.response.data.errors.map(err => {
               NotificationManager.error(err.msg, "Error", 4000);
             });
-          } else if (
-            error.response.data.err.message ===
-            "A user with the given username is already registered"
-          ) {
-            NotificationManager.error(
-              "A user with that email is already registered",
-              "Error",
-              4000
-            );
+          } else if (error.response.data.err) {
+            if (
+              error.response.data.err.message ===
+              "A user with the given username is already registered"
+            ) {
+              NotificationManager.error(
+                "A user with that email is already registered",
+                "Error",
+                4000
+              );
+            }
+          } else {
+            NotificationManager.error(error.toString(), "Error", 4000);
           }
         } else {
           NotificationManager.error(error.toString(), "Error", 4000);
@@ -124,10 +147,10 @@ class Register extends Component {
               <label>Username</label>
               <input
                 type="text"
-                name="name"
+                name="username"
                 className="form-control"
                 placeholder="Username"
-                value={this.state.name}
+                value={this.state.username}
                 onChange={this.handleChange}
                 required
               />

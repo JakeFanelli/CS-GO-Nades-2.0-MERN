@@ -42,13 +42,14 @@ class App extends Component {
       });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     axios(`${URL}/user`, {
       method: "get",
       withCredentials: true
     }).then(res => {
       if (res.data.email) {
-        this.setState({ user: res.data });
+        if (prevState.user !== this.state.user)
+          this.setState({ user: res.data });
       }
     });
   }
@@ -57,18 +58,6 @@ class App extends Component {
     let loggedIn = this.state.loggedIn;
     loggedIn = !loggedIn;
     this.setState({ loggedIn });
-  };
-
-  setName = nameParam => {
-    let name = this.state.name;
-    name = nameParam;
-    this.setState({ name });
-  };
-
-  setEmail = emailParam => {
-    let email = this.state.email;
-    email = emailParam;
-    this.setState({ email });
   };
 
   render() {
