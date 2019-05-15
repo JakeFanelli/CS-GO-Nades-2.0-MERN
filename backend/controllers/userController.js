@@ -52,7 +52,7 @@ exports.register = async (req, res, next) => {
     if (err) {
       res.status(400).send({ err });
     } else {
-      res.status(200).send(user);
+      next();
     }
   });
 };
@@ -60,7 +60,7 @@ exports.register = async (req, res, next) => {
 exports.getUser = (req, res) => {
   if (req.session.passport) {
     const id = req.session.passport.user;
-    User.findOne({ _id: id }, function(err, result) {
+    User.findOne({ email: id }, function(err, result) {
       if (err) {
         res.sendStatus(401);
       } else {
@@ -87,19 +87,15 @@ exports.getUserId = async (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
-  console.log(req.session);
   User.findOneAndUpdate(
-    { _id: req.body.id },
+    { email: req.session.passport.user },
     { $set: { username: req.body.username, email: req.body.email } },
     function(err, user) {
       if (err) {
         res.sendStatus(500);
       } else {
-        user.save(function(err) {
-          if (!err) {
-            res.sendStatus(200);
-          }
-        });
+        req.session.passport.user = req.body.email;
+        res.sendStatus(200);
       }
     }
   );

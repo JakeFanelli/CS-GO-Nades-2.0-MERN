@@ -55,7 +55,11 @@ router.post("/userId", userController.getUserId);
 router.post(
   "/register",
   userController.validateRegister,
-  userController.register
+  userController.register,
+  passport.authenticate("local", {}),
+  function(req, res) {
+    res.sendStatus(200);
+  }
 );
 
 router.post("/login", passport.authenticate("local", {}), function(req, res) {

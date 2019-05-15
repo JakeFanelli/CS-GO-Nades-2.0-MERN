@@ -49,30 +49,12 @@ class Register extends Component {
     })
       .then(res => {
         //success
-        const userObj = {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password,
-          passwordConfirm: this.state.passwordConfirm,
-          _id: res.data._id
-        };
-        axios(`${URL}/login`, {
-          method: "post",
-          withCredentials: true,
-          data: userObj
-        }).then(res => {
-          //success and setting loggedIn state to true with loggedInUpdate()
-          NotificationManager.success(
-            "Successully logged in!",
-            "Success!",
-            4000
-          );
-        });
         NotificationManager.success(
           "Account successfully created",
           "Success!",
           4000
         );
+        NotificationManager.success("Successully logged in!", "Success!", 4000);
         //set loggedIn to true and reset the form & make sure user is redirected to Home Page
         this.props.loggedInUpdate();
         this.setState({

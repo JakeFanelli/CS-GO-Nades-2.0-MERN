@@ -32,49 +32,33 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    //API endpoint call to get the ID based on the email
-    axios(`${URL}/userId`, {
+    //API endpoint call to log in our user
+    axios(`${URL}/login`, {
       method: "post",
       withCredentials: true,
       data: user
     })
       .then(res => {
-        //API endpoint call to log in our user
-        res.data.password = user.password;
-        axios(`${URL}/login`, {
-          method: "post",
-          withCredentials: true,
-          data: res.data
-        })
-          .then(res => {
-            //success and setting loggedIn state to true with loggedInUpdate()
-            NotificationManager.success(
-              "Successully logged in!",
-              "Success!",
-              4000
-            );
-            this.props.loggedInUpdate();
-          })
-          .catch(error => {
-            if (error.response) {
-              if (error.response.data.errors) {
-                error.response.data.errors.map(err => {
-                  NotificationManager.error(err.msg, "Error", 4000);
-                });
-              } else if (error.response.status === 401) {
-                NotificationManager.error(
-                  "Sorry, we couldn't find an account with that email and password.",
-                  "Error",
-                  4000
-                );
-              }
-            } else {
-              NotificationManager.error(error.toString(), "Error", 4000);
-            }
-          });
+        //success and setting loggedIn state to true with loggedInUpdate()
+        NotificationManager.success("Successully logged in!", "Success!", 4000);
+        this.props.loggedInUpdate();
       })
       .catch(error => {
-        console.log(error);
+        if (error.response) {
+          if (error.response.data.errors) {
+            error.response.data.errors.map(err => {
+              NotificationManager.error(err.msg, "Error", 4000);
+            });
+          } else if (error.response.status === 401) {
+            NotificationManager.error(
+              "Sorry, we couldn't find an account with that email and password.",
+              "Error",
+              4000
+            );
+          }
+        } else {
+          NotificationManager.error(error.toString(), "Error", 4000);
+        }
       });
   };
 
