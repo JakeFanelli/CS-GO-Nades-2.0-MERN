@@ -48,8 +48,8 @@ class App extends Component {
       withCredentials: true
     }).then(res => {
       if (
-        prevState.user.username !== this.state.user.username ||
-        prevState.user.email !== this.state.user.email
+        prevState.user.username !== res.data.username ||
+        prevState.user.email !== res.data.email
       ) {
         this.setState({ user: res.data });
       }
