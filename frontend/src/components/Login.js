@@ -28,28 +28,30 @@ class Login extends Component {
   //When user clicks Log In button
   onSubmit = e => {
     e.preventDefault();
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
     //API endpoint call to log in our user
     axios(`${URL}/login`, {
       method: "post",
       withCredentials: true,
-      data: user
+      data: { email: this.state.email, password: this.state.password }
     })
       .then(res => {
-        //success and setting loggedIn state to true with loggedInUpdate()
-        NotificationManager.success("Successully logged in!", "Success!", 4000);
-        this.props.loggedInUpdate();
+        axios(`${URL}/user`, {
+          method: "get",
+          withCredentials: true
+        }).then(res => {
+          this.props.updateUser(res.data);
+          //success and setting loggedIn state to true with loggedInUpdate()
+          NotificationManager.success(
+            "Successully logged in!",
+            "Success!",
+            4000
+          );
+          this.props.loggedInUpdate();
+        });
       })
       .catch(error => {
         if (error.response) {
-          if (error.response.data.errors) {
-            error.response.data.errors.map(err => {
-              NotificationManager.error(err.msg, "Error", 4000);
-            });
-          } else if (error.response.status === 401) {
+          if (error.response.status === 401) {
             NotificationManager.error(
               "Sorry, we couldn't find an account with that email and password.",
               "Error",

@@ -40,6 +40,8 @@ class AccountEditingOrViewing extends Component {
       })
         .then(res => {
           this.props.handleEdit();
+          this.props.updateUsername(user.username);
+          this.props.updateEmail(user.email);
           NotificationManager.success(
             "Successully updated account!",
             "Success!",

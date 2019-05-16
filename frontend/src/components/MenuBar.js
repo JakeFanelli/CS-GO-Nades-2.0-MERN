@@ -65,6 +65,7 @@ class MenuBar extends Component {
                 {...props}
                 loggedIn={this.props.loggedIn}
                 loggedInUpdate={this.props.loggedInUpdate}
+                updateUser={this.props.updateUser}
               />
             )}
           />
@@ -85,6 +86,8 @@ class MenuBar extends Component {
                 {...props}
                 loggedIn={this.props.loggedIn}
                 user={this.props.user}
+                updateUsername={this.props.updateUsername}
+                updateEmail={this.props.updateEmail}
               />
             )}
           />

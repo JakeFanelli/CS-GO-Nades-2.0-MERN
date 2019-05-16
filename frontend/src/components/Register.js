@@ -34,18 +34,16 @@ class Register extends Component {
   //When user clicks Register button on Register Page
   onSubmit = e => {
     e.preventDefault();
-    //User object based on the fields on the form
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      passwordConfirm: this.state.passwordConfirm
-    };
     //API endpoint call to register our user in our mongoDB
     axios(`${URL}/register`, {
       method: "post",
       withCredentials: true,
-      data: user
+      data: {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        passwordConfirm: this.state.passwordConfirm
+      }
     })
       .then(res => {
         //success

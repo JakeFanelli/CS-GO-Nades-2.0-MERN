@@ -28,6 +28,8 @@ class Account extends Component {
             editing={this.state.editing}
             user={this.props.user}
             handleEdit={this.handleEdit}
+            updateUsername={this.props.updateUsername}
+            updateEmail={this.props.updateEmail}
           />
         </div>
       );

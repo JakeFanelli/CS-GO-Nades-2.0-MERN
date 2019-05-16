@@ -42,19 +42,21 @@ class App extends Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    axios(`${URL}/user`, {
-      method: "get",
-      withCredentials: true
-    }).then(res => {
-      if (
-        prevState.user.username !== res.data.username ||
-        prevState.user.email !== res.data.email
-      ) {
-        this.setState({ user: res.data });
-      }
-    });
-  }
+  updateUser = user => {
+    this.setState({ user });
+  };
+
+  updateUsername = username => {
+    let user = { ...this.state.user };
+    user.name = username;
+    this.setState({ user });
+  };
+
+  updateEmail = email => {
+    let user = { ...this.state.user };
+    user.email = email;
+    this.setState({ user });
+  };
 
   loggedInUpdate = () => {
     let loggedIn = this.state.loggedIn;
@@ -69,6 +71,9 @@ class App extends Component {
           loggedIn={this.state.loggedIn}
           loggedInUpdate={this.loggedInUpdate}
           user={this.state.user}
+          updateUser={this.updateUser}
+          updateUsername={this.updateUsername}
+          updateEmail={this.updateEmail}
         />
         <NotificationContainer />
       </div>
