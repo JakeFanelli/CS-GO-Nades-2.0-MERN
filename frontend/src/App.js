@@ -48,7 +48,7 @@ class App extends Component {
 
   updateUsername = username => {
     let user = { ...this.state.user };
-    user.name = username;
+    user.username = username;
     this.setState({ user });
   };
 

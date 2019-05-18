@@ -53,14 +53,20 @@ class Register extends Component {
           4000
         );
         NotificationManager.success("Successully logged in!", "Success!", 4000);
-        //set loggedIn to true and reset the form & make sure user is redirected to Home Page
-        this.props.loggedInUpdate();
-        this.setState({
-          username: "",
-          email: "",
-          password: "",
-          passwordConfirm: "",
-          redirectToHome: true
+        axios(`${URL}/user`, {
+          method: "get",
+          withCredentials: true
+        }).then(res => {
+          this.props.updateUser(res.data);
+          //set loggedIn to true and reset the form & make sure user is redirected to Home Page
+          this.props.loggedInUpdate();
+          this.setState({
+            username: "",
+            email: "",
+            password: "",
+            passwordConfirm: "",
+            redirectToHome: true
+          });
         });
       })
       .catch(error => {

@@ -76,6 +76,7 @@ class MenuBar extends Component {
                 {...props}
                 loggedInUpdate={this.props.loggedInUpdate}
                 loggedIn={this.props.loggedIn}
+                updateUser={this.props.updateUser}
               />
             )}
           />
