@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const md5 = require("md5");
 const validator = require("validator");
 const mongodbErrorHandler = require("mongoose-mongodb-errors");
+const uniqueValidator = require("mongoose-unique-validator");
 const passportLocalMongoose = require("passport-local-mongoose");
 const Schema = mongoose.Schema;
 
@@ -16,8 +17,9 @@ const User = new Schema({
   },
   username: {
     type: String,
-    required: "Please supply a username",
-    trim: true
+    unique: true,
+    trim: true,
+    required: "Please supply a Username"
   },
   date: {
     type: Date,
@@ -27,5 +29,6 @@ const User = new Schema({
 
 User.plugin(passportLocalMongoose, { usernameField: "email" });
 User.plugin(mongodbErrorHandler);
+User.plugin(uniqueValidator);
 
 module.exports = mongoose.model("User", User);

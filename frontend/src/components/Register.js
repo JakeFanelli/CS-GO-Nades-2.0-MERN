@@ -75,17 +75,6 @@ class Register extends Component {
             error.response.data.errors.map(err => {
               NotificationManager.error(err.msg, "Error", 4000);
             });
-          } else if (error.response.data.err) {
-            if (
-              error.response.data.err.message ===
-              "A user with the given username is already registered"
-            ) {
-              NotificationManager.error(
-                "A user with that email is already registered",
-                "Error",
-                4000
-              );
-            }
           } else {
             NotificationManager.error(error.toString(), "Error", 4000);
           }

@@ -4,7 +4,7 @@ const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
   req.sanitizeBody("username");
-  req.checkBody("username", "You must supply a username!").notEmpty();
+  req.checkBody("username", "You must supply a Username!").notEmpty();
   req.checkBody("email", "That Email is not valid!").isEmail();
   req.sanitizeBody("email").normalizeEmail({
     gmail_remove_dots: false,
@@ -18,7 +18,6 @@ exports.validateRegister = (req, res, next) => {
   req
     .checkBody("passwordConfirm", "Oops! Your passwords do not match")
     .equals(req.body.password);
-
   req
     .check("password")
     .custom(value => (regexLower.test(value) ? true : false))
@@ -50,7 +49,29 @@ exports.register = async (req, res, next) => {
   });
   User.register(user, req.body.password, function(err, user) {
     if (err) {
-      res.status(400).send({ err });
+      if (
+        err.message == "A user with the given username is already registered"
+      ) {
+        err = {
+          msg: "An account with that email already exists."
+        };
+        let errors = [err];
+        res.status(500).send({ errors });
+      } else {
+        let array = Object.keys(err).map(function(key) {
+          return err[key];
+        });
+        let array2 = array[0];
+        let errors = Object.keys(array2).map(function(key) {
+          return array2[key];
+        });
+        errors.forEach(error => {
+          if (error.path == "username") {
+            error.msg = "An account with that username already exists.";
+          }
+        });
+        res.status(500).send({ errors });
+      }
     } else {
       next();
     }
@@ -89,10 +110,25 @@ exports.getUserId = async (req, res, next) => {
 exports.updateUser = (req, res, next) => {
   User.findOneAndUpdate(
     { email: req.session.passport.user },
-    { $set: { username: req.body.username, email: req.body.email } },
+    { $set: { email: req.body.email, username: req.body.username } },
+    { runValidators: true, context: "query" },
     function(err, user) {
       if (err) {
-        res.sendStatus(500);
+        let array = Object.keys(err).map(function(key) {
+          return err[key];
+        });
+        let array2 = array[0];
+        let errors = Object.keys(array2).map(function(key) {
+          return array2[key];
+        });
+        errors.forEach(error => {
+          if (error.path == "email") {
+            error.msg = "An account with that email already exists.";
+          } else if (error.path == "username") {
+            error.msg = "An account with that username already exists.";
+          }
+        });
+        res.status(500).send({ errors });
       } else {
         req.session.passport.user = req.body.email;
         res.sendStatus(200);
