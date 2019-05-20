@@ -59,7 +59,6 @@ class Register extends Component {
         }).then(res => {
           this.props.updateUser(res.data);
           //set loggedIn to true and reset the form & make sure user is redirected to Home Page
-          this.props.loggedInUpdate();
           this.setState({
             username: "",
             email: "",
@@ -67,6 +66,7 @@ class Register extends Component {
             passwordConfirm: "",
             redirectToHome: true
           });
+          this.props.loggedInUpdate();
         });
       })
       .catch(error => {
