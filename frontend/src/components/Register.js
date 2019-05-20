@@ -73,7 +73,7 @@ class Register extends Component {
         if (error.response) {
           if (error.response.data.errors) {
             error.response.data.errors.map(err => {
-              NotificationManager.error(err.msg, "Error", 4000);
+              return NotificationManager.error(err.msg, "Error", 4000);
             });
           } else {
             NotificationManager.error(error.toString(), "Error", 4000);
