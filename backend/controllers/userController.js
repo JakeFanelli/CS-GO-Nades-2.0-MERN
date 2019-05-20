@@ -107,6 +107,22 @@ exports.getUserId = async (req, res, next) => {
   }
 };
 
+exports.validateUpdate = (req, res, next) => {
+  req.sanitizeBody("username");
+  req.checkBody("email", "That Email is not valid!").isEmail();
+  req.sanitizeBody("email").normalizeEmail({
+    gmail_remove_dots: false,
+    remove_extension: false,
+    gmail_remove_subaddress: false
+  });
+  let errors = req.validationErrors();
+  if (errors) {
+    res.status(400).send({ errors });
+  } else {
+    next(); // there were no errors!
+  }
+};
+
 exports.updateUser = (req, res, next) => {
   User.findOneAndUpdate(
     { email: req.session.passport.user },

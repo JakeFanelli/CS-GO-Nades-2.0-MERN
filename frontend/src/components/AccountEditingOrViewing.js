@@ -83,7 +83,7 @@ class AccountEditingOrViewing extends Component {
           <div className="form-group">
             <label>Email</label>
             <input
-              type="text"
+              type="email"
               name="email"
               className="form-control"
               placeholder={this.props.user.email}

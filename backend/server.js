@@ -70,7 +70,11 @@ router.post("/login", passport.authenticate("local", {}), function(req, res) {
 
 router.post("/logout", authController.logout);
 
-router.post("/updateUser", userController.updateUser);
+router.post(
+  "/updateUser",
+  userController.validateUpdate,
+  userController.updateUser
+);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);
