@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
-
 import { URL } from "../helpers";
 
 class AccountEditing extends Component {
