@@ -127,6 +127,12 @@ a.thumbnail:hover {
 }
 .mapPic {
   max-width: 100%;
-  filter: blur(0.8px);
+  filter: blur(1.2px);
   transition-duration: 0.15s;
+}
+.middle {
+  margin: 0 auto;
+}
+.invisible {
+  display: none;
 }

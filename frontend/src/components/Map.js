@@ -10,7 +10,8 @@ class Map extends Component {
             <img
               className="img-responsive mapPic"
               src={this.props.src}
-              alt="Mirage"
+              alt={this.props.alt}
+              onLoad={this.props.loaded}
             />
           </Link>
           <div className="centered">
