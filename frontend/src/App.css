@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+body {
+  background-color: #333;
+  color: #fff;
+}
+h2 {
+  color: #fff;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -40,7 +48,7 @@
   user-select: none; /* Standard */
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .nav-link {
     opacity: 0;
     transform: translateX(-100%);
