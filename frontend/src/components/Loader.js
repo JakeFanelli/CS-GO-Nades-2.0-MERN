@@ -10,7 +10,7 @@ class Loader extends Component {
         <ReactLoading
           className="middle"
           type={"spin"}
-          color={"#000"}
+          color={"#fff"}
           height={"4%"}
           width={"4%"}
         />
