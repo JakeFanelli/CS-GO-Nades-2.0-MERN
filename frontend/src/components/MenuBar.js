@@ -9,6 +9,7 @@ import Register from "./Register";
 import NoMatch from "./NoMatch";
 import LoggedInOrOut from "./LoggedInOrOut";
 import Account from "./Account";
+import MapPage from "./MapPage";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -55,8 +56,8 @@ class MenuBar extends Component {
         </div>
         <Switch>
           <Route path="/" exact component={Index} />
+          <Route path="/maps/:id" component={MapPage} />
           <Route path="/maps" component={Maps} />
-          <Route path="/maps/:id" component={Maps} />
           <Route path="/recoils" component={Recoils} />
           <Route
             path="/login"

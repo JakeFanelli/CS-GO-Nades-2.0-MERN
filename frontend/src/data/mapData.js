@@ -1,45 +1,45 @@
 const DATA = [
   {
     mapTitle: "Mirage",
-    src: "../maps/mirage.jpg",
+    src: "../map_images/mirage.jpg",
     alt: "Mirage Map",
-    to: ""
+    to: "maps/mirage"
   },
   {
     mapTitle: "Dust ll",
-    src: "../maps/d2.jpg",
+    src: "../map_images/d2.jpg",
     alt: "Dust ll Map",
-    to: ""
+    to: "maps/dust2"
   },
   {
     mapTitle: "Inferno",
-    src: "../maps/inferno.jpg",
+    src: "../map_images/inferno.jpg",
     alt: "Inferno Map",
-    to: ""
+    to: "maps/inferno"
   },
   {
     mapTitle: "Train",
-    src: "../maps/train.jpg",
+    src: "../map_images/train.jpg",
     alt: "Train Map",
-    to: ""
+    to: "maps/train"
   },
   {
     mapTitle: "Overpass",
-    src: "../maps/overpass.jpg",
+    src: "../map_images/overpass.jpg",
     alt: "Overpass Map",
-    to: ""
+    to: "maps/overpass"
   },
   {
     mapTitle: "Nuke",
-    src: "../maps/nuke.jpg",
+    src: "../map_images/nuke.jpg",
     alt: "Nuke Map",
-    to: ""
+    to: "maps/nuke"
   },
   {
     mapTitle: "Cache",
-    src: "../maps/cache.jpg",
+    src: "../map_images/cache.jpg",
     alt: "Cache Map",
-    to: ""
+    to: "maps/cache"
   }
 ];
 

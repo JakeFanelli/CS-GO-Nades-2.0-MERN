@@ -21,6 +21,7 @@ class Maplist extends Component {
           mapTitle={map.mapTitle}
           src={map.src}
           alt={map.alt}
+          to={map.to}
           loaded={this.loaded}
         />
       );
