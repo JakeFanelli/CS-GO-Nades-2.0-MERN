@@ -6,15 +6,7 @@ class Map extends Component {
     return (
       <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 mapCol">
         <div className="imgContainer">
-          <Link
-            className="thumbnail"
-            to={{
-              pathname: this.props.to,
-              state: {
-                mapTitle: this.props.mapTitle
-              }
-            }}
-          >
+          <Link to={this.props.to} className="thumbnail">
             <img
               className="img-responsive mapPic"
               src={this.props.src}
@@ -22,17 +14,8 @@ class Map extends Component {
               onLoad={this.props.loaded}
             />
           </Link>
-
           <div className="centered">
-            <Link
-              className="noLinkLook"
-              to={{
-                pathname: this.props.to,
-                state: {
-                  mapTitle: this.props.mapTitle
-                }
-              }}
-            >
+            <Link to={this.props.to} className="noLinkLook">
               <p className="h1">{this.props.mapTitle}</p>
             </Link>
           </div>
