@@ -7,6 +7,7 @@ class MapPage extends Component {
     this.state = {
       mapImage: "",
       mapTitle: "",
+      mapAlt: "",
       mapList: []
     };
   }
@@ -20,7 +21,9 @@ class MapPage extends Component {
         uppercaseMapTitle.substring(0, 4) === mapObj.mapTitle.substring(0, 4)
       ) {
         this.setState({
-          mapTitle: mapObj.mapTitle
+          mapTitle: mapObj.mapTitle,
+          mapImage: mapObj.overlaysrc,
+          mapAlt: mapObj.mapAlt
         });
       }
     });
@@ -30,6 +33,18 @@ class MapPage extends Component {
     return (
       <div className="container">
         <h2>{this.state.mapTitle}</h2>
+        <div id="contentContainer" class="container">
+          <div id="mapRow" class="row">
+            <div id="mapCol" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <img
+                id="imgBox"
+                className="img-responsive overlay"
+                src={this.state.mapImage}
+                alt={this.state.mapAlt}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
