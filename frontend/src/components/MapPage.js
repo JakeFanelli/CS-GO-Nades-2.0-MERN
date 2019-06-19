@@ -23,7 +23,7 @@ class MapPage extends Component {
         this.setState({
           mapTitle: mapObj.mapTitle,
           mapImage: mapObj.overlaysrc,
-          mapAlt: mapObj.mapAlt
+          mapAlt: mapObj.alt
         });
       }
     });
@@ -33,9 +33,12 @@ class MapPage extends Component {
     return (
       <div className="container">
         <h2>{this.state.mapTitle}</h2>
-        <div id="contentContainer" class="container">
-          <div id="mapRow" class="row">
-            <div id="mapCol" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="contentContainer" className="">
+          <div id="mapRow" className="row">
+            <div
+              id="mapCol"
+              className="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+            >
               <img
                 id="imgBox"
                 className="img-responsive overlay"
