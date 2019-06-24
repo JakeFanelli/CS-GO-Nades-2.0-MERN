@@ -155,3 +155,19 @@ a.thumbnail:hover {
   display: block;
   margin: 0 auto;
 }
+.svgClass {
+  position: absolute;
+  top: 0;
+  left: 58px;
+  height: 100%;
+}
+@media only screen and (max-width: 1200px) {
+  .svgClass {
+    left: 15px;
+  }
+}
+.svgClass > g {
+  stroke: #fff;
+  fill: #fff;
+  stroke-width: 1.7;
+}
