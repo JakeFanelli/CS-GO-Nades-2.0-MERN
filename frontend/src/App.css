@@ -170,4 +170,10 @@ a.thumbnail:hover {
   stroke: #fff;
   fill: #fff;
   stroke-width: 1.7;
+  opacity: 0.4;
+}
+
+.smokes:hover {
+  opacity: 1;
+  cursor: pointer;
 }
