@@ -16,7 +16,8 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: "",
-      user: {}
+      user: {},
+      tOrCt: "T"
     };
     document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
@@ -64,6 +65,12 @@ class App extends Component {
     this.setState({ loggedIn });
   };
 
+  switchSides = () => {
+    this.state.tOrCt === "T"
+      ? this.setState({ tOrCt: "CT" })
+      : this.setState({ tOrCt: "T" });
+  };
+
   render() {
     return (
       <div>
@@ -74,6 +81,8 @@ class App extends Component {
           updateUser={this.updateUser}
           updateUsername={this.updateUsername}
           updateEmail={this.updateEmail}
+          tOrCt={this.state.tOrCt}
+          switchSides={this.switchSides}
         />
         <NotificationContainer />
       </div>
