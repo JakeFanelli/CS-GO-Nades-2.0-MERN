@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import Smokes from "./Smokes";
 
 class CounterTerroristNades extends Component {
-  state = {
-    CT_nade_data: (this.props.nadeData.filter = nade => {
-      if (nade.side === "CT") {
-        return nade;
-      }
-    })
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      CT_nade_data: []
+    };
+  }
+  componentWillMount() {
+    this.setState({
+      CT_nade_data: this.props.nadeData.filter(nade => nade.side === "CT")
+    });
+  }
   render() {
     if (this.props.tOrCt === "CT") {
       return (

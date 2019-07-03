@@ -20,6 +20,28 @@ const NADE_DATA = [
     title: "Stairs smoke from outside A ramp",
     type: "Smoke",
     url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
+  },
+  {
+    id: 3,
+    startX: 100,
+    startY: 102,
+    endX: 190,
+    endY: 150,
+    side: "CT",
+    title: "A CT SMOKE",
+    type: "Smoke",
+    url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
+  },
+  {
+    id: 4,
+    startX: 100,
+    startY: 102,
+    endX: 190,
+    endY: 150,
+    side: "T",
+    title: "A T MOLLY",
+    type: "Molotov",
+    url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
   }
 ];
 

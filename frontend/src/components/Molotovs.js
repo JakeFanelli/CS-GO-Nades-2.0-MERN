@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Smokes extends Component {
+class Molotovs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nades: []
     };
     this.props.nadeData.forEach(nade => {
-      if (nade.type === "Smoke") {
+      if (nade.type === "Molotov") {
         this.state.nades.push(
           <Link key={nade.id} to={this.props.match.params.id + "/" + nade.id}>
             <g>
@@ -19,10 +19,7 @@ class Smokes extends Component {
                 y2={nade.endY}
               />
               <circle cx={nade.startX} cy={nade.startY} r="1" />
-              <circle cx={nade.endX + 1} cy={nade.endY} r="1.5" />
-              <circle cx={nade.endX - 1} cy={nade.endY} r="1.5" />
-              <circle cx={nade.endX} cy={nade.endY - 1} r="1.5" />
-              <circle cx={nade.endX} cy={nade.endY + 1} r="1.5" />
+              <image href="../molly.png" x={nade.endX} y={nade.endY} />
             </g>
           </Link>
         );
@@ -35,4 +32,4 @@ class Smokes extends Component {
   }
 }
 
-export default Smokes;
+export default Molotovs;
