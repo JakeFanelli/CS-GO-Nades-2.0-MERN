@@ -186,22 +186,24 @@ a.thumbnail:hover {
   cursor: pointer;
 }
 g image {
-  width: 0.7em;
-  height: 0.7em;
-  transform: translate(-0.35em, -0.35em);
+  width: 0.55em;
+  height: 0.55em;
+  transform: translate(-0.275em, -0.275em);
 }
 .filterLabel {
   color: rgba(255, 255, 255, 0.5);
-}
-.filterLabel:hover {
-  color: #fff;
-  background-color: #000;
 }
 .filterBar {
   background-color: #222;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
+.filterBar > .filterLabel:hover {
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+}
+
 .filterBar > input:checked + label {
   color: #fff;
   background-color: #000;
