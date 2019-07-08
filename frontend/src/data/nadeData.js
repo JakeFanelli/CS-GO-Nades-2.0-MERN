@@ -23,9 +23,9 @@ const NADE_DATA = [
   },
   {
     id: 3,
-    startX: 100,
-    startY: 102,
-    endX: 190,
+    startX: 80,
+    startY: 122,
+    endX: 50,
     endY: 150,
     side: "CT",
     title: "A CT SMOKE",
@@ -41,6 +41,39 @@ const NADE_DATA = [
     side: "T",
     title: "A T MOLLY",
     type: "Molotov",
+    url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
+  },
+  {
+    id: 5,
+    startX: 111,
+    startY: 122,
+    endX: 160,
+    endY: 120,
+    side: "CT",
+    title: "A CT MOLLY",
+    type: "Molotov",
+    url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
+  },
+  {
+    id: 6,
+    startX: 40,
+    startY: 62,
+    endX: 90,
+    endY: 50,
+    side: "CT",
+    title: "A CT FLASH",
+    type: "Flash",
+    url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
+  },
+  {
+    id: 7,
+    startX: 30,
+    startY: 82,
+    endX: 190,
+    endY: 120,
+    side: "T",
+    title: "A T Flash",
+    type: "Flash",
     url: "https://giant.gfycat.com/VillainousViciousDeviltasmanian.mp4"
   }
 ];
