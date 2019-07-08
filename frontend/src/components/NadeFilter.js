@@ -11,7 +11,8 @@ class NadeFilter extends Component {
           id="smokebox"
           type="checkbox"
           name="smokebox"
-          autoComplete="off"
+          onChange={this.props.smokesFlagUpdate}
+          checked={this.props.smokesFlag}
         />
         <label htmlFor="smokebox" className="btn filterLabel">
           Smokes
@@ -20,7 +21,8 @@ class NadeFilter extends Component {
           id="flashbox"
           type="checkbox"
           name="flashbox"
-          autoComplete="off"
+          onChange={this.props.flashesFlagUpdate}
+          checked={this.props.flashesFlag}
         />
         <label htmlFor="flashbox" className="btn filterLabel">
           Flashes
@@ -29,7 +31,8 @@ class NadeFilter extends Component {
           id="molotovbox"
           type="checkbox"
           name="molotovbox"
-          autoComplete="off"
+          onChange={this.props.molotovsFlagUpdate}
+          checked={this.props.molotovsFlag}
         />
         <label htmlFor="molotovbox" className="btn filterLabel">
           Molotovs

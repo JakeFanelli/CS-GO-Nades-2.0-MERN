@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Smokes from "./Smokes";
+import Molotovs from "./Molotovs";
+import Flashes from "./Flashes";
 
 class CounterTerroristNades extends Component {
   constructor(props) {
@@ -16,7 +18,29 @@ class CounterTerroristNades extends Component {
   render() {
     if (this.props.tOrCt === "CT") {
       return (
-        <Smokes match={this.props.match} nadeData={this.state.CT_nade_data} />
+        <React.Fragment>
+          <Smokes
+            match={this.props.match}
+            nadeData={this.state.CT_nade_data}
+            smokesFlag={this.props.smokesFlag}
+            flashesFlag={this.props.flashesFlag}
+            molotovsFlag={this.props.molotovsFlag}
+          />
+          <Molotovs
+            match={this.props.match}
+            nadeData={this.state.CT_nade_data}
+            smokesFlag={this.props.smokesFlag}
+            flashesFlag={this.props.flashesFlag}
+            molotovsFlag={this.props.molotovsFlag}
+          />
+          <Flashes
+            match={this.props.match}
+            nadeData={this.state.CT_nade_data}
+            smokesFlag={this.props.smokesFlag}
+            flashesFlag={this.props.flashesFlag}
+            molotovsFlag={this.props.molotovsFlag}
+          />
+        </React.Fragment>
       );
     } else {
       return null;

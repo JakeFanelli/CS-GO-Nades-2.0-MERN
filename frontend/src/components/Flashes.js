@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Molotovs extends Component {
+class Flashes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nades: []
     };
     this.props.nadeData.forEach(nade => {
-      if (nade.type === "Molotov") {
+      if (nade.type === "Flash") {
         this.state.nades.push(
           <Link key={nade.id} to={this.props.match.params.id + "/" + nade.id}>
             <g>
@@ -19,16 +19,15 @@ class Molotovs extends Component {
                 y2={nade.endY}
               />
               <circle cx={nade.startX} cy={nade.startY} r="1" />
-              <image href="../molly.png" x={nade.endX} y={nade.endY} />
+              <image href="../flash.png" x={nade.endX} y={nade.endY} />
             </g>
           </Link>
         );
       }
     });
   }
-
   render() {
-    if (this.props.molotovsFlag) {
+    if (this.props.flashesFlag) {
       return this.state.nades;
     } else {
       return null;
@@ -36,4 +35,4 @@ class Molotovs extends Component {
   }
 }
 
-export default Molotovs;
+export default Flashes;

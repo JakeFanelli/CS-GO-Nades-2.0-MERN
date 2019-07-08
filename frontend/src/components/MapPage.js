@@ -49,6 +49,12 @@ class MapPage extends Component {
           <FilterBar
             tOrCt={this.props.tOrCt}
             switchSides={this.props.switchSides}
+            smokesFlag={this.props.smokesFlag}
+            flashesFlag={this.props.flashesFlag}
+            molotovsFlag={this.props.molotovsFlag}
+            smokesFlagUpdate={this.props.smokesFlagUpdate}
+            flashesFlagUpdate={this.props.flashesFlagUpdate}
+            molotovsFlagUpdate={this.props.molotovsFlagUpdate}
           />
           <div id="contentContainer">
             <div id="mapRow" className="row">
@@ -72,11 +78,17 @@ class MapPage extends Component {
                     match={this.props.match}
                     tOrCt={this.props.tOrCt}
                     nadeData={this.state.nadeData}
+                    smokesFlag={this.props.smokesFlag}
+                    flashesFlag={this.props.flashesFlag}
+                    molotovsFlag={this.props.molotovsFlag}
                   />
                   <CounterTerroristNades
                     match={this.props.match}
                     tOrCt={this.props.tOrCt}
                     nadeData={this.state.nadeData}
+                    smokesFlag={this.props.smokesFlag}
+                    flashesFlag={this.props.flashesFlag}
+                    molotovsFlag={this.props.molotovsFlag}
                   />
                 </svg>
               </div>

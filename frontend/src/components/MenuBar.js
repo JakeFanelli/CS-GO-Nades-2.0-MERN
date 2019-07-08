@@ -65,6 +65,12 @@ class MenuBar extends Component {
                 {...props}
                 tOrCt={this.props.tOrCt}
                 switchSides={this.props.switchSides}
+                smokesFlag={this.props.smokesFlag}
+                flashesFlag={this.props.flashesFlag}
+                molotovsFlag={this.props.molotovsFlag}
+                smokesFlagUpdate={this.props.smokesFlagUpdate}
+                flashesFlagUpdate={this.props.flashesFlagUpdate}
+                molotovsFlagUpdate={this.props.molotovsFlagUpdate}
               />
             )}
           />

@@ -17,7 +17,10 @@ class App extends Component {
     this.state = {
       loggedIn: "",
       user: {},
-      tOrCt: "T"
+      tOrCt: "T",
+      smokesFlag: true,
+      flashesFlag: false,
+      molotovsFlag: false
     };
     document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
@@ -71,6 +74,24 @@ class App extends Component {
       : this.setState({ tOrCt: "T" });
   };
 
+  smokesFlagUpdate = () => {
+    this.state.smokesFlag === false
+      ? this.setState({ smokesFlag: true })
+      : this.setState({ smokesFlag: false });
+  };
+
+  flashesFlagUpdate = () => {
+    this.state.flashesFlag === false
+      ? this.setState({ flashesFlag: true })
+      : this.setState({ flashesFlag: false });
+  };
+
+  molotovsFlagUpdate = () => {
+    this.state.molotovsFlag === false
+      ? this.setState({ molotovsFlag: true })
+      : this.setState({ molotovsFlag: false });
+  };
+
   render() {
     return (
       <div>
@@ -83,6 +104,12 @@ class App extends Component {
           updateEmail={this.updateEmail}
           tOrCt={this.state.tOrCt}
           switchSides={this.switchSides}
+          smokesFlag={this.state.smokesFlag}
+          flashesFlag={this.state.flashesFlag}
+          molotovsFlag={this.state.molotovsFlag}
+          smokesFlagUpdate={this.smokesFlagUpdate}
+          flashesFlagUpdate={this.flashesFlagUpdate}
+          molotovsFlagUpdate={this.molotovsFlagUpdate}
         />
         <NotificationContainer />
       </div>

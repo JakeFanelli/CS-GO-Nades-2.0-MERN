@@ -31,7 +31,11 @@ class Smokes extends Component {
   }
 
   render() {
-    return this.state.nades;
+    if (this.props.smokesFlag) {
+      return this.state.nades;
+    } else {
+      return null;
+    }
   }
 }
 
