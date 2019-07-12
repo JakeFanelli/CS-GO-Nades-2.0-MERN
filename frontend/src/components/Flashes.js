@@ -22,6 +22,7 @@ class Flashes extends Component {
     });
     return smokeLines;
   };
+
   render() {
     if (this.props.flashesFlag) {
       return this.createSmokeLines();
