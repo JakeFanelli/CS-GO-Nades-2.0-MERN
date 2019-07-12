@@ -8,8 +8,10 @@ const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 const router = express.Router();
 require("./models/User");
+require("./models/Nade");
 const userController = require("./controllers/userController");
 const authController = require("./controllers/authController");
+const nadesController = require("./controllers/nadeController");
 const expressValidator = require("express-validator");
 const passport = require("passport");
 require("dotenv").config({ path: "variables.env" });
@@ -75,6 +77,8 @@ router.post(
   userController.validateUpdate,
   userController.updateUser
 );
+
+router.post("/loadNades", nadesController.loadNades);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);
