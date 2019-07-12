@@ -4,7 +4,8 @@ import FilterBar from "./FilterBar";
 import TerroristNades from "./TerroristNades";
 import CounterTerroristNades from "./CounterTerroristNades";
 import Loader from "./Loader";
-import NADE_DATA from "../data/nadeData";
+import axios from "axios";
+import { URL } from "../helpers";
 
 class MapPage extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class MapPage extends Component {
       mapAlt: "",
       loaded: "",
       visibility: "invisible",
-      nadeData: NADE_DATA
+      nadeData: []
     };
   }
 
@@ -32,6 +33,18 @@ class MapPage extends Component {
           mapImage: mapObj.overlaysrc,
           mapAlt: mapObj.alt
         });
+      }
+    });
+    //api endpoint to load nades
+    axios(`${URL}/loadNades`, {
+      method: "post",
+      withCredentials: true,
+      data: {
+        mapTitle: this.props.match.params.id
+      }
+    }).then(res => {
+      if (res.data) {
+        this.setState({ nadeData: res.data });
       }
     });
   }
@@ -77,7 +90,9 @@ class MapPage extends Component {
                   <TerroristNades
                     match={this.props.match}
                     tOrCt={this.props.tOrCt}
-                    nadeData={this.state.nadeData}
+                    nadeData={this.state.nadeData.filter(
+                      nade => nade.side === "T"
+                    )}
                     smokesFlag={this.props.smokesFlag}
                     flashesFlag={this.props.flashesFlag}
                     molotovsFlag={this.props.molotovsFlag}
@@ -85,7 +100,9 @@ class MapPage extends Component {
                   <CounterTerroristNades
                     match={this.props.match}
                     tOrCt={this.props.tOrCt}
-                    nadeData={this.state.nadeData}
+                    nadeData={this.state.nadeData.filter(
+                      nade => nade.side === "CT"
+                    )}
                     smokesFlag={this.props.smokesFlag}
                     flashesFlag={this.props.flashesFlag}
                     molotovsFlag={this.props.molotovsFlag}
