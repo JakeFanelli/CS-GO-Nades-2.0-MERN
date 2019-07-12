@@ -6,7 +6,7 @@ class Smokes extends Component {
     let smokeLines = [];
     this.props.nadeData.forEach(nade => {
       smokeLines.push(
-        <Link key={nade._id} to={this.props.match.params._id + "/" + nade._id}>
+        <Link key={nade._id} to={this.props.match.params.id + "/" + nade._id}>
           <g>
             <line
               x1={nade.startX}
