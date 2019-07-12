@@ -278,3 +278,14 @@ input:checked + .slider:before {
   font-weight: 400;
   font-size: 16px;
 }
+.welcomeText {
+  text-align: center;
+  padding-top: 2em;
+}
+.subText {
+  padding-top: 1em;
+  text-align: center;
+}
+.h1 {
+  text-shadow: 2px 2px 5px #000;
+}
