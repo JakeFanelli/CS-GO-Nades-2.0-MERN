@@ -107,6 +107,18 @@ exports.getUserId = async (req, res, next) => {
   }
 };
 
+exports.getAuthorUserName = (req, res) => {
+  if (req.body.authorID) {
+    User.findOne({ _id: req.body.authorID }, function(err, result) {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  }
+};
+
 exports.validateUpdate = (req, res, next) => {
   req.sanitizeBody("username");
   req.checkBody("email", "That Email is not valid!").isEmail();

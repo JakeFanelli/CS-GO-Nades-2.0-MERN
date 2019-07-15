@@ -29,7 +29,7 @@ class MenuBar extends Component {
     return (
       <Router>
         <div>
-          <Navbar bg="dark" expand="lg" variant="dark">
+          <Navbar expand="lg" variant="dark">
             <div className="container">
               <Link to="/" className="navbar-brand">
                 CS:GO Nades

@@ -79,6 +79,8 @@ router.post(
 );
 
 router.post("/loadNades", nadesController.loadNades);
+router.post("/loadNadeVideo", nadesController.loadNadeVideo);
+router.post("/getAuthorUserName", userController.getAuthorUserName);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);

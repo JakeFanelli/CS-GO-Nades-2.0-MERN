@@ -2,12 +2,20 @@
   text-align: center;
 }
 
+html {
+  margin-left: calc(100vw - 100%);
+  margin-right: 0;
+}
+
 body {
   background-color: #333;
   color: #fff;
 }
 h2 {
   color: #fff;
+}
+.bold {
+  font-weight: bold;
 }
 
 .App-logo {
@@ -38,6 +46,10 @@ h2 {
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  background-color: #333;
 }
 
 .nav-link,
@@ -165,7 +177,6 @@ a.thumbnail:hover {
   }
 }
 @media only screen and (min-width: 1200px) {
-  .mapTitle,
   #filterRow {
     margin-left: 43px;
     margin-right: 43px;
@@ -208,6 +219,34 @@ g image {
   color: #fff;
   background-color: #000;
 }
+
+.filterBar > input:last-of-type:checked + label {
+  border-bottom-right-radius: 0;
+}
+.filterBar > input:first-of-type:checked + label {
+  border-top-left-radius: 4px;
+}
+.filterBar > label:first-of-type {
+  transition: border-top-left-radius 0s;
+}
+.filterBar > label:last-of-type {
+  transition: border-bottom-right-radius 0s;
+}
+
+/*Removes bootstraps css that adds to the left*/
+.btn-group > .btn-group:not(:first-child),
+.btn-group > .btn:not(:first-child) {
+  margin-left: 0;
+}
+
+/*Add rounded top left corner to 1st child*/
+.filterBar label:first-of-type:hover {
+  border-top-left-radius: 4px;
+}
+.filterBar label:last-of-type:hover {
+  border-bottom-right-radius: 0;
+}
+
 .filterBar > input {
   display: none;
 }
