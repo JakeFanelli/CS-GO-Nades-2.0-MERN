@@ -21,11 +21,16 @@ class NadePage extends Component {
       }
     }).then(res => {
       if (res.data) {
+        let dateReturned = new Date(res.data.date);
+        let month = dateReturned.getMonth() + 1;
+        let day = dateReturned.getDate();
+        let year = dateReturned.getFullYear();
+        let fullDate = month + "/" + day + "/" + year;
         this.setState({
           nadeTitle: res.data.title,
           authorID: res.data.authorID,
           videoURL: res.data.url,
-          dateSubmitted: res.data.date
+          dateSubmitted: fullDate
         });
         axios(`${URL}/getAuthorUserName`, {
           method: "post",
