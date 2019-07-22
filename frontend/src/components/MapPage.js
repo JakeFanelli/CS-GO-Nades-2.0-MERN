@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import DATA from "../data/mapData";
 import FilterBar from "./FilterBar";
-import TerroristNades from "./TerroristNades";
-import CounterTerroristNades from "./CounterTerroristNades";
 import Loader from "./Loader";
 import axios from "axios";
 import { URL } from "../helpers";
+import MapOverlay from "./MapOverlay";
 
 class MapPage extends Component {
   constructor(props) {
@@ -69,48 +68,18 @@ class MapPage extends Component {
             flashesFlagUpdate={this.props.flashesFlagUpdate}
             molotovsFlagUpdate={this.props.molotovsFlagUpdate}
           />
-          <div id="contentContainer">
-            <div id="mapRow" className="row">
-              <div
-                id="mapCol"
-                className="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-              >
-                <img
-                  id="imgBox"
-                  className="img-responsive overlay"
-                  src={this.state.mapImage}
-                  alt={this.state.mapAlt}
-                  onLoad={this.loaded}
-                />
-                <svg
-                  className="svgClass"
-                  viewBox="0 0 250 250"
-                  preserveAspectRatio="none"
-                >
-                  <TerroristNades
-                    match={this.props.match}
-                    tOrCt={this.props.tOrCt}
-                    nadeData={this.state.nadeData.filter(
-                      nade => nade.side === "T"
-                    )}
-                    smokesFlag={this.props.smokesFlag}
-                    flashesFlag={this.props.flashesFlag}
-                    molotovsFlag={this.props.molotovsFlag}
-                  />
-                  <CounterTerroristNades
-                    match={this.props.match}
-                    tOrCt={this.props.tOrCt}
-                    nadeData={this.state.nadeData.filter(
-                      nade => nade.side === "CT"
-                    )}
-                    smokesFlag={this.props.smokesFlag}
-                    flashesFlag={this.props.flashesFlag}
-                    molotovsFlag={this.props.molotovsFlag}
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
+          <MapOverlay
+            match={this.props.match}
+            mapImage={this.state.mapImage}
+            mapAlt={this.state.mapAlt}
+            loaded={this.loaded}
+            tOrCt={this.props.tOrCt}
+            nadeData={this.state.nadeData}
+            smokesFlag={this.props.smokesFlag}
+            flashesFlag={this.props.flashesFlag}
+            molotovsFlag={this.props.molotovsFlag}
+            show={true}
+          />
         </div>
       </div>
     );

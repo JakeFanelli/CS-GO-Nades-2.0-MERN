@@ -11,6 +11,7 @@ import LoggedInOrOut from "./LoggedInOrOut";
 import Account from "./Account";
 import MapPage from "./MapPage";
 import NadePage from "./NadePage";
+import SubmitNade from "./SubmitNade";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class MenuBar extends Component {
               />
             )}
           />
+          <Route path="/submitNade" component={SubmitNade} />
           <Route component={NoMatch} />
         </Switch>
       </Router>
