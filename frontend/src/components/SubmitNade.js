@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MapDropdown from "./MapDropdown";
 import MapOverlay from "./MapOverlay";
 import DATA from "../data/mapData";
+import RadioButtonsForType from "./RadioButtonsForType";
 
 class SubmitNade extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class SubmitNade extends Component {
       mapChoice: "Mirage",
       mapImage: "",
       mapAlt: "",
-      nadeTitle: ""
+      nadeTitle: "",
+      selectedOption: "Smoke"
     };
     this.handleMapChange = this.handleMapChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,30 +65,12 @@ class SubmitNade extends Component {
               value={this.state.nadeTitle}
               onChange={this.handleChange}
             />
-            <label className="label">Type: </label>
-            <br />
-            <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  classNames="form-check-input"
-                  type="radio"
-                  name="typeOfNade"
-                  value="Smoke"
-                />
-                Smoke
-              </label>
-            </div>
-            <div className="form-check-inline">
-              <label className="form-check-label">
-                <input
-                  classNames="form-check-input"
-                  type="radio"
-                  name="typeOfNade"
-                  value="Flash"
-                />
-                Flash
-              </label>
-            </div>
+          </div>
+          <div className="form-group">
+            <RadioButtonsForType
+              selectedOption={this.state.selectedOption}
+              handleChange={this.handleChange}
+            />
             <MapOverlay
               show={false}
               mapImage={this.state.mapImage}
