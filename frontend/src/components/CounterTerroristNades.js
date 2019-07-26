@@ -14,6 +14,7 @@ class CounterTerroristNades extends Component {
             smokesFlag={this.props.smokesFlag}
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
+            nadeClass={this.props.nadeClass}
           />
           <Molotovs
             match={this.props.match}
@@ -23,6 +24,7 @@ class CounterTerroristNades extends Component {
             smokesFlag={this.props.smokesFlag}
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
+            nadeClass={this.props.nadeClass}
           />
           <Flashes
             match={this.props.match}
@@ -30,6 +32,7 @@ class CounterTerroristNades extends Component {
             smokesFlag={this.props.smokesFlag}
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
+            nadeClass={this.props.nadeClass}
           />
         </React.Fragment>
       );

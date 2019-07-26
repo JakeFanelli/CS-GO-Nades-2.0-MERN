@@ -192,9 +192,12 @@ a.thumbnail:hover {
   stroke-width: 1.7;
   opacity: 0.4;
 }
-.svgClass g:hover {
+.loadedNades:hover {
   opacity: 1;
   cursor: pointer;
+}
+.userNadeNormal {
+  opacity: 1 !important;
 }
 g image {
   width: 0.55em;

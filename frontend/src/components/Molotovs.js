@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import MolotovSVG from "./MolotovSVG";
 
 class Molotovs extends Component {
   createSmokeLines = () => {
@@ -7,16 +8,13 @@ class Molotovs extends Component {
     this.props.nadeData.forEach(nade => {
       smokeLines.push(
         <Link key={nade._id} to={this.props.match.params.id + "/" + nade._id}>
-          <g>
-            <line
-              x1={nade.startX}
-              x2={nade.endX}
-              y1={nade.startY}
-              y2={nade.endY}
-            />
-            <circle cx={nade.startX} cy={nade.startY} r="1" />
-            <image href="../molly.png" x={nade.endX} y={nade.endY} />
-          </g>
+          <MolotovSVG
+            startX={nade.startX}
+            startY={nade.startY}
+            endX={nade.endX}
+            endY={nade.endY}
+            nadeClass={this.props.nadeClass}
+          />
         </Link>
       );
     });

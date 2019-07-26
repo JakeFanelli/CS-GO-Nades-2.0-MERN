@@ -14,6 +14,7 @@ class BothNades extends Component {
             smokesFlag={this.props.smokesFlag}
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
+            nadeClass={this.props.nadeClass}
           />
           <CounterTerroristNades
             match={this.props.match}
@@ -22,6 +23,7 @@ class BothNades extends Component {
             smokesFlag={this.props.smokesFlag}
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
+            nadeClass={this.props.nadeClass}
           />
         </React.Fragment>
       );

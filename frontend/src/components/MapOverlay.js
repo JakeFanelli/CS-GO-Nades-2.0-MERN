@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import BothNades from "./BothNades";
+import NadesSVG from "./NadesSVG";
 
 class MapOverlay extends Component {
   render() {
@@ -15,9 +16,11 @@ class MapOverlay extends Component {
               onLoad={this.props.loaded}
             />
             <svg
+              id="svgID"
               className="svgClass"
               viewBox="0 0 250 250"
               preserveAspectRatio="none"
+              onClick={this.props.mouseClicker}
             >
               <BothNades
                 match={this.props.match}
@@ -27,6 +30,16 @@ class MapOverlay extends Component {
                 flashesFlag={this.props.flashesFlag}
                 molotovsFlag={this.props.molotovsFlag}
                 show={this.props.show}
+                nadeClass={this.props.nadeClass}
+              />
+              <NadesSVG
+                showUserNade={this.props.showUserNade}
+                startX={this.props.startX}
+                startY={this.props.startY}
+                endX={this.props.endX}
+                endY={this.props.endY}
+                selectedOption={this.props.selectedOption}
+                nadeClass={this.props.nadeClass}
               />
             </svg>
           </div>

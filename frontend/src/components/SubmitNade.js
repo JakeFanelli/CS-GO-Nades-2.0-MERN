@@ -16,7 +16,13 @@ class SubmitNade extends Component {
       nadeTitle: "",
       nadeURL: "",
       selectedOption: "Smoke",
-      selectedSideOption: "T"
+      selectedSideOption: "T",
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0,
+      starterFlag: true,
+      endingFlag: false
     };
     this.handleMapChange = this.handleMapChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,8 +64,13 @@ class SubmitNade extends Component {
     if ((ctm = ctm.inverse())) {
       uupos = uupos.matrixTransform(ctm);
     }
-
-    console.log(Math.floor(uupos.x), Math.floor(uupos.y));
+    let x = Math.floor(uupos.x);
+    let y = Math.floor(uupos.y);
+    if (this.state.starterFlag) {
+      this.setState({ startX: x, startY: y, starterFlag: false });
+    } else {
+      this.setState({ endX: x, endY: y, starterFlag: true });
+    }
   };
 
   render() {
@@ -102,9 +113,16 @@ class SubmitNade extends Component {
             />
             <MapOverlay
               show={false}
+              showUserNade={true}
               mapImage={this.state.mapImage}
               mapAlt={this.state.mapAlt}
               mouseClicker={this.mouseClicker}
+              startX={this.state.startX}
+              startY={this.state.startY}
+              endX={this.state.endX}
+              endY={this.state.endY}
+              selectedOption={this.state.selectedOption}
+              nadeClass={"userNadeNormal"}
             />
           </div>
         </form>

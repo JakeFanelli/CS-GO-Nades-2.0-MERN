@@ -79,6 +79,7 @@ class MapPage extends Component {
             flashesFlag={this.props.flashesFlag}
             molotovsFlag={this.props.molotovsFlag}
             show={true}
+            nadeClass={"loadedNades"}
           />
         </div>
       </div>
