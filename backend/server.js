@@ -82,7 +82,11 @@ router.post("/loadNades", nadesController.loadNades);
 router.post("/loadNadeVideo", nadesController.loadNadeVideo);
 router.post("/getAuthorUserName", userController.getAuthorUserName);
 
-router.post("/submitNade", nadesController.submitNade);
+router.post(
+  "/submitNade",
+  nadesController.validateNade,
+  nadesController.submitNade
+);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);

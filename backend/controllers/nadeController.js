@@ -25,6 +25,26 @@ exports.loadNadeVideo = (req, res) => {
   }
 };
 
+exports.validateNade = (req, res, next) => {
+  req.checkBody("nadeTitle", "You must supply a title!").notEmpty();
+  req.checkBody("nadeURL", "You must supply a url!").notEmpty();
+  req
+    .check("startX")
+    .custom(value => (value !== 0 ? true : false))
+    .withMessage("You must plot the nade below!");
+  req
+    .check("endX")
+    .custom(value => (value !== 0 ? true : false))
+    .withMessage("You must plot the nade below!");
+
+  let errors = req.validationErrors();
+  if (errors) {
+    res.status(400).send({ errors });
+  } else {
+    next(); // there were no errors!
+  }
+};
+
 exports.submitNade = (req, res) => {
   const nade = new Nades({
     startX: req.body.startX,
