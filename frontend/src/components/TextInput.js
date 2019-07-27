@@ -9,6 +9,7 @@ class TextInput extends Component {
         name={this.props.name}
         value={this.props.inputText}
         onChange={this.props.onChange}
+        required
       />
     );
   }

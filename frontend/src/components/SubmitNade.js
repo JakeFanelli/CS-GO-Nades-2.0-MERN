@@ -5,6 +5,9 @@ import DATA from "../data/mapData";
 import RadioButtonsForType from "./RadioButtonsForType";
 import RadioButtonsForSide from "./RadioButtonsForSide";
 import TextInput from "./TextInput";
+import axios from "axios";
+import { NotificationManager } from "react-notifications";
+import { URL } from "../helpers";
 
 class SubmitNade extends Component {
   constructor(props) {
@@ -46,8 +49,50 @@ class SubmitNade extends Component {
   }
 
   handleSubmit(event) {
-    alert("submitted");
     event.preventDefault();
+    axios(`${URL}/submitNade`, {
+      method: "post",
+      withCredentials: true,
+      data: {
+        mapChoice:
+          this.state.mapChoice.charAt(0).toLowerCase() +
+          this.state.mapChoice.slice(1),
+        nadeTitle: this.state.nadeTitle,
+        nadeURL: this.state.nadeURL,
+        selectedOption: this.state.selectedOption,
+        selectedSideOption: this.state.selectedSideOption,
+        startX: this.state.startX,
+        startY: this.state.startY,
+        endX: this.state.endX,
+        endY: this.state.endY
+      }
+    })
+      .then(res => {
+        this.setState({
+          nadeTitle: "",
+          nadeURL: "",
+          startX: 0,
+          startY: 0,
+          endX: 0,
+          endY: 0
+        });
+        NotificationManager.success(
+          "Successully submitted nade!",
+          "Success!",
+          4000
+        );
+      })
+      .catch(error => {
+        // if (error.response) {
+        //   if (error.response.data.errors) {
+        //     error.response.data.errors.map(err => {
+        //       return NotificationManager.error(err.msg, "Error", 4000);
+        //     });
+        //   }
+        // } else {
+        //   NotificationManager.error(error.toString(), "Error", 4000);
+        // }
+      });
   }
 
   handleChange = event => {
@@ -111,6 +156,13 @@ class SubmitNade extends Component {
               selectedSideOption={this.state.selectedSideOption}
               handleChange={this.handleChange}
             />
+          </div>
+          <div className="form-group">
+            <button className="btn btn-primary" type="submit">
+              Submit Nade
+            </button>
+          </div>
+          <div className="form-group">
             <MapOverlay
               show={false}
               showUserNade={true}

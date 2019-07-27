@@ -32,6 +32,9 @@ const Nades = new Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  authorID: {
+    type: String
   }
 });
 
