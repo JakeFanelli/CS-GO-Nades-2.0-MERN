@@ -163,7 +163,11 @@ exports.updateUser = (req, res) => {
         res.status(500).send({ errors });
       } else {
         req.session.passport.user = req.body.email;
-        res.sendStatus(200);
+        const updatedUser = {
+          username: req.body.username,
+          email: req.body.email
+        };
+        res.status(200).send(updatedUser);
       }
     }
   );
