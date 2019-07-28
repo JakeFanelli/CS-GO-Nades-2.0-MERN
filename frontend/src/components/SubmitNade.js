@@ -24,8 +24,7 @@ class SubmitNade extends Component {
       startY: 0,
       endX: 0,
       endY: 0,
-      starterFlag: true,
-      endingFlag: false
+      starterFlag: true
     };
     this.handleMapChange = this.handleMapChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -80,7 +79,8 @@ class SubmitNade extends Component {
           startX: 0,
           startY: 0,
           endX: 0,
-          endY: 0
+          endY: 0,
+          starterFlag: true
         });
         NotificationManager.success(
           "Successully submitted nade!",
