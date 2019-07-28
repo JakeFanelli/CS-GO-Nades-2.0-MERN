@@ -42,6 +42,13 @@ const DATA = [
     overlaysrc: "../map_overlays/nukeMap.png"
   },
   {
+    mapTitle: "Vertigo",
+    src: "../map_images/vertigo.jpg",
+    alt: "Verigo Map",
+    to: "maps/vertigo",
+    overlaysrc: "../map_overlays/vertigoMap.png"
+  },
+  {
     mapTitle: "Cache",
     src: "../map_images/cache.jpg",
     alt: "Cache Map",
