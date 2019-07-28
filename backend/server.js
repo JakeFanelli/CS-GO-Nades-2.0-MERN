@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 const router = express.Router();
+const expressSanitizer = require("express-sanitizer");
 require("./models/User");
 require("./models/Nade");
 const userController = require("./controllers/userController");
@@ -21,6 +22,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(expressSanitizer());
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
