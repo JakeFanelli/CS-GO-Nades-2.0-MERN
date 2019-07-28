@@ -50,13 +50,19 @@ class SubmitNade extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    var mapChoiceAdjusted;
+    if (this.state.mapChoice === "Dust ll") {
+      mapChoiceAdjusted = "dust2";
+    } else {
+      mapChoiceAdjusted = this.state.mapChoice;
+    }
     axios(`${URL}/submitNade`, {
       method: "post",
       withCredentials: true,
       data: {
         mapChoice:
-          this.state.mapChoice.charAt(0).toLowerCase() +
-          this.state.mapChoice.slice(1),
+          mapChoiceAdjusted.charAt(0).toLowerCase() +
+          mapChoiceAdjusted.slice(1),
         nadeTitle: this.state.nadeTitle,
         nadeURL: this.state.nadeURL,
         selectedOption: this.state.selectedOption,
