@@ -26,6 +26,8 @@ exports.loadNadeVideo = (req, res) => {
 };
 
 exports.validateNade = (req, res, next) => {
+  req.body.nadeTitle = req.sanitize(req.body.nadeTitle).trim();
+  req.body.nadeURL = req.sanitize(req.body.nadeURL).trim();
   req.checkBody("nadeTitle", "You must supply a title!").notEmpty();
   req.checkBody("nadeURL", "You must supply a url!").notEmpty();
   req
@@ -36,8 +38,6 @@ exports.validateNade = (req, res, next) => {
     .check("endX")
     .custom(value => (value !== 0 ? true : false))
     .withMessage("You must plot the nade below!");
-  req.body.nadeTitle = req.sanitize(req.body.nadeTitle).trim();
-  req.body.nadeURL = req.sanitize(req.body.nadeURL).trim();
   let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });

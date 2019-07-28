@@ -3,7 +3,10 @@ const User = mongoose.model("User");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 
 exports.validateRegister = (req, res, next) => {
-  req.sanitizeBody("username");
+  req.body.username = req.sanitize(req.body.username).trim();
+  req.body.email = req.sanitize(req.body.email).trim();
+  req.body.password = req.sanitize(req.body.password).trim();
+  req.body.passwordConfirm = req.sanitize(req.body.passwordConfirm).trim();
   req.checkBody("username", "You must supply a Username!").notEmpty();
   req.checkBody("email", "That Email is not valid!").isEmail();
   req.sanitizeBody("email").normalizeEmail({
@@ -120,7 +123,8 @@ exports.getAuthorUserName = (req, res) => {
 };
 
 exports.validateUpdate = (req, res, next) => {
-  req.sanitizeBody("username");
+  req.body.username = req.sanitize(req.body.username).trim();
+  req.body.email = req.sanitize(req.body.email).trim();
   req.checkBody("email", "That Email is not valid!").isEmail();
   req.sanitizeBody("email").normalizeEmail({
     gmail_remove_dots: false,
@@ -135,7 +139,7 @@ exports.validateUpdate = (req, res, next) => {
   }
 };
 
-exports.updateUser = (req, res, next) => {
+exports.updateUser = (req, res) => {
   User.findOneAndUpdate(
     { email: req.session.passport.user },
     { $set: { email: req.body.email, username: req.body.username } },
