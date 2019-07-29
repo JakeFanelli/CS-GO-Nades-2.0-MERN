@@ -22,7 +22,7 @@ class MapPage extends Component {
   }
 
   componentWillMount() {
-    DATA.forEach(mapObj => {
+    for (let mapObj of DATA) {
       let uppercaseMapTitle =
         this.props.match.params.id.charAt(0).toUpperCase() +
         this.props.match.params.id.slice(1);
@@ -32,15 +32,18 @@ class MapPage extends Component {
         this.setState({
           mapTitle: mapObj.mapTitle,
           mapImage: mapObj.overlaysrc,
-          mapAlt: mapObj.alt
+          mapAlt: mapObj.alt,
+          showNoMatchComponent: false,
+          loaded: false
         });
+        break;
       } else {
         this.setState({
-          loaded: true,
-          showNoMatchComponent: true
+          showNoMatchComponent: true,
+          loaded: true
         });
       }
-    });
+    }
     //api endpoint to load nades
     axios(`${URL}/loadNades`, {
       method: "post",
@@ -49,7 +52,6 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
-      console.log(res);
       if (res.data) {
         this.setState({ nadeData: res.data });
       }
