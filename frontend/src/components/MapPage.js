@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import axios from "axios";
 import { URL } from "../helpers";
 import MapOverlay from "./MapOverlay";
+import NoMatch from "./NoMatch";
 
 class MapPage extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class MapPage extends Component {
       mapAlt: "",
       loaded: "",
       visibility: "invisible",
-      nadeData: []
+      nadeData: [],
+      showNoMatchComponent: false
     };
   }
 
@@ -32,6 +34,11 @@ class MapPage extends Component {
           mapImage: mapObj.overlaysrc,
           mapAlt: mapObj.alt
         });
+      } else {
+        this.setState({
+          loaded: true,
+          showNoMatchComponent: true
+        });
       }
     });
     //api endpoint to load nades
@@ -42,6 +49,7 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
+      console.log(res);
       if (res.data) {
         this.setState({ nadeData: res.data });
       }
@@ -53,37 +61,41 @@ class MapPage extends Component {
   };
 
   render() {
-    return (
-      <div className="container">
-        <Loader loaded={this.state.loaded} />
-        <div className={this.state.visibility}>
-          <h2 className="mapTitle">{this.state.mapTitle}</h2>
-          <FilterBar
-            tOrCt={this.props.tOrCt}
-            switchSides={this.props.switchSides}
-            smokesFlag={this.props.smokesFlag}
-            flashesFlag={this.props.flashesFlag}
-            molotovsFlag={this.props.molotovsFlag}
-            smokesFlagUpdate={this.props.smokesFlagUpdate}
-            flashesFlagUpdate={this.props.flashesFlagUpdate}
-            molotovsFlagUpdate={this.props.molotovsFlagUpdate}
-          />
-          <MapOverlay
-            match={this.props.match}
-            mapImage={this.state.mapImage}
-            mapAlt={this.state.mapAlt}
-            loaded={this.loaded}
-            tOrCt={this.props.tOrCt}
-            nadeData={this.state.nadeData}
-            smokesFlag={this.props.smokesFlag}
-            flashesFlag={this.props.flashesFlag}
-            molotovsFlag={this.props.molotovsFlag}
-            show={true}
-            nadeClass={"loadedNades"}
-          />
+    if (this.state.showNoMatchComponent) {
+      return <NoMatch />;
+    } else {
+      return (
+        <div className="container">
+          <Loader loaded={this.state.loaded} />
+          <div className={this.state.visibility}>
+            <h2 className="mapTitle">{this.state.mapTitle}</h2>
+            <FilterBar
+              tOrCt={this.props.tOrCt}
+              switchSides={this.props.switchSides}
+              smokesFlag={this.props.smokesFlag}
+              flashesFlag={this.props.flashesFlag}
+              molotovsFlag={this.props.molotovsFlag}
+              smokesFlagUpdate={this.props.smokesFlagUpdate}
+              flashesFlagUpdate={this.props.flashesFlagUpdate}
+              molotovsFlagUpdate={this.props.molotovsFlagUpdate}
+            />
+            <MapOverlay
+              match={this.props.match}
+              mapImage={this.state.mapImage}
+              mapAlt={this.state.mapAlt}
+              loaded={this.loaded}
+              tOrCt={this.props.tOrCt}
+              nadeData={this.state.nadeData}
+              smokesFlag={this.props.smokesFlag}
+              flashesFlag={this.props.flashesFlag}
+              molotovsFlag={this.props.molotovsFlag}
+              show={true}
+              nadeClass={"loadedNades"}
+            />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
