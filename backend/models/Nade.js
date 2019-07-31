@@ -8,11 +8,20 @@ const Nades = new Schema({
   startY: {
     type: Number
   },
+  midX: {
+    type: Number
+  },
+  midY: {
+    type: Number
+  },
   endX: {
     type: Number
   },
   endY: {
     type: Number
+  },
+  lines: {
+    type: String
   },
   side: {
     type: String

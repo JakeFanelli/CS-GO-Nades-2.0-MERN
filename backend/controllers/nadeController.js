@@ -38,6 +38,12 @@ exports.validateNade = (req, res, next) => {
     .check("endX")
     .custom(value => (value !== 0 ? true : false))
     .withMessage("You must plot the nade below!");
+  if (req.body.lines === "2") {
+    req
+      .check("midX")
+      .custom(value => (value !== 0 ? true : false))
+      .withMessage("You have lines set to 2 and didn't include a 2nd line");
+  }
   let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });
@@ -50,8 +56,11 @@ exports.submitNade = (req, res) => {
   const nade = new Nades({
     startX: req.body.startX,
     startY: req.body.startY,
+    midX: req.body.midX,
+    midY: req.body.midY,
     endX: req.body.endX,
     endY: req.body.endY,
+    lines: req.body.lines,
     side: req.body.selectedSideOption,
     title: req.body.nadeTitle,
     type: req.body.selectedOption,

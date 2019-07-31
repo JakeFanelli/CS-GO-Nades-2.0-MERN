@@ -4,6 +4,7 @@ import MapOverlay from "./MapOverlay";
 import DATA from "../data/mapData";
 import RadioButtonsForType from "./RadioButtonsForType";
 import RadioButtonsForSide from "./RadioButtonsForSide";
+import RadioButtonsForLines from "./RadioButtonsForLines";
 import TextInput from "./TextInput";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
@@ -22,9 +23,13 @@ class SubmitNade extends Component {
       selectedSideOption: "T",
       startX: 0,
       startY: 0,
+      midX: 0,
+      midY: 0,
       endX: 0,
       endY: 0,
-      starterFlag: true
+      starterFlag: true,
+      midFlag: false,
+      lines: "1"
     };
     this.handleMapChange = this.handleMapChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,8 +73,11 @@ class SubmitNade extends Component {
         selectedSideOption: this.state.selectedSideOption,
         startX: this.state.startX,
         startY: this.state.startY,
+        midX: this.state.midX,
+        midY: this.state.midY,
         endX: this.state.endX,
-        endY: this.state.endY
+        endY: this.state.endY,
+        lines: this.state.lines
       }
     })
       .then(res => {
@@ -78,6 +86,8 @@ class SubmitNade extends Component {
           nadeURL: "",
           startX: 0,
           startY: 0,
+          midX: 0,
+          midY: 0,
           endX: 0,
           endY: 0,
           starterFlag: true
@@ -118,10 +128,23 @@ class SubmitNade extends Component {
     let x = Math.floor(uupos.x);
     let y = Math.floor(uupos.y);
     if (this.state.starterFlag) {
-      this.setState({ startX: x, startY: y, starterFlag: false });
+      this.setState({
+        startX: x,
+        startY: y,
+        starterFlag: false,
+        midFlag: true
+      });
+    } else if (this.state.midFlag && this.state.lines === "2") {
+      this.setState({ midX: x, midY: y, midFlag: false });
     } else {
       this.setState({ endX: x, endY: y, starterFlag: true });
     }
+  };
+
+  switchSides = () => {
+    this.state.lines === 1
+      ? this.setState({ lines: 2 })
+      : this.setState({ lines: 1 });
   };
 
   render() {
@@ -164,6 +187,12 @@ class SubmitNade extends Component {
             />
           </div>
           <div className="form-group">
+            <RadioButtonsForLines
+              lines={this.state.lines}
+              handleChange={this.handleChange}
+            />
+          </div>
+          <div className="form-group">
             <button className="btn btn-primary" type="submit">
               Submit Nade
             </button>
@@ -177,10 +206,13 @@ class SubmitNade extends Component {
               mouseClicker={this.mouseClicker}
               startX={this.state.startX}
               startY={this.state.startY}
+              midX={this.state.midX}
+              midY={this.state.midY}
               endX={this.state.endX}
               endY={this.state.endY}
               selectedOption={this.state.selectedOption}
               nadeClass={"userNadeNormal"}
+              lines={this.state.lines}
             />
           </div>
         </form>

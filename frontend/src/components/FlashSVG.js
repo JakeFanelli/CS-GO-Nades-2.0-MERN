@@ -10,8 +10,11 @@ class FlashSVG extends Component {
         <LineSVG
           startX={this.props.startX}
           endX={this.props.endX}
+          midX={this.props.midX}
+          midY={this.props.midY}
           startY={this.props.startY}
           endY={this.props.endY}
+          lines={this.props.lines}
         />
         <End endX={this.props.endX} endY={this.props.endY} />
       </g>

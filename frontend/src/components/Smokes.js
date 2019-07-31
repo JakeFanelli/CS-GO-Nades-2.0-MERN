@@ -11,9 +11,12 @@ class Smokes extends Component {
           <SmokeSVG
             startX={nade.startX}
             startY={nade.startY}
+            midX={nade.midX}
+            midY={nade.midY}
             endX={nade.endX}
             endY={nade.endY}
             nadeClass={this.props.nadeClass}
+            lines={nade.lines}
           />
         </Link>
       );

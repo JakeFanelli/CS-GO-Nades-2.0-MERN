@@ -9,9 +9,12 @@ class SmokeSVG extends Component {
         <StartSVG startX={this.props.startX} startY={this.props.startY} />
         <LineSVG
           startX={this.props.startX}
-          endX={this.props.endX}
           startY={this.props.startY}
+          midX={this.props.midX}
+          midY={this.props.midY}
+          endX={this.props.endX}
           endY={this.props.endY}
+          lines={this.props.lines}
         />
         <End endX={this.props.endX} endY={this.props.endY} />
       </g>

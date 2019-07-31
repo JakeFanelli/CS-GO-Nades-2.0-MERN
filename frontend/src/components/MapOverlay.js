@@ -36,10 +36,13 @@ class MapOverlay extends Component {
                 showUserNade={this.props.showUserNade}
                 startX={this.props.startX}
                 startY={this.props.startY}
+                midX={this.props.midX}
+                midY={this.props.midY}
                 endX={this.props.endX}
                 endY={this.props.endY}
                 selectedOption={this.props.selectedOption}
                 nadeClass={this.props.nadeClass}
+                lines={this.props.lines}
               />
             </svg>
           </div>

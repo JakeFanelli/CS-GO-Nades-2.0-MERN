@@ -11,9 +11,12 @@ class NadesSVG extends Component {
           <SmokeSVG
             startX={this.props.startX}
             startY={this.props.startY}
+            midX={this.props.midX}
+            midY={this.props.midY}
             endX={this.props.endX}
             endY={this.props.endY}
             nadeClass={this.props.nadeClass}
+            lines={this.props.lines}
           />
         );
       } else if (this.props.selectedOption === "Flash") {
@@ -21,9 +24,12 @@ class NadesSVG extends Component {
           <FlashSVG
             startX={this.props.startX}
             startY={this.props.startY}
+            midX={this.props.midX}
+            midY={this.props.midY}
             endX={this.props.endX}
             endY={this.props.endY}
             nadeClass={this.props.nadeClass}
+            lines={this.props.lines}
           />
         );
       } else if (this.props.selectedOption === "Molotov") {
@@ -31,9 +37,12 @@ class NadesSVG extends Component {
           <MolotovSVG
             startX={this.props.startX}
             startY={this.props.startY}
+            midX={this.props.midX}
+            midY={this.props.midY}
             endX={this.props.endX}
             endY={this.props.endY}
             nadeClass={this.props.nadeClass}
+            lines={this.props.lines}
           />
         );
       }
