@@ -4,12 +4,14 @@ import axios from "axios";
 import { NotificationContainer } from "react-notifications";
 import { URL } from "./helpers";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faMap, faList } from "@fortawesome/free-solid-svg-icons";
 import "react-notifications/lib/notifications.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 library.add(faEdit);
+library.add(faMap);
+library.add(faList);
 
 class App extends Component {
   constructor() {

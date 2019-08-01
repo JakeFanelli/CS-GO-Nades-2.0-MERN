@@ -6,6 +6,8 @@ import axios from "axios";
 import { URL } from "../helpers";
 import MapOverlay from "./MapOverlay";
 import NoMatch from "./NoMatch";
+import MapListIcon from "./MapListIcon";
+import MapListView from "./MapListView";
 
 class MapPage extends Component {
   constructor(props) {
@@ -17,7 +19,8 @@ class MapPage extends Component {
       loaded: "",
       visibility: "invisible",
       nadeData: [],
-      showNoMatchComponent: false
+      showNoMatchComponent: false,
+      icon: "list"
     };
   }
 
@@ -62,6 +65,12 @@ class MapPage extends Component {
     this.setState({ loaded: true, visibility: "visible" });
   };
 
+  toggleView = () => {
+    this.state.icon === "list"
+      ? this.setState({ icon: "map" })
+      : this.setState({ icon: "list" });
+  };
+
   render() {
     if (this.state.showNoMatchComponent) {
       return <NoMatch />;
@@ -70,7 +79,15 @@ class MapPage extends Component {
         <div className="container">
           <Loader loaded={this.state.loaded} />
           <div className={this.state.visibility}>
-            <h2 className="mapTitle">{this.state.mapTitle}</h2>
+            <div className="row">
+              <h2 className="mapTitle col">{this.state.mapTitle}</h2>
+              <div className="col">
+                <MapListIcon
+                  icon={this.state.icon}
+                  toggleView={this.toggleView}
+                />
+              </div>
+            </div>
             <FilterBar
               tOrCt={this.props.tOrCt}
               switchSides={this.props.switchSides}
@@ -81,6 +98,7 @@ class MapPage extends Component {
               flashesFlagUpdate={this.props.flashesFlagUpdate}
               molotovsFlagUpdate={this.props.molotovsFlagUpdate}
             />
+            <MapListView icon={this.state.icon} />
             <MapOverlay
               match={this.props.match}
               mapImage={this.state.mapImage}
@@ -93,6 +111,7 @@ class MapPage extends Component {
               molotovsFlag={this.props.molotovsFlag}
               show={true}
               nadeClass={"loadedNades"}
+              icon={this.state.icon}
             />
           </div>
         </div>
