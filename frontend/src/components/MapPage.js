@@ -81,7 +81,7 @@ class MapPage extends Component {
           <div className={this.state.visibility}>
             <div className="row">
               <h2 className="mapTitle col">{this.state.mapTitle}</h2>
-              <div className="col">
+              <div className="col iconDiv">
                 <MapListIcon
                   icon={this.state.icon}
                   toggleView={this.toggleView}

@@ -340,3 +340,7 @@ input:checked + .slider:before {
   float: right;
   cursor: pointer;
 }
+.iconDiv {
+  margin-top: auto;
+  margin-bottom: auto;
+}
