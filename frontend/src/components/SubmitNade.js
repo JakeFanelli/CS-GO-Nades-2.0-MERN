@@ -213,6 +213,7 @@ class SubmitNade extends Component {
               selectedOption={this.state.selectedOption}
               nadeClass={"userNadeNormal"}
               lines={this.state.lines}
+              icon={"list"}
             />
           </div>
         </form>
