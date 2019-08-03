@@ -22,7 +22,8 @@ class App extends Component {
       tOrCt: "T",
       smokesFlag: true,
       flashesFlag: false,
-      molotovsFlag: false
+      molotovsFlag: false,
+      icon: "list"
     };
     document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
@@ -94,6 +95,12 @@ class App extends Component {
       : this.setState({ molotovsFlag: false });
   };
 
+  toggleView = () => {
+    this.state.icon === "list"
+      ? this.setState({ icon: "map" })
+      : this.setState({ icon: "list" });
+  };
+
   render() {
     return (
       <div>
@@ -112,6 +119,8 @@ class App extends Component {
           smokesFlagUpdate={this.smokesFlagUpdate}
           flashesFlagUpdate={this.flashesFlagUpdate}
           molotovsFlagUpdate={this.molotovsFlagUpdate}
+          icon={this.state.icon}
+          toggleView={this.toggleView}
         />
         <NotificationContainer />
       </div>

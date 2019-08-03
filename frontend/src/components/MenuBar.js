@@ -44,6 +44,9 @@ class MenuBar extends Component {
                   <Link to="/maps" className="nav-link">
                     Maps
                   </Link>
+                  <Link to="/submitNade" className="nav-link">
+                    Submit Nade
+                  </Link>
                   <Link to="/recoils" className="nav-link">
                     Recoil Patterns
                   </Link>
@@ -72,6 +75,8 @@ class MenuBar extends Component {
                 smokesFlagUpdate={this.props.smokesFlagUpdate}
                 flashesFlagUpdate={this.props.flashesFlagUpdate}
                 molotovsFlagUpdate={this.props.molotovsFlagUpdate}
+                icon={this.props.icon}
+                toggleView={this.props.toggleView}
               />
             )}
           />

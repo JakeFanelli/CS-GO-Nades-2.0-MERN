@@ -19,8 +19,7 @@ class MapPage extends Component {
       loaded: "",
       visibility: "invisible",
       nadeData: [],
-      showNoMatchComponent: false,
-      icon: "list"
+      showNoMatchComponent: false
     };
   }
 
@@ -59,16 +58,16 @@ class MapPage extends Component {
         this.setState({ nadeData: res.data });
       }
     });
+    if (this.props.icon === "map") {
+      this.setState({
+        loaded: true,
+        visibility: "visible"
+      });
+    }
   }
 
   loaded = () => {
     this.setState({ loaded: true, visibility: "visible" });
-  };
-
-  toggleView = () => {
-    this.state.icon === "list"
-      ? this.setState({ icon: "map" })
-      : this.setState({ icon: "list" });
   };
 
   render() {
@@ -83,8 +82,8 @@ class MapPage extends Component {
               <h2 className="mapTitle col">{this.state.mapTitle}</h2>
               <div className="col iconDiv">
                 <MapListIcon
-                  icon={this.state.icon}
-                  toggleView={this.toggleView}
+                  icon={this.props.icon}
+                  toggleView={this.props.toggleView}
                 />
               </div>
             </div>
@@ -98,7 +97,15 @@ class MapPage extends Component {
               flashesFlagUpdate={this.props.flashesFlagUpdate}
               molotovsFlagUpdate={this.props.molotovsFlagUpdate}
             />
-            <MapListView icon={this.state.icon} />
+            <MapListView
+              match={this.props.match}
+              icon={this.props.icon}
+              tOrCt={this.props.tOrCt}
+              nadeData={this.state.nadeData}
+              smokesFlag={this.props.smokesFlag}
+              flashesFlag={this.props.flashesFlag}
+              molotovsFlag={this.props.molotovsFlag}
+            />
             <MapOverlay
               match={this.props.match}
               mapImage={this.state.mapImage}
@@ -111,7 +118,7 @@ class MapPage extends Component {
               molotovsFlag={this.props.molotovsFlag}
               show={true}
               nadeClass={"loadedNades"}
-              icon={this.state.icon}
+              icon={this.props.icon}
             />
           </div>
         </div>

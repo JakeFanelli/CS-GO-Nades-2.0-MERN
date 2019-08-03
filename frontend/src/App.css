@@ -53,7 +53,8 @@ h2 {
 }
 
 .nav-link,
-.navbar-brand {
+.navbar-brand,
+#svgID {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -177,7 +178,8 @@ a.thumbnail:hover {
   }
 }
 @media only screen and (min-width: 1200px) {
-  #filterRow {
+  #filterRow,
+  .list-group {
     margin-left: 43px;
     margin-right: 43px;
   }
@@ -255,7 +257,7 @@ g image {
 }
 #switch {
   float: right;
-  top: 0.3em;
+  top: 0.25em;
 }
 .switch {
   position: relative;
@@ -343,4 +345,15 @@ input:checked + .slider:before {
 .iconDiv {
   margin-top: auto;
   margin-bottom: auto;
+}
+.list-group a {
+  color: #fff;
+}
+.nadeItem {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
 }
