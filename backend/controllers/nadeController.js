@@ -29,6 +29,10 @@ exports.validateNade = (req, res, next) => {
   req.body.nadeTitle = req.sanitize(req.body.nadeTitle).trim();
   req.body.nadeURL = req.sanitize(req.body.nadeURL).trim();
   req.checkBody("nadeTitle", "You must supply a title!").notEmpty();
+  req
+    .check("nadeTitle")
+    .custom(value => (value.length < 50 ? true : false))
+    .withMessage("Title must be less than 50 characters");
   req.checkBody("nadeURL", "You must supply a url!").notEmpty();
   req
     .check("startX")
