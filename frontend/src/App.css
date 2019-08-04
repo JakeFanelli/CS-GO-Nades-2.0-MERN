@@ -349,11 +349,24 @@ input:checked + .slider:before {
 .list-group a {
   color: #fff;
 }
+.list-group {
+  overflow: auto;
+  max-height: calc(100vh - 140px);
+}
 .nadeItem {
   padding-bottom: 10px;
   padding-top: 10px;
-  margin-top: auto;
-  margin-bottom: auto;
-  border-bottom: 1px solid;
-  border-top: 1px solid;
+  background-color: #000;
+  margin-bottom: 15px;
+}
+.list-group .nadeItem:last-of-type {
+  margin-bottom: 0px;
+}
+.nameTimeNade {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.authorNade {
+  padding-left: 10px;
+  padding-right: 10px;
 }
