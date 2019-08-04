@@ -172,6 +172,9 @@ class SubmitNade extends Component {
               inputText={this.state.nadeURL}
               name="nadeURL"
               onChange={this.handleChange}
+              placeholder={
+                "https://giant.gfycat.com/OrdinaryPowerfulGannet.mp4"
+              }
             />
           </div>
           <div className="form-group">

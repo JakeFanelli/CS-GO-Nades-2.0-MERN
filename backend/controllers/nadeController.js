@@ -38,6 +38,18 @@ exports.validateNade = (req, res, next) => {
     .check("endX")
     .custom(value => (value !== 0 ? true : false))
     .withMessage("You must plot the nade below!");
+  req
+    .check("nadeURL")
+    .custom(value =>
+      value.substring(0, 25) === "https://giant.gfycat.com/" ? true : false
+    )
+    .withMessage("Only submit gfycat urls!");
+  req
+    .check("nadeURL")
+    .custom(value =>
+      value.substring(value.length - 3, value.length) === "mp4" ? true : false
+    )
+    .withMessage("Only submit mp4 gfycat urls!");
   if (req.body.lines === "2") {
     req
       .check("midX")
