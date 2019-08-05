@@ -60,6 +60,10 @@ exports.validateNade = (req, res, next) => {
       .custom(value => (value !== 0 ? true : false))
       .withMessage("You have lines set to 2 and didn't include a 2nd line");
   }
+  req
+    .check("loggedIn")
+    .custom(value => (value !== false ? true : false))
+    .withMessage("You must be logged in!");
   let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });

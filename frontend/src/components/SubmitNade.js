@@ -77,7 +77,8 @@ class SubmitNade extends Component {
         midY: this.state.midY,
         endX: this.state.endX,
         endY: this.state.endY,
-        lines: this.state.lines
+        lines: this.state.lines,
+        loggedIn: this.props.loggedIn
       }
     })
       .then(res => {

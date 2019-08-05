@@ -116,7 +116,12 @@ class MenuBar extends Component {
               />
             )}
           />
-          <Route path="/submitNade" component={SubmitNade} />
+          <Route
+            path="/submitNade"
+            render={props => (
+              <SubmitNade {...props} loggedIn={this.props.loggedIn} />
+            )}
+          />
           <Route component={NoMatch} />
         </Switch>
       </Router>
