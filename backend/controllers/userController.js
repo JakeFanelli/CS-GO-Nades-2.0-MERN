@@ -143,6 +143,14 @@ exports.validateUpdate = (req, res, next) => {
     remove_extension: false,
     gmail_remove_subaddress: false
   });
+  req
+    .check("username")
+    .custom(value => (value.length < 25 ? true : false))
+    .withMessage("Your username less than 25 characters.");
+  req
+    .check("email")
+    .custom(value => (value.length < 35 ? true : false))
+    .withMessage("Your email less than 35 characters.");
   let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });
