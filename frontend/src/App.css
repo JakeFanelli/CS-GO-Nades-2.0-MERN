@@ -369,3 +369,6 @@ input:checked + .slider:before {
 .listContainer::-webkit-scrollbar {
   display: none;
 }
+.nadeTime {
+  padding-left: 20px;
+}
