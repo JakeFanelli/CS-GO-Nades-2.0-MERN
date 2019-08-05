@@ -350,26 +350,22 @@ input:checked + .slider:before {
   color: #fff;
 }
 .list-group {
-  overflow: auto;
+  display: grid;
+  grid-auto-rows: 1fr;
+}
+.listContainer {
   max-height: calc(100vh - 140px);
+  overflow-y: auto;
 }
 .nadeItem {
   padding-bottom: 10px;
   padding-top: 10px;
   background-color: #222;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .nadeItem a {
   text-decoration: none;
 }
-.list-group .nadeItem:last-of-type {
-  margin-bottom: 0px;
-}
-.nameTimeNade {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.authorNade {
-  padding-left: 10px;
-  padding-right: 10px;
+.listContainer::-webkit-scrollbar {
+  display: none;
 }
