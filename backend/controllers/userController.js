@@ -37,6 +37,18 @@ exports.validateRegister = (req, res, next) => {
     .check("password")
     .custom(value => (regexLength.test(value) ? true : false))
     .withMessage("Your password must be 8 characters or longer.");
+  req
+    .check("username")
+    .custom(value => (value.length < 25 ? true : false))
+    .withMessage("Your username less than 25 characters.");
+  req
+    .check("email")
+    .custom(value => (value.length < 35 ? true : false))
+    .withMessage("Your email less than 35 characters.");
+  req
+    .check("password")
+    .custom(value => (value.length < 25 ? true : false))
+    .withMessage("Your password less than 25 characters.");
   let errors = req.validationErrors();
   if (errors) {
     res.status(400).send({ errors });
