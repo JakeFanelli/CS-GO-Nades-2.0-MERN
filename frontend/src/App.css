@@ -372,3 +372,6 @@ input:checked + .slider:before {
 .nadeTime {
   padding-left: 20px;
 }
+.topLine {
+  align-items: center;
+}
