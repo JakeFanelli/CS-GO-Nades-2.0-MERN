@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const md5 = require("md5");
 const validator = require("validator");
 const mongodbErrorHandler = require("mongoose-mongodb-errors");
 const uniqueValidator = require("mongoose-unique-validator");

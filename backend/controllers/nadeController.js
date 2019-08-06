@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Nades = mongoose.model("nade");
+const Unverified_Nade = mongoose.model("Unverified_Nade");
 
 exports.loadNades = (req, res) => {
   if (req.body.mapTitle) {
@@ -73,7 +74,7 @@ exports.validateNade = (req, res, next) => {
 };
 
 exports.submitNade = (req, res) => {
-  const nade = new Nades({
+  const nade = new Unverified_Nade({
     startX: req.body.startX,
     startY: req.body.startY,
     midX: req.body.midX,
@@ -92,7 +93,7 @@ exports.submitNade = (req, res) => {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.status(200).send(results);
+      res.sendStatus(200);
     }
   });
 };

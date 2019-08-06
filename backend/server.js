@@ -10,6 +10,7 @@ const router = express.Router();
 const expressSanitizer = require("express-sanitizer");
 require("./models/User");
 require("./models/Nade");
+require("./models/Unverified_Nade");
 const userController = require("./controllers/userController");
 const authController = require("./controllers/authController");
 const nadesController = require("./controllers/nadeController");

@@ -93,11 +93,7 @@ class SubmitNade extends Component {
           endY: 0,
           starterFlag: true
         });
-        NotificationManager.success(
-          "Successully submitted nade!",
-          "Success!",
-          4000
-        );
+        NotificationManager.success("Pending approval!", "Success!", 4000);
       })
       .catch(error => {
         if (error.response) {
