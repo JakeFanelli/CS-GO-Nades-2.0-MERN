@@ -84,6 +84,7 @@ router.post(
 router.post("/loadNades", nadesController.loadNades);
 router.post("/loadNadeVideo", nadesController.loadNadeVideo);
 router.post("/getAuthorUserName", userController.getAuthorUserName);
+router.post("/getAuthorUserNames", userController.getAuthorUserNames);
 
 router.post(
   "/submitNade",

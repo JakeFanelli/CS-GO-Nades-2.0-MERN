@@ -134,6 +134,18 @@ exports.getAuthorUserName = (req, res) => {
   }
 };
 
+exports.getAuthorUserNames = async (req, res) => {
+  if (req.body.data) {
+    let mappedArr = req.body.data.map(async nade => {
+      await User.findOne({ _id: nade.authorID }).then(result => {
+        nade.author = result.username;
+      });
+      return nade;
+    });
+    res.status(200).send(await Promise.all(mappedArr));
+  }
+};
+
 exports.validateUpdate = (req, res, next) => {
   req.body.username = req.sanitize(req.body.username).trim();
   req.body.email = req.sanitize(req.body.email).trim();

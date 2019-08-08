@@ -54,9 +54,17 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
-      if (res.data) {
-        this.setState({ nadeData: res.data });
-      }
+      axios(`${URL}/getAuthorUserNames`, {
+        method: "post",
+        withCredentials: true,
+        data: {
+          data: res.data
+        }
+      }).then(res => {
+        if (res.data) {
+          this.setState({ nadeData: res.data });
+        }
+      });
     });
     if (this.props.icon === "map") {
       this.setState({
