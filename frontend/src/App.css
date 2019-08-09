@@ -366,9 +366,13 @@ input:checked + .slider:before {
   padding-top: 10px;
   background-color: #222;
   margin-bottom: 20px;
+  border: 1px solid #222;
 }
 .nadeItem a {
   text-decoration: none;
+}
+.nadeItem:hover {
+  border-color: #fff;
 }
 .listContainer::-webkit-scrollbar {
   display: none;
