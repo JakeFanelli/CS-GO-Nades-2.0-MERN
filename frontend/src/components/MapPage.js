@@ -41,8 +41,7 @@ class MapPage extends Component {
         break;
       } else {
         this.setState({
-          showNoMatchComponent: true,
-          loaded: true
+          showNoMatchComponent: true
         });
       }
     }
@@ -62,21 +61,15 @@ class MapPage extends Component {
         }
       }).then(res => {
         if (res.data) {
-          this.setState({ nadeData: res.data });
+          this.setState({
+            nadeData: res.data,
+            loaded: true,
+            visibility: "visible"
+          });
         }
       });
     });
-    if (this.props.icon === "map") {
-      this.setState({
-        loaded: true,
-        visibility: "visible"
-      });
-    }
   }
-
-  loaded = () => {
-    this.setState({ loaded: true, visibility: "visible" });
-  };
 
   render() {
     if (this.state.showNoMatchComponent) {
