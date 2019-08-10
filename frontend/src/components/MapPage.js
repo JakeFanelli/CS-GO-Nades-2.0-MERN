@@ -53,6 +53,15 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
+      this.setState({
+        nadeData: res.data
+      });
+      if (this.props.icon === "list") {
+        this.setState({
+          loaded: true,
+          visibility: "visible"
+        });
+      }
       axios(`${URL}/getAuthorUserNames`, {
         method: "post",
         withCredentials: true,
@@ -62,9 +71,9 @@ class MapPage extends Component {
       }).then(res => {
         if (res.data) {
           this.setState({
-            nadeData: res.data,
             loaded: true,
-            visibility: "visible"
+            visibility: "visible",
+            nadeData: res.data
           });
         }
       });
