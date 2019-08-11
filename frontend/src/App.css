@@ -263,13 +263,12 @@ g image {
 }
 #switch {
   float: right;
-  top: 0.25em;
 }
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 38px;
   margin-bottom: 0px;
 }
 
@@ -301,7 +300,7 @@ g image {
   height: 26px;
   width: 26px;
   left: 4px;
-  bottom: 4px;
+  bottom: 5px;
   background-color: #9d9d9d;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -317,7 +316,7 @@ input:checked + .slider:before {
 #T {
   float: right;
   position: relative;
-  top: 22%;
+  top: 6px;
   right: 10%;
   color: #9d9d9d;
   font-weight: 400;
@@ -326,7 +325,7 @@ input:checked + .slider:before {
 #CT {
   float: left;
   position: relative;
-  top: 22%;
+  top: 6px;
   left: 10%;
   color: #9d9d9d;
   font-weight: 400;
@@ -347,11 +346,6 @@ input:checked + .slider:before {
 .list {
   float: right;
   cursor: pointer;
-}
-.iconDiv {
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-right: 0px;
 }
 .list-group a {
   color: #fff;
