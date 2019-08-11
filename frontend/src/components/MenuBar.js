@@ -61,7 +61,15 @@ class MenuBar extends Component {
         </div>
         <Switch>
           <Route path="/" exact component={Index} />
-          <Route path="/maps/:id/:id" component={NadePage} />
+          <Route
+            path="/maps/:id/:id"
+            render={props => (
+              <NadePage
+                {...props}
+                userSubmissionFlag={this.props.userSubmissionFlag}
+              />
+            )}
+          />
           <Route
             path="/maps/:id"
             render={props => (
@@ -77,6 +85,10 @@ class MenuBar extends Component {
                 molotovsFlagUpdate={this.props.molotovsFlagUpdate}
                 icon={this.props.icon}
                 toggleView={this.props.toggleView}
+                nadeData={this.props.nadeData}
+                updateNadeData={this.props.updateNadeData}
+                userSubmissionFlag={this.props.userSubmissionFlag}
+                userSubmissionFlagUpdate={this.props.userSubmissionFlagUpdate}
               />
             )}
           />

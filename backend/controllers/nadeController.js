@@ -14,9 +14,33 @@ exports.loadNades = (req, res) => {
   }
 };
 
+exports.loadUnverifiedNades = (req, res) => {
+  if (req.body.mapTitle) {
+    Unverified_Nade.find({ map: req.body.mapTitle }, function(err, result) {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  }
+};
+
 exports.loadNadeVideo = (req, res) => {
   if (req.body.nadeID) {
     Nades.findOne({ _id: req.body.nadeID }, function(err, result) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(result);
+      }
+    });
+  }
+};
+
+exports.loadUnverifiedNadeVideo = (req, res) => {
+  if (req.body.nadeID) {
+    Unverified_Nade.findOne({ _id: req.body.nadeID }, function(err, result) {
       if (err) {
         res.status(500).send(err);
       } else {

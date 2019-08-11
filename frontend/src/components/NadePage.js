@@ -14,8 +14,13 @@ class NadePage extends Component {
   };
 
   componentWillMount() {
+    if (!this.props.userSubmissionFlag) {
+      var apiCall = "loadNadeVideo";
+    } else {
+      apiCall = "loadUnverifiedNadeVideo";
+    }
     //api endpoint to load nade video
-    axios(`${URL}/loadNadeVideo`, {
+    axios(`${URL}/${apiCall}`, {
       method: "post",
       withCredentials: true,
       data: {

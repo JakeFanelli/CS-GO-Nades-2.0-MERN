@@ -6,8 +6,8 @@ import axios from "axios";
 import { URL } from "../helpers";
 import MapOverlay from "./MapOverlay";
 import NoMatch from "./NoMatch";
-import MapListIcon from "./MapListIcon";
 import MapListView from "./MapListView";
+import ViewOptionsRow from "./ViewOptionsRow";
 
 class MapPage extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class MapPage extends Component {
       mapAlt: "",
       loaded: "",
       visibility: "invisible",
-      nadeData: [],
       showNoMatchComponent: false
     };
   }
@@ -45,17 +44,20 @@ class MapPage extends Component {
         });
       }
     }
+    if (!this.props.userSubmissionFlag) {
+      var apiCall = "loadNades";
+    } else {
+      apiCall = "loadUnverifiedNades";
+    }
     //api endpoint to load nades
-    axios(`${URL}/loadNades`, {
+    axios(`${URL}/${apiCall}`, {
       method: "post",
       withCredentials: true,
       data: {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
-      this.setState({
-        nadeData: res.data
-      });
+      this.props.updateNadeData(res.data);
       if (this.props.icon === "list") {
         this.setState({
           loaded: true,
@@ -70,15 +72,58 @@ class MapPage extends Component {
         }
       }).then(res => {
         if (res.data) {
+          this.props.updateNadeData(res.data);
           this.setState({
             loaded: true,
-            visibility: "visible",
-            nadeData: res.data
+            visibility: "visible"
           });
         }
       });
     });
   }
+
+  userSubmissionFlagUpdate = () => {
+    if (this.props.userSubmissionFlag) {
+      var apiCall = "loadNades";
+    } else {
+      apiCall = "loadUnverifiedNades";
+    }
+    this.setState({
+      loaded: false,
+      visibility: "invisible"
+    });
+    axios(`${URL}/${apiCall}`, {
+      method: "post",
+      withCredentials: true,
+      data: {
+        mapTitle: this.props.match.params.id
+      }
+    }).then(res => {
+      this.props.updateNadeData(res.data);
+      if (this.props.icon === "list") {
+        this.setState({
+          loaded: true,
+          visibility: "visible"
+        });
+      }
+      axios(`${URL}/getAuthorUserNames`, {
+        method: "post",
+        withCredentials: true,
+        data: {
+          data: res.data
+        }
+      }).then(res => {
+        if (res.data) {
+          this.props.updateNadeData(res.data);
+          this.setState({
+            loaded: true,
+            visibility: "visible"
+          });
+        }
+      });
+    });
+    this.props.userSubmissionFlagUpdate();
+  };
 
   render() {
     if (this.state.showNoMatchComponent) {
@@ -89,23 +134,12 @@ class MapPage extends Component {
           <Loader loaded={this.state.loaded} />
           <div className={this.state.visibility}>
             <h2 className="mapTitle">{this.state.mapTitle}</h2>
-            <div className="row viewOptionsRow">
-              <div className="viewOptionsCol col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <input
-                  type="checkbox"
-                  className="form-check-input userSubmissionCheck"
-                  id="exampleCheck1"
-                />
-                <label className="userSubmissionLabel" for="exampleCheck1">
-                  User Submissions
-                </label>
-                <MapListIcon
-                  icon={this.props.icon}
-                  toggleView={this.props.toggleView}
-                />
-              </div>
-            </div>
-
+            <ViewOptionsRow
+              icon={this.props.icon}
+              toggleView={this.props.toggleView}
+              userSubmissionFlag={this.props.userSubmissionFlag}
+              userSubmissionFlagUpdate={this.userSubmissionFlagUpdate}
+            />
             <FilterBar
               tOrCt={this.props.tOrCt}
               switchSides={this.props.switchSides}
@@ -120,7 +154,7 @@ class MapPage extends Component {
               match={this.props.match}
               icon={this.props.icon}
               tOrCt={this.props.tOrCt}
-              nadeData={this.state.nadeData}
+              nadeData={this.props.nadeData}
               smokesFlag={this.props.smokesFlag}
               flashesFlag={this.props.flashesFlag}
               molotovsFlag={this.props.molotovsFlag}
@@ -131,7 +165,7 @@ class MapPage extends Component {
               mapAlt={this.state.mapAlt}
               loaded={this.loaded}
               tOrCt={this.props.tOrCt}
-              nadeData={this.state.nadeData}
+              nadeData={this.props.nadeData}
               smokesFlag={this.props.smokesFlag}
               flashesFlag={this.props.flashesFlag}
               molotovsFlag={this.props.molotovsFlag}

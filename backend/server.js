@@ -82,7 +82,12 @@ router.post(
 );
 
 router.post("/loadNades", nadesController.loadNades);
+router.post("/loadUnverifiedNades", nadesController.loadUnverifiedNades);
 router.post("/loadNadeVideo", nadesController.loadNadeVideo);
+router.post(
+  "/loadUnverifiedNadeVideo",
+  nadesController.loadUnverifiedNadeVideo
+);
 router.post("/getAuthorUserName", userController.getAuthorUserName);
 router.post("/getAuthorUserNames", userController.getAuthorUserNames);
 

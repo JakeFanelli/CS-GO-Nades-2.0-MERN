@@ -23,7 +23,9 @@ class App extends Component {
       smokesFlag: true,
       flashesFlag: false,
       molotovsFlag: false,
-      icon: "list"
+      icon: "list",
+      nadeData: [],
+      userSubmissionFlag: false
     };
     document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
@@ -101,6 +103,18 @@ class App extends Component {
       : this.setState({ icon: "list" });
   };
 
+  updateNadeData = nadeData => {
+    this.setState({
+      nadeData: nadeData
+    });
+  };
+
+  userSubmissionFlagUpdate = () => {
+    this.setState({
+      userSubmissionFlag: !this.state.userSubmissionFlag
+    });
+  };
+
   render() {
     return (
       <div>
@@ -121,6 +135,10 @@ class App extends Component {
           molotovsFlagUpdate={this.molotovsFlagUpdate}
           icon={this.state.icon}
           toggleView={this.toggleView}
+          nadeData={this.state.nadeData}
+          updateNadeData={this.updateNadeData}
+          userSubmissionFlag={this.state.userSubmissionFlag}
+          userSubmissionFlagUpdate={this.userSubmissionFlagUpdate}
         />
         <NotificationContainer />
       </div>
