@@ -183,11 +183,13 @@ a.thumbnail:hover {
 }
 @media only screen and (min-width: 1200px) {
   #filterRow,
-  .list-group {
+  .list-group,
+  .viewOptionsRow {
     margin-left: 43px;
     margin-right: 43px;
   }
-  #filterCol {
+  #filterCol,
+  .viewOptionsCol {
     padding-left: 0;
     padding-right: 0;
   }
@@ -349,6 +351,7 @@ input:checked + .slider:before {
 .iconDiv {
   margin-top: auto;
   margin-bottom: auto;
+  padding-right: 0px;
 }
 .list-group a {
   color: #fff;
@@ -382,4 +385,10 @@ input:checked + .slider:before {
 }
 .topLine {
   align-items: center;
+}
+.userSubmissionCheck {
+  margin-left: 0em;
+}
+.userSubmissionLabel {
+  margin-left: 1.25em;
 }

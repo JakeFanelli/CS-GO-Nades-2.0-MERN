@@ -88,15 +88,24 @@ class MapPage extends Component {
         <div className="container">
           <Loader loaded={this.state.loaded} />
           <div className={this.state.visibility}>
-            <div className="row">
-              <h2 className="mapTitle col">{this.state.mapTitle}</h2>
-              <div className="col iconDiv">
+            <h2 className="mapTitle">{this.state.mapTitle}</h2>
+            <div className="row viewOptionsRow">
+              <div className="viewOptionsCol col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <input
+                  type="checkbox"
+                  className="form-check-input userSubmissionCheck"
+                  id="exampleCheck1"
+                />
+                <label className="userSubmissionLabel" for="exampleCheck1">
+                  User Submissions
+                </label>
                 <MapListIcon
                   icon={this.props.icon}
                   toggleView={this.props.toggleView}
                 />
               </div>
             </div>
+
             <FilterBar
               tOrCt={this.props.tOrCt}
               switchSides={this.props.switchSides}
