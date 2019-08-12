@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const Nades = mongoose.model("nade");
-const Unverified_Nade = mongoose.model("Unverified_Nade");
 
 exports.loadNades = (req, res) => {
   if (req.body.mapTitle) {
-    Nades.find({ map: req.body.mapTitle }, function(err, result) {
+    Nades.find({ map: req.body.mapTitle, verified: true }, function(
+      err,
+      result
+    ) {
       if (err) {
         res.sendStatus(500);
       } else {
@@ -16,7 +18,10 @@ exports.loadNades = (req, res) => {
 
 exports.loadUnverifiedNades = (req, res) => {
   if (req.body.mapTitle) {
-    Unverified_Nade.find({ map: req.body.mapTitle }, function(err, result) {
+    Nades.find({ map: req.body.mapTitle, verified: false }, function(
+      err,
+      result
+    ) {
       if (err) {
         res.sendStatus(500);
       } else {
@@ -29,18 +34,6 @@ exports.loadUnverifiedNades = (req, res) => {
 exports.loadNadeVideo = (req, res) => {
   if (req.body.nadeID) {
     Nades.findOne({ _id: req.body.nadeID }, function(err, result) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(result);
-      }
-    });
-  }
-};
-
-exports.loadUnverifiedNadeVideo = (req, res) => {
-  if (req.body.nadeID) {
-    Unverified_Nade.findOne({ _id: req.body.nadeID }, function(err, result) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -98,7 +91,7 @@ exports.validateNade = (req, res, next) => {
 };
 
 exports.submitNade = (req, res) => {
-  const nade = new Unverified_Nade({
+  const nade = new Nades({
     startX: req.body.startX,
     startY: req.body.startY,
     midX: req.body.midX,
@@ -111,7 +104,10 @@ exports.submitNade = (req, res) => {
     type: req.body.selectedOption,
     url: req.body.nadeURL,
     map: req.body.mapChoice,
-    authorID: req.user._id
+    authorID: req.user._id,
+    verified: false,
+    likesArr: [],
+    dislikesArr: []
   });
   nade.save(function(err, results) {
     if (err) {
@@ -120,4 +116,31 @@ exports.submitNade = (req, res) => {
       res.sendStatus(200);
     }
   });
+};
+
+exports.likeNadePost = (req, res) => {
+  if (req.body.userID) {
+    let arr = [];
+    Nades.findOne({ _id: req.body.nadeID }, async function(err, result) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        arr = result.likesArr;
+        await arr.push(req.body.userID);
+      }
+    }).then(l => {
+      Nades.findOneAndUpdate(
+        { _id: req.body.nadeID },
+        { $set: { likesArr: arr } },
+        { new: true },
+        function(err, result) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.status(200).send(result);
+          }
+        }
+      );
+    });
+  }
 };

@@ -44,6 +44,15 @@ const Nades = new Schema({
   },
   authorID: {
     type: String
+  },
+  verified: {
+    type: Boolean
+  },
+  likesArr: {
+    type: Array
+  },
+  dislikesArr: {
+    type: Array
   }
 });
 

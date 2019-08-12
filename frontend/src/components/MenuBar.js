@@ -67,6 +67,8 @@ class MenuBar extends Component {
               <NadePage
                 {...props}
                 userSubmissionFlag={this.props.userSubmissionFlag}
+                loggedIn={this.props.loggedIn}
+                user={this.props.user}
               />
             )}
           />

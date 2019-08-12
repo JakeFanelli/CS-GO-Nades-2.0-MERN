@@ -386,3 +386,19 @@ input:checked + .slider:before {
 .userSubmissionLabel {
   margin-left: 1.25em;
 }
+.thumbs-up-icon-span {
+  padding-right: 10px;
+}
+.numLikes,
+.numDislikes {
+  padding-right: 5px;
+}
+.thumbs-down,
+.thumbs-up {
+  cursor: pointer;
+}
+.liked,
+.disliked {
+  color: #007bff;
+  cursor: pointer;
+}
