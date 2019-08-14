@@ -121,26 +121,16 @@ exports.submitNade = (req, res) => {
 exports.likeNadePost = (req, res) => {
   if (req.body.userID) {
     let arr = [];
-    Nades.findOne({ _id: req.body.nadeID }, async function(err, result) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        arr = result.likesArr;
-        await arr.push(req.body.userID);
-      }
-    }).then(l => {
+    Nades.findOne({ _id: req.body.nadeID }).then(result => {
+      arr = result.likesArr;
+      arr.push(req.body.userID);
       Nades.findOneAndUpdate(
         { _id: req.body.nadeID },
         { $set: { likesArr: arr } },
-        { new: true },
-        function(err, result) {
-          if (err) {
-            res.status(500).send(err);
-          } else {
-            res.status(200).send(result);
-          }
-        }
-      );
+        { new: true }
+      ).then(result => {
+        res.status(200).send(result);
+      });
     });
   }
 };

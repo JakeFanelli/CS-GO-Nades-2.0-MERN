@@ -46,7 +46,7 @@ class NadePage extends Component {
             }
           })
           .then(res => {
-            if (this.props.loggedIn) {
+            if (this.state.loggedIn) {
               if (this.state.likesArr.includes(this.props.user._id)) {
                 this.setState({ like: "thumps-up liked" });
               }
