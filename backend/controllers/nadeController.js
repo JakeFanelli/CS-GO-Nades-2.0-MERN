@@ -123,14 +123,26 @@ exports.likeNadePost = (req, res) => {
     let arr = [];
     Nades.findOne({ _id: req.body.nadeID }).then(result => {
       arr = result.likesArr;
-      arr.push(req.body.userID);
-      Nades.findOneAndUpdate(
-        { _id: req.body.nadeID },
-        { $set: { likesArr: arr } },
-        { new: true }
-      ).then(result => {
-        res.status(200).send(result);
-      });
+      if (arr.includes(req.body.userID)) {
+        let index = arr.findIndex(x => x.authorID === req.body.userID);
+        arr.splice(index, 1);
+        Nades.findOneAndUpdate(
+          { _id: req.body.nadeID },
+          { $set: { likesArr: arr } },
+          { new: true }
+        ).then(result => {
+          res.status(200).send({ result, msg: "removed" });
+        });
+      } else {
+        arr.push(req.body.userID);
+        Nades.findOneAndUpdate(
+          { _id: req.body.nadeID },
+          { $set: { likesArr: arr } },
+          { new: true }
+        ).then(result => {
+          res.status(200).send({ result, msg: "added" });
+        });
+      }
     });
   }
 };

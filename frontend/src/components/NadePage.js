@@ -120,10 +120,18 @@ class NadePage extends Component {
         }
       })
         .then(res => {
-          this.setState({
-            likes: this.state.likes + 1,
-            like: "thumps-up liked"
-          });
+          if (res.data.msg === "removed") {
+            this.setState({
+              likes: this.state.likes - 1,
+              like: "thumbs-up"
+            });
+          }
+          if (res.data.msg === "added") {
+            this.setState({
+              likes: this.state.likes + 1,
+              like: "thumbs-up liked"
+            });
+          }
         })
         .catch(error => {
           console.log(error);
