@@ -93,6 +93,7 @@ router.post(
 );
 
 router.post("/likeNadePost", nadesController.likeNadePost);
+router.post("/dislikeNadePost", nadesController.dislikeNadePost);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);

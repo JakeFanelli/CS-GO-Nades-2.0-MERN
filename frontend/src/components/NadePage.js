@@ -132,6 +132,14 @@ class NadePage extends Component {
               like: "thumbs-up liked"
             });
           }
+          if (res.data.msg === "removed and added") {
+            this.setState({
+              likes: this.state.likes + 1,
+              dislikes: this.state.dislikes - 1,
+              like: "thumbs-up liked",
+              dislike: "thumbs-down"
+            });
+          }
         })
         .catch(error => {
           console.log(error);
@@ -142,9 +150,43 @@ class NadePage extends Component {
   };
 
   dislike = () => {
-    this.setState({
-      dislikes: this.state.dislikes + 1
-    });
+    if (this.state.loggedIn) {
+      axios(`${URL}/dislikeNadePost`, {
+        method: "post",
+        withCredentials: true,
+        data: {
+          userID: this.state.user._id,
+          nadeID: this.props.match.params.id
+        }
+      })
+        .then(res => {
+          if (res.data.msg === "removed") {
+            this.setState({
+              dislikes: this.state.dislikes - 1,
+              dislike: "thumbs-down"
+            });
+          }
+          if (res.data.msg === "added") {
+            this.setState({
+              dislikes: this.state.dislikes + 1,
+              dislike: "thumbs-down disliked"
+            });
+          }
+          if (res.data.msg === "removed and added") {
+            this.setState({
+              likes: this.state.likes - 1,
+              dislikes: this.state.dislikes + 1,
+              like: "thumbs-up",
+              dislike: "thumbs-down disliked"
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      alert("you must be logged in!");
+    }
   };
 
   render() {
