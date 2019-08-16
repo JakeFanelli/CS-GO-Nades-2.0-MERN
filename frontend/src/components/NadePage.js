@@ -3,6 +3,7 @@ import axios from "axios";
 import { URL } from "../helpers";
 import NoMatch from "./NoMatch";
 import LikesDislikes from "./LikesDislikes";
+import { NotificationManager } from "react-notifications";
 
 class NadePage extends Component {
   state = {
@@ -142,10 +143,10 @@ class NadePage extends Component {
           }
         })
         .catch(error => {
-          console.log(error);
+          NotificationManager.error(error.toString(), "Error", 4000);
         });
     } else {
-      alert("you must be logged in!");
+      NotificationManager.error("You must be logged in!", "Error!", 4000);
     }
   };
 
@@ -182,10 +183,10 @@ class NadePage extends Component {
           }
         })
         .catch(error => {
-          console.log(error);
+          NotificationManager.error(error.toString(), "Error", 4000);
         });
     } else {
-      alert("you must be logged in!");
+      NotificationManager.error("You must be logged in!", "Error!", 4000);
     }
   };
 

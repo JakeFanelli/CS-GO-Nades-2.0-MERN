@@ -120,18 +120,18 @@ exports.submitNade = (req, res) => {
 
 exports.likeNadePost = (req, res) => {
   if (req.body.userID) {
-    let arr = [];
-    let arr2 = [];
+    let nadeLikesArr = [];
+    let nadeDislikesArr = [];
     Nades.findOne({ _id: req.body.nadeID }).then(result => {
-      arr = result.likesArr;
-      arr2 = result.dislikesArr;
+      nadeLikesArr = result.likesArr;
+      nadeDislikesArr = result.dislikesArr;
       //if the user already likes this nade
-      if (arr.includes(req.body.userID)) {
-        let index = arr.findIndex(x => x.authorID === req.body.userID);
-        arr.splice(index, 1);
+      if (nadeLikesArr.includes(req.body.userID)) {
+        let index = nadeLikesArr.findIndex(x => x.authorID === req.body.userID);
+        nadeLikesArr.splice(index, 1);
         Nades.findOneAndUpdate(
           { _id: req.body.nadeID },
-          { $set: { likesArr: arr } },
+          { $set: { likesArr: nadeLikesArr } },
           { new: true }
         ).then(result => {
           res.status(200).send({ result, msg: "removed" });
@@ -139,28 +139,30 @@ exports.likeNadePost = (req, res) => {
         //if the user doesn't already like this nade
       } else {
         //if the user already dislikes this nade
-        if (arr2.includes(req.body.userID)) {
-          let index = arr2.findIndex(x => x.authorID === req.body.userID);
-          arr2.splice(index, 1);
+        if (nadeDislikesArr.includes(req.body.userID)) {
+          let index = nadeDislikesArr.findIndex(
+            x => x.authorID === req.body.userID
+          );
+          nadeDislikesArr.splice(index, 1);
           Nades.findOneAndUpdate(
             { _id: req.body.nadeID },
-            { $set: { dislikesArr: arr2 } },
+            { $set: { dislikesArr: nadeDislikesArr } },
             { new: true }
           ).then(result => {
-            arr.push(req.body.userID);
+            nadeLikesArr.push(req.body.userID);
             Nades.findOneAndUpdate(
               { _id: req.body.nadeID },
-              { $set: { likesArr: arr } },
+              { $set: { likesArr: nadeLikesArr } },
               { new: true }
             ).then(result => {
               res.status(200).send({ result, msg: "removed and added" });
             });
           });
         } else {
-          arr.push(req.body.userID);
+          nadeLikesArr.push(req.body.userID);
           Nades.findOneAndUpdate(
             { _id: req.body.nadeID },
-            { $set: { likesArr: arr } },
+            { $set: { likesArr: nadeLikesArr } },
             { new: true }
           ).then(result => {
             res.status(200).send({ result, msg: "added" });
@@ -173,18 +175,20 @@ exports.likeNadePost = (req, res) => {
 
 exports.dislikeNadePost = (req, res) => {
   if (req.body.userID) {
-    let arr = [];
-    let arr2 = [];
+    let nadeDislikesArr = [];
+    let nadeLikesArr = [];
     Nades.findOne({ _id: req.body.nadeID }).then(result => {
-      arr = result.dislikesArr;
-      arr2 = result.likesArr;
+      nadeDislikesArr = result.dislikesArr;
+      nadeLikesArr = result.likesArr;
       //if user already dislikes this nade
-      if (arr.includes(req.body.userID)) {
-        let index = arr.findIndex(x => x.authorID === req.body.userID);
-        arr.splice(index, 1);
+      if (nadeDislikesArr.includes(req.body.userID)) {
+        let index = nadeDislikesArr.findIndex(
+          x => x.authorID === req.body.userID
+        );
+        nadeDislikesArr.splice(index, 1);
         Nades.findOneAndUpdate(
           { _id: req.body.nadeID },
-          { $set: { dislikesArr: arr } },
+          { $set: { dislikesArr: nadeDislikesArr } },
           { new: true }
         ).then(result => {
           res.status(200).send({ result, msg: "removed" });
@@ -192,18 +196,20 @@ exports.dislikeNadePost = (req, res) => {
         //if user already doesn't dislike this nade
       } else {
         //if user already likes this nade
-        if (arr2.includes(req.body.userID)) {
-          let index = arr2.findIndex(x => x.authorID === req.body.userID);
-          arr2.splice(index, 1);
+        if (nadeLikesArr.includes(req.body.userID)) {
+          let index = nadeLikesArr.findIndex(
+            x => x.authorID === req.body.userID
+          );
+          nadeLikesArr.splice(index, 1);
           Nades.findOneAndUpdate(
             { _id: req.body.nadeID },
-            { $set: { likesArr: arr2 } },
+            { $set: { likesArr: nadeLikesArr } },
             { new: true }
           ).then(result => {
-            arr.push(req.body.userID);
+            nadeDislikesArr.push(req.body.userID);
             Nades.findOneAndUpdate(
               { _id: req.body.nadeID },
-              { $set: { dislikesArr: arr } },
+              { $set: { dislikesArr: nadeDislikesArr } },
               { new: true }
             ).then(result => {
               res.status(200).send({ result, msg: "removed and added" });
@@ -211,10 +217,10 @@ exports.dislikeNadePost = (req, res) => {
           });
         } else {
           //normal dislike
-          arr.push(req.body.userID);
+          nadeDislikesArr.push(req.body.userID);
           Nades.findOneAndUpdate(
             { _id: req.body.nadeID },
-            { $set: { dislikesArr: arr } },
+            { $set: { dislikesArr: nadeDislikesArr } },
             { new: true }
           ).then(result => {
             res.status(200).send({ result, msg: "added" });
