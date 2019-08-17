@@ -59,7 +59,6 @@ class MapPage extends Component {
       }
     }).then(res => {
       this.props.updateNadeData(res.data);
-      console.log("nadesLoadedTrue");
       this.setState({
         nadesLoaded: "nadesLoadedTrue"
       });
@@ -72,7 +71,6 @@ class MapPage extends Component {
       }).then(res => {
         if (res.data) {
           this.props.updateNadeData(res.data);
-          console.log("authorsLoadedTrue");
           this.setState({
             authorsLoaded: "authorsLoadedTrue"
           });
@@ -125,7 +123,6 @@ class MapPage extends Component {
   };
 
   onLoad = () => {
-    console.log("imageLoadedTrue");
     this.setState({
       imageLoaded: "imageLoadedTrue"
     });
