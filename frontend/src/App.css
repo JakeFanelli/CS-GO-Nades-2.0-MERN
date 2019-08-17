@@ -416,3 +416,6 @@ input:checked + .slider:before {
 .mapnadesLoadedFalseauthorsLoadedTrueimageLoadedTrue {
   visibility: hidden !important;
 }
+.nadeTitleRow {
+  padding-top: 1em;
+}

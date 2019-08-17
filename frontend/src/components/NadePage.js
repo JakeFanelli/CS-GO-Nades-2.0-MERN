@@ -196,17 +196,13 @@ class NadePage extends Component {
     } else {
       return (
         <div className="container">
-          <h2>{this.state.nadeTitle}</h2>
           <div className="embed-responsive embed-responsive-16by9">
             <video loop autoPlay muted controls key={this.state.videoURL}>
               <source src={this.state.videoURL} />
             </video>
           </div>
-          <div className="d-flex w-100 justify-content-between">
-            <div>
-              <label className="label">Author</label>
-              <p>{this.state.author}</p>
-            </div>
+          <div className="nadeTitleRow d-flex w-100 justify-content-between">
+            <h2>{this.state.nadeTitle}</h2>
             <LikesDislikes
               likes={this.state.likes}
               dislikes={this.state.dislikes}
@@ -215,6 +211,10 @@ class NadePage extends Component {
               userLikes={this.state.like}
               userDislikes={this.state.dislike}
             />
+          </div>
+          <div>
+            <label className="label">Author</label>
+            <p>{this.state.author}</p>
           </div>
           <div>
             <label className="label">Date Submitted</label>
