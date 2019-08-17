@@ -16,7 +16,6 @@ class MapPage extends Component {
       mapImage: "",
       mapTitle: "",
       mapAlt: "",
-      loaded: "",
       showNoMatchComponent: false,
       nadesLoaded: "nadesLoadedFalse",
       authorsLoaded: "authorsLoadedFalse",
@@ -58,10 +57,6 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
-      this.props.updateNadeData(res.data);
-      this.setState({
-        nadesLoaded: "nadesLoadedTrue"
-      });
       axios(`${URL}/getAuthorUserNames`, {
         method: "post",
         withCredentials: true,
@@ -72,7 +67,8 @@ class MapPage extends Component {
         if (res.data) {
           this.props.updateNadeData(res.data);
           this.setState({
-            authorsLoaded: "authorsLoadedTrue"
+            authorsLoaded: "authorsLoadedTrue",
+            nadesLoaded: "nadesLoadedTrue"
           });
         }
       });
@@ -80,15 +76,15 @@ class MapPage extends Component {
   }
 
   userSubmissionFlagUpdate = () => {
+    this.setState({
+      nadesLoaded: "nadesLoadedFalse",
+      authorsLoaded: "authorsLoadedFalse"
+    });
     if (this.props.userSubmissionFlag) {
       var apiCall = "loadNades";
     } else {
       apiCall = "loadUnverifiedNades";
     }
-    this.setState({
-      loaded: false,
-      visibility: "invisible"
-    });
     axios(`${URL}/${apiCall}`, {
       method: "post",
       withCredentials: true,
@@ -96,13 +92,6 @@ class MapPage extends Component {
         mapTitle: this.props.match.params.id
       }
     }).then(res => {
-      this.props.updateNadeData(res.data);
-      if (this.props.icon === "list") {
-        this.setState({
-          loaded: true,
-          visibility: "visible"
-        });
-      }
       axios(`${URL}/getAuthorUserNames`, {
         method: "post",
         withCredentials: true,
@@ -113,8 +102,8 @@ class MapPage extends Component {
         if (res.data) {
           this.props.updateNadeData(res.data);
           this.setState({
-            loaded: true,
-            visibility: "visible"
+            authorsLoaded: "authorsLoadedTrue",
+            nadesLoaded: "nadesLoadedTrue"
           });
         }
       });
