@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import DATA from "../data/mapData";
-import FilterBar from "./FilterBar";
-import Loader from "./Loader";
+import MapPageLoader from "./MapPageLoader";
 import axios from "axios";
 import { URL } from "../helpers";
-import MapOverlay from "./MapOverlay";
 import NoMatch from "./NoMatch";
-import MapListView from "./MapListView";
 import ViewOptionsRow from "./ViewOptionsRow";
+import FilterBar from "./FilterBar";
+import MapListView from "./MapListView";
+import MapOverlay from "./MapOverlay";
 
 class MapPage extends Component {
   constructor(props) {
@@ -17,8 +17,10 @@ class MapPage extends Component {
       mapTitle: "",
       mapAlt: "",
       loaded: "",
-      visibility: "invisible",
-      showNoMatchComponent: false
+      showNoMatchComponent: false,
+      nadesLoaded: "nadesLoadedFalse",
+      authorsLoaded: "authorsLoadedFalse",
+      imageLoaded: "imageLoadedFalse"
     };
   }
 
@@ -34,8 +36,7 @@ class MapPage extends Component {
           mapTitle: mapObj.mapTitle,
           mapImage: mapObj.overlaysrc,
           mapAlt: mapObj.alt,
-          showNoMatchComponent: false,
-          loaded: false
+          showNoMatchComponent: false
         });
         break;
       } else {
@@ -58,12 +59,10 @@ class MapPage extends Component {
       }
     }).then(res => {
       this.props.updateNadeData(res.data);
-      if (this.props.icon === "list") {
-        this.setState({
-          loaded: true,
-          visibility: "visible"
-        });
-      }
+      console.log("nadesLoadedTrue");
+      this.setState({
+        nadesLoaded: "nadesLoadedTrue"
+      });
       axios(`${URL}/getAuthorUserNames`, {
         method: "post",
         withCredentials: true,
@@ -73,9 +72,9 @@ class MapPage extends Component {
       }).then(res => {
         if (res.data) {
           this.props.updateNadeData(res.data);
+          console.log("authorsLoadedTrue");
           this.setState({
-            loaded: true,
-            visibility: "visible"
+            authorsLoaded: "authorsLoadedTrue"
           });
         }
       });
@@ -125,15 +124,34 @@ class MapPage extends Component {
     this.props.userSubmissionFlagUpdate();
   };
 
+  onLoad = () => {
+    console.log("imageLoadedTrue");
+    this.setState({
+      imageLoaded: "imageLoadedTrue"
+    });
+  };
+
   render() {
     if (this.state.showNoMatchComponent) {
       return <NoMatch />;
     } else {
       return (
         <div className="container">
-          <Loader loaded={this.state.loaded} />
-          <div className={this.state.visibility}>
-            <h2 className="mapTitle">{this.state.mapTitle}</h2>
+          <h2 className="mapTitle">{this.state.mapTitle}</h2>
+          <MapPageLoader
+            nadesLoaded={this.state.nadesLoaded}
+            authorsLoaded={this.state.authorsLoaded}
+            imageLoaded={this.state.imageLoaded}
+            icon={this.props.icon}
+          />
+          <div
+            className={
+              this.props.icon +
+              this.state.nadesLoaded +
+              this.state.authorsLoaded +
+              this.state.imageLoaded
+            }
+          >
             <ViewOptionsRow
               icon={this.props.icon}
               toggleView={this.props.toggleView}
@@ -163,7 +181,7 @@ class MapPage extends Component {
               match={this.props.match}
               mapImage={this.state.mapImage}
               mapAlt={this.state.mapAlt}
-              loaded={this.loaded}
+              onLoad={this.onLoad}
               tOrCt={this.props.tOrCt}
               nadeData={this.props.nadeData}
               smokesFlag={this.props.smokesFlag}

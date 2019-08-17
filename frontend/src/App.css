@@ -286,8 +286,8 @@ g image {
   right: 0;
   bottom: 0;
   background-color: #222;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: transform 0.4s;
+  transition: transform 0.4s;
   -webkit-user-select: none; /* Safari 3.1+ */
   -moz-user-select: none; /* Firefox 2+ */
   -ms-user-select: none; /* IE 10+ */
@@ -302,8 +302,8 @@ g image {
   left: 4px;
   bottom: 5px;
   background-color: #9d9d9d;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: transform 0.4s;
+  transition: transform 0.4s;
 }
 input:checked + .slider {
   background-color: #222;
@@ -401,4 +401,18 @@ input:checked + .slider:before {
 .disliked {
   color: #007bff;
   cursor: pointer;
+}
+.listnadesLoadedFalseauthorsLoadedFalseimageLoadedFalse,
+.listnadesLoadedTrueauthorsLoadedFalseimageLoadedFalse,
+.listnadesLoadedFalseauthorsLoadedTrueimageLoadedFalse,
+.listnadesLoadedFalseauthorsLoadedFalseimageLoadedTrue,
+.listnadesLoadedTrueauthorsLoadedTrueimageLoadedFalse,
+.listnadesLoadedFalseauthorsLoadedTrueimageLoadedTrue,
+.mapnadesLoadedFalseauthorsLoadedFalseimageLoadedFalse,
+.mapnadesLoadedTrueauthorsLoadedFalseimageLoadedFalse,
+.mapnadesLoadedFalseauthorsLoadedTrueimageLoadedFalse,
+.mapnadesLoadedFalseauthorsLoadedFalseimageLoadedTrue,
+.mapnadesLoadedTrueauthorsLoadedFalseimageLoadedTrue,
+.mapnadesLoadedFalseauthorsLoadedTrueimageLoadedTrue {
+  visibility: hidden !important;
 }

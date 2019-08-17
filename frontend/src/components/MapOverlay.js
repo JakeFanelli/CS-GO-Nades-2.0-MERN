@@ -17,7 +17,7 @@ class MapOverlay extends Component {
                 className="img-responsive overlay"
                 src={this.props.mapImage}
                 alt={this.props.mapAlt}
-                onLoad={this.props.loaded}
+                onLoad={this.props.onLoad}
               />
               <svg
                 id="svgID"
