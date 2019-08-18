@@ -48,7 +48,10 @@ class MenuBar extends Component {
                     Submit Nade
                   </Link>
                   <Link to="/recoils" className="nav-link">
-                    Recoils
+                    Recoils Patterns
+                  </Link>
+                  <Link to="/donate" className="nav-link">
+                    Donate
                   </Link>
                 </Nav>
                 <LoggedInOrOut
@@ -96,6 +99,7 @@ class MenuBar extends Component {
           />
           <Route path="/maps" component={Maps} />
           <Route path="/recoils" component={Recoils} />
+          <Route path="/donate" component={Recoils} />
           <Route
             path="/login"
             render={props => (
