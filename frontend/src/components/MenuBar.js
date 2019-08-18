@@ -12,6 +12,7 @@ import Account from "./Account";
 import MapPage from "./MapPage";
 import NadePage from "./NadePage";
 import SubmitNade from "./SubmitNade";
+import Donate from "./Donate";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -50,9 +51,12 @@ class MenuBar extends Component {
                   <Link to="/recoils" className="nav-link">
                     Recoils Patterns
                   </Link>
-                  <Link to="/donate" className="nav-link">
+                  <a
+                    href="https://www.paypal.me/JacobFanelli"
+                    className="nav-link"
+                  >
                     Donate
-                  </Link>
+                  </a>
                 </Nav>
                 <LoggedInOrOut
                   loggedIn={this.props.loggedIn}
@@ -99,7 +103,7 @@ class MenuBar extends Component {
           />
           <Route path="/maps" component={Maps} />
           <Route path="/recoils" component={Recoils} />
-          <Route path="/donate" component={Recoils} />
+          <Route path="/donate" component={Donate} />
           <Route
             path="/login"
             render={props => (
