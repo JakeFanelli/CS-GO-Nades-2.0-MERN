@@ -419,3 +419,11 @@ input:checked + .slider:before {
 .nadeTitleRow {
   padding-top: 1em;
 }
+.forgotPassword {
+  float: right;
+  color: rgba(255, 255, 255, 0.5);
+}
+.forgotPassword:hover {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}

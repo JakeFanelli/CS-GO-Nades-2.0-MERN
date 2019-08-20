@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
 import { URL } from "../helpers";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -90,6 +90,9 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <label>Password</label>
+            <Link to="/forgot_password" className="forgotPassword">
+              Forgot your password?
+            </Link>
             <input
               type="password"
               name="password"

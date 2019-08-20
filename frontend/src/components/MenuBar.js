@@ -13,6 +13,7 @@ import MapPage from "./MapPage";
 import NadePage from "./NadePage";
 import SubmitNade from "./SubmitNade";
 import Donate from "./Donate";
+import ForgotPassword from "./ForgotPassword";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -138,6 +139,7 @@ class MenuBar extends Component {
               />
             )}
           />
+          <Route path="/forgot_password" component={ForgotPassword} />
           <Route
             path="/submit_nade"
             render={props => (
