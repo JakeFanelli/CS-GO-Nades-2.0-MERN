@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
+const crypto = require("crypto");
 
 exports.validateRegister = (req, res, next) => {
   req.body.username = req.sanitize(req.body.username).trim();
@@ -14,7 +15,7 @@ exports.validateRegister = (req, res, next) => {
     remove_extension: false,
     gmail_remove_subaddress: false
   });
-  req.checkBody("password", "Password Cannot be Blank!").notEmpty();
+  req.checkBody("password", "Password Can't be blank!").notEmpty();
   req
     .checkBody("passwordConfirm", "Confirmed Password cannot be blank!")
     .notEmpty();
@@ -108,7 +109,7 @@ exports.getUser = (req, res) => {
   }
 };
 
-exports.getUserId = async (req, res, next) => {
+exports.getUserId = async (req, res) => {
   if (req.body.email) {
     User.findOne({ email: req.body.email }, function(err, result) {
       if (err) {
@@ -147,6 +148,8 @@ exports.getAuthorUserNames = async (req, res) => {
 };
 
 exports.validateUpdate = (req, res, next) => {
+  req.checkBody("username", "Username can't be blank!").notEmpty();
+  req.checkBody("email", "Email can't be blank!").notEmpty();
   req.body.username = req.sanitize(req.body.username).trim();
   req.body.email = req.sanitize(req.body.email).trim();
   req.checkBody("email", "That Email is not valid!").isEmail();
@@ -203,4 +206,39 @@ exports.updateUser = (req, res) => {
       }
     }
   );
+};
+
+exports.validateForgotPassword = (req, res, next) => {
+  req.body.email = req.sanitize(req.body.email).trim();
+  req.checkBody("email", "That Email is not valid!").isEmail();
+  req.sanitizeBody("email").normalizeEmail({
+    gmail_remove_dots: false,
+    remove_extension: false,
+    gmail_remove_subaddress: false
+  });
+  let errors = req.validationErrors();
+  if (errors) {
+    res.status(400).send({ errors });
+  } else {
+    next(); // there were no errors!
+  }
+};
+
+exports.forgotPassword = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    //NO ACCOUNT WITH THIS EMAIL
+    res.sendStatus(200);
+  } else {
+    //ACCOUNT WITH THIS EMAIL
+    user.resetPasswordToken = crypto.randomBytes(20).toString("hex");
+    user.resetPasswordExpires = Date.now() + 3600000; //1 hr from now
+    await user.save();
+    //send email
+    const resetURL = `${req.headers.origin}/forgot_password/${
+      user.resetPasswordToken
+    }`;
+    //console.log(resetURL);
+  }
+  res.status(200).send(req.body.email);
 };

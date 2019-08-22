@@ -80,6 +80,12 @@ router.post(
   userController.updateUser
 );
 
+router.post(
+  "/forgotPassword",
+  userController.validateForgotPassword,
+  userController.forgotPassword
+);
+
 router.post("/loadNades", nadesController.loadNades);
 router.post("/loadUnverifiedNades", nadesController.loadUnverifiedNades);
 router.post("/loadNadeVideo", nadesController.loadNadeVideo);

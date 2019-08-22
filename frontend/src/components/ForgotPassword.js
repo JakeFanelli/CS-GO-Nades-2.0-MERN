@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { URL } from "../helpers";
+import axios from "axios";
 import { NotificationManager } from "react-notifications";
 
 class ForgotPassword extends Component {
@@ -10,11 +12,19 @@ class ForgotPassword extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    NotificationManager.success(
-      "If an account with that address exists an email will be sent.",
-      "Success!",
-      4000
-    );
+    axios(`${URL}/forgotPassword`, {
+      method: "post",
+      withCredentials: true,
+      data: { email: this.state.email }
+    }).then(res => {
+      this.setState({ email: "" });
+      console.log(res);
+      NotificationManager.success(
+        "If an account with that email address exists an email will be sent",
+        "Success!",
+        4000
+      );
+    });
   };
   render() {
     return (

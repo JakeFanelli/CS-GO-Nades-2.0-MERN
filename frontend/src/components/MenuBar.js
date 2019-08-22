@@ -14,6 +14,7 @@ import NadePage from "./NadePage";
 import SubmitNade from "./SubmitNade";
 import Donate from "./Donate";
 import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -139,6 +140,7 @@ class MenuBar extends Component {
               />
             )}
           />
+          <Route path="/forgot_password/:id" component={ResetPassword} />
           <Route path="/forgot_password" component={ForgotPassword} />
           <Route
             path="/submit_nade"
