@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const { regexLower, regexUpper, regexNum, regexLength } = require("../helpers");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
 exports.validateRegister = (req, res, next) => {
   req.body.username = req.sanitize(req.body.username).trim();
@@ -238,7 +239,66 @@ exports.forgotPassword = async (req, res) => {
     const resetURL = `${req.headers.origin}/forgot_password/${
       user.resetPasswordToken
     }`;
-    //console.log(resetURL);
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.user,
+        pass: process.env.pass
+      }
+    });
+    var mailOptions = {
+      from: "no_reply CS:GO Nades",
+      to: user.email,
+      subject: "CS:GO Nades Password Reset",
+      text:
+        "You are receiving this because you have requested the reset of the password for your account.\n" +
+        "If you did not request this, please ignore this email and your password will remain unchanged.\n\n" +
+        "Please click on the following link, or paste this into your browser to reset your password:\n" +
+        resetURL +
+        "\n"
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(200).send(req.body.email);
+      }
+    });
   }
-  res.status(200).send(req.body.email);
+};
+
+exports.confirmResetPassword = async (req, res) => {
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  });
+  if (!user) {
+    res.status(200).send({ info: "Invalid/Expired" });
+  } else {
+    res.status(200).send({ info: "Pass" });
+  }
+};
+
+exports.validateUpdatePassword = async (req, res, next) => {
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  });
+  if (!user) {
+    res.status(200).send({ info: "Invalid/Expired" });
+  } else {
+    req.body.user = user;
+    next();
+  }
+};
+
+exports.updatePassword = (req, res) => {
+  req.body.user.setPassword(req.body.password, function() {
+    req.body.user.resetPasswordExpires = "";
+    req.body.user.resetPasswordToken = "";
+    req.body.user.save();
+    res.status(200).send({ info: "Pass" });
+  });
 };

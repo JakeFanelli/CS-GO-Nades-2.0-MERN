@@ -85,6 +85,12 @@ router.post(
   userController.validateForgotPassword,
   userController.forgotPassword
 );
+router.post("/confirmResetPassword", userController.confirmResetPassword);
+router.post(
+  "/updatePassword",
+  userController.validateUpdatePassword,
+  userController.updatePassword
+);
 
 router.post("/loadNades", nadesController.loadNades);
 router.post("/loadUnverifiedNades", nadesController.loadUnverifiedNades);

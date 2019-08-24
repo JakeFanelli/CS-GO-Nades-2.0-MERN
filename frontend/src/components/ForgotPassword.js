@@ -18,9 +18,8 @@ class ForgotPassword extends Component {
       data: { email: this.state.email }
     }).then(res => {
       this.setState({ email: "" });
-      console.log(res);
       NotificationManager.success(
-        "If an account with that email address exists an email will be sent",
+        "An email has been sent, might be in spam folder",
         "Success!",
         4000
       );
