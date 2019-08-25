@@ -4,7 +4,7 @@ import ThumbIcon from "./ThumbIcon";
 class LikesDislikes extends Component {
   render() {
     return (
-      <span className="mb-1">
+      <span className="mb-1 likes-dislikes-span">
         <div>
           <span className="thumbs-up-icon-span">
             <span className="numLikes">{this.props.likes}</span>

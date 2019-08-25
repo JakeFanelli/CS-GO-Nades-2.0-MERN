@@ -454,7 +454,7 @@ input:checked + .slider:before {
   vertical-align: middle !important;
   padding-bottom: 20px;
 }
-.mb-1 {
+.likes-dislikes-span {
   width: 6em;
 }
 @media only screen and (max-width: 767px) {
@@ -488,7 +488,7 @@ input:checked + .slider:before {
   }
 }
 @media only screen and (max-width: 400px) {
-  .mb-1 {
+  .likes-dislikes-span {
     width: 8em;
   }
 }
