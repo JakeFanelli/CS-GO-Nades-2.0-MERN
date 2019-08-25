@@ -202,7 +202,7 @@ class NadePage extends Component {
             </video>
           </div>
           <div className="nadeTitleRow d-flex w-100 justify-content-between">
-            <h2>{this.state.nadeTitle}</h2>
+            <h5>{this.state.nadeTitle}</h5>
             <LikesDislikes
               likes={this.state.likes}
               dislikes={this.state.dislikes}

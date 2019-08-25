@@ -54,6 +54,8 @@ class MenuBar extends Component {
                     Recoils Patterns
                   </Link>
                   <a
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.paypal.me/JacobFanelli"
                     className="nav-link"
                   >
@@ -69,7 +71,11 @@ class MenuBar extends Component {
           </Navbar>
         </div>
         <Switch>
-          <Route path="/" exact component={Index} />
+          <Route
+            path="/"
+            exact
+            render={props => <Index loggedIn={this.props.loggedIn} />}
+          />
           <Route
             path="/maps/:id/:id"
             render={props => (
