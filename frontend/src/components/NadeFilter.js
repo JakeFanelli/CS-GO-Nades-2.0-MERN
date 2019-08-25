@@ -14,8 +14,11 @@ class NadeFilter extends Component {
           onChange={this.props.smokesFlagUpdate}
           checked={this.props.smokesFlag}
         />
-        <label htmlFor="smokebox" className="btn filterLabel">
+        <label htmlFor="smokebox" className="btn filterLabel bigRes">
           Smokes
+        </label>
+        <label htmlFor="smokebox" className="btn filterLabel smallRes">
+          S
         </label>
         <input
           id="flashbox"
@@ -24,8 +27,11 @@ class NadeFilter extends Component {
           onChange={this.props.flashesFlagUpdate}
           checked={this.props.flashesFlag}
         />
-        <label htmlFor="flashbox" className="btn filterLabel">
+        <label htmlFor="flashbox" className="btn filterLabel bigRes">
           Flashes
+        </label>
+        <label htmlFor="flashbox" className="btn filterLabel smallRes">
+          F
         </label>
         <input
           id="molotovbox"
@@ -34,8 +40,11 @@ class NadeFilter extends Component {
           onChange={this.props.molotovsFlagUpdate}
           checked={this.props.molotovsFlag}
         />
-        <label htmlFor="molotovbox" className="btn filterLabel">
+        <label htmlFor="molotovbox" className="btn filterLabel bigRes">
           Molotovs
+        </label>
+        <label htmlFor="molotovbox" className="btn filterLabel smallRes">
+          M
         </label>
       </div>
     );

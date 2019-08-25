@@ -162,11 +162,11 @@ a.thumbnail:hover {
 .invisible {
   display: none;
 }
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1199px) {
   #contentContainer {
     overflow: auto;
     max-width: 100%;
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 172px);
   }
 }
 #imgBox {
@@ -179,14 +179,14 @@ a.thumbnail:hover {
   left: 58px;
   height: 100%;
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1199px) {
   .svgClass {
     left: 15px;
   }
 }
 @media only screen and (min-width: 1200px) {
   #filterRow,
-  .list-group,
+  .listContainer,
   .viewOptionsRow {
     margin-left: 43px;
     margin-right: 43px;
@@ -350,7 +350,7 @@ input:checked + .slider:before {
   grid-auto-rows: 1fr;
 }
 .listContainer {
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 172px);
   overflow-y: auto;
 }
 .nadeItem {
@@ -366,9 +366,7 @@ input:checked + .slider:before {
 .nadeItem:hover {
   border-color: #fff;
 }
-.listContainer::-webkit-scrollbar {
-  display: none;
-}
+
 .nadeTime {
   padding-left: 20px;
 }
@@ -490,5 +488,15 @@ input:checked + .slider:before {
 @media only screen and (max-width: 400px) {
   .likes-dislikes-span {
     width: 8em;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .bigRes {
+    display: none;
+  }
+}
+@media only screen and (min-width: 361px) {
+  .smallRes {
+    display: none;
   }
 }
