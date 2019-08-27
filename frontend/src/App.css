@@ -224,12 +224,25 @@ g image {
   border-top-right-radius: 4px;
 }
 .filterBar > .filterLabel:hover {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.filterBar > input:checked + label:hover {
   color: #fff;
-  background-color: #000;
+  cursor: pointer;
+}
+
+.filterBar > input:checked + label + label:hover {
+  color: #fff;
   cursor: pointer;
 }
 
 .filterBar > input:checked + label {
+  color: #fff;
+  background-color: #000;
+}
+.filterBar > input:checked + label + label {
   color: #fff;
   background-color: #000;
 }
