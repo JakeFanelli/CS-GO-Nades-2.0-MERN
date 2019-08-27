@@ -15,6 +15,7 @@ const nadesController = require("./controllers/nadeController");
 const expressValidator = require("express-validator");
 const passport = require("passport");
 const path = require("path");
+const enforce = require("express-sslify");
 require("dotenv").config({ path: "variables.env" });
 require("./handlers/passport");
 
@@ -119,6 +120,7 @@ router.post("/dislikeNadePost", nadesController.dislikeNadePost);
 
 app.use("/", router);
 app.set("port", process.env.PORT || 4000);
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
