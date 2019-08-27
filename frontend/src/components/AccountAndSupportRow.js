@@ -16,7 +16,7 @@ class AccountAndSupportRow extends Component {
           </div>
           <div className="rowContent col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <h3>Support</h3>
-            <p>Feel free to donate! Helps go towards improvements.</p>
+            <p>Feel free to donate!</p>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -54,7 +54,7 @@ class AccountAndSupportRow extends Component {
               />
             </div>
             <h3>Support</h3>
-            <p>Feel free to donate! Helps go towards improvements.</p>
+            <p>Feel free to donate!</p>
             <a
               target="_blank"
               rel="noopener noreferrer"
