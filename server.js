@@ -117,7 +117,7 @@ router.post(
 router.post("/likeNadePost", nadesController.likeNadePost);
 router.post("/dislikeNadePost", nadesController.dislikeNadePost);
 
-app.use("/react-node", router);
+app.use("/", router);
 app.set("port", process.env.PORT || 4000);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
