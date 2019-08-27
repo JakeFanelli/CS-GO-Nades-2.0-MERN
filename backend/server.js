@@ -15,6 +15,7 @@ const authController = require("./controllers/authController");
 const nadesController = require("./controllers/nadeController");
 const expressValidator = require("express-validator");
 const passport = require("passport");
+const path = require("path");
 require("dotenv").config({ path: "variables.env" });
 require("./handlers/passport");
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(expressValidator());
 app.use(expressSanitizer());
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
 
@@ -109,6 +111,9 @@ router.post("/dislikeNadePost", nadesController.dislikeNadePost);
 
 app.use("/react-node", router);
 app.set("port", process.env.PORT || 7777);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "../frontend/build/index.html"));
+});
 const server = app.listen(app.get("port"), () => {
   console.log(`Server is running on Port: ${server.address().port}`);
 });
