@@ -24,7 +24,13 @@ class FlashSVG extends Component {
 
 function End(props) {
   if (props.endX !== 0) {
-    return <image href="../flash.png" x={props.endX} y={props.endY} />;
+    return (
+      <image
+        href={process.env.PUBLIC_URL + "/flash.png"}
+        x={props.endX}
+        y={props.endY}
+      />
+    );
   } else {
     return null;
   }
