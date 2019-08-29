@@ -205,6 +205,7 @@ class NadePage extends Component {
                 muted
                 autoplay
                 controls
+                playsinline
                 src="${this.state.videoURL}"
                 type=video/mp4
                 />`
