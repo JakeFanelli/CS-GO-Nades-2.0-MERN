@@ -197,7 +197,14 @@ class NadePage extends Component {
       return (
         <div className="container">
           <div className="embed-responsive embed-responsive-16by9">
-            <video loop autoPlay muted controls key={this.state.videoURL}>
+            <video
+              loop
+              autoPlay
+              muted
+              controls
+              playsinline
+              key={this.state.videoURL}
+            >
               <source src={this.state.videoURL} />
             </video>
           </div>
