@@ -196,18 +196,18 @@ class NadePage extends Component {
     } else {
       return (
         <div className="container">
-          <div className="embed-responsive embed-responsive-16by9">
-            <video
-              loop
-              autoPlay
-              muted
-              controls
-              playsinline
-              key={this.state.videoURL}
-            >
-              <source src={this.state.videoURL} />
-            </video>
-          </div>
+          <div
+            className="embed-responsive embed-responsive-16by9"
+            dangerouslySetInnerHTML={{
+              __html: `
+                <video
+                loop
+                muted
+                autoplay
+                src="${this.state.videoURL}"
+                />,`
+            }}
+          ></div>
           <div className="nadeTitleRow d-flex w-100 justify-content-between">
             <h5>{this.state.nadeTitle}</h5>
             <LikesDislikes
