@@ -205,8 +205,9 @@ class NadePage extends Component {
                 muted
                 autoplay
                 controls
+                playsinline
                 src="${this.state.videoURL}"
-                />,`
+                />`
             }}
           ></div>
           <div className="nadeTitleRow d-flex w-100 justify-content-between">
