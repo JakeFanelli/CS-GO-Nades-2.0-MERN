@@ -204,6 +204,7 @@ class NadePage extends Component {
                 loop
                 muted
                 autoplay
+                controls
                 src="${this.state.videoURL}"
                 />,`
             }}
