@@ -9,11 +9,9 @@ import "react-notifications/lib/notifications.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ReactGA from "react-ga";
-
 library.add(fas);
 
 ReactGA.initialize("UA-129029364-2");
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 class App extends Component {
   constructor() {

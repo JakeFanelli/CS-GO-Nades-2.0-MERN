@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
+    "history": "^4.9.0",
     "i": "^0.3.6",
     "npm": "^6.10.2",
     "react": "^16.9.0",
@@ -16,7 +17,7 @@
     "react-ga": "^2.6.0",
     "react-loading": "^2.0.3",
     "react-notifications": "^1.4.3",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.0",
     "react-transition-group": "^1.2.1"
   },

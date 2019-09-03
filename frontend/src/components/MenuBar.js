@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Switch, Router, Route, Link } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import { Navbar, Nav } from "react-bootstrap";
 import Index from "./Index";
 import Maps from "./Maps";
@@ -15,6 +16,13 @@ import SubmitNade from "./SubmitNade";
 import Donate from "./Donate";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import ReactGA from "react-ga";
+
+const history = createBrowserHistory();
+history.listen(location => {
+  ReactGA.set({ page: location.pathname }); // Update the user's current page
+  ReactGA.pageview(location.pathname); // Record a pageview for the given page
+});
 
 class MenuBar extends Component {
   constructor(props) {
@@ -31,7 +39,7 @@ class MenuBar extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <Navbar expand="lg" variant="dark">
             <div className="container">
