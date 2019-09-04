@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Router, Route, Link } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import Index from "./Index";
 import Maps from "./Maps";
@@ -16,13 +15,7 @@ import SubmitNade from "./SubmitNade";
 import Donate from "./Donate";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import ReactGA from "react-ga";
-
-const history = createBrowserHistory();
-history.listen(location => {
-  ReactGA.set({ page: location.pathname }); // Update the user's current page
-  ReactGA.pageview(location.pathname); // Record a pageview for the given page
-});
+import Analytics from "react-router-ga";
 
 class MenuBar extends Component {
   constructor(props) {
@@ -39,7 +32,7 @@ class MenuBar extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router>
         <div>
           <Navbar expand="lg" variant="dark">
             <div className="container">
@@ -78,92 +71,94 @@ class MenuBar extends Component {
             </div>
           </Navbar>
         </div>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render={props => <Index loggedIn={this.props.loggedIn} />}
-          />
-          <Route
-            path="/maps/:id/:id"
-            render={props => (
-              <NadePage
-                {...props}
-                userSubmissionFlag={this.props.userSubmissionFlag}
-                loggedIn={this.props.loggedIn}
-                user={this.props.user}
-              />
-            )}
-          />
-          <Route
-            path="/maps/:id"
-            render={props => (
-              <MapPage
-                {...props}
-                tOrCt={this.props.tOrCt}
-                switchSides={this.props.switchSides}
-                smokesFlag={this.props.smokesFlag}
-                flashesFlag={this.props.flashesFlag}
-                molotovsFlag={this.props.molotovsFlag}
-                smokesFlagUpdate={this.props.smokesFlagUpdate}
-                flashesFlagUpdate={this.props.flashesFlagUpdate}
-                molotovsFlagUpdate={this.props.molotovsFlagUpdate}
-                icon={this.props.icon}
-                toggleView={this.props.toggleView}
-                nadeData={this.props.nadeData}
-                updateNadeData={this.props.updateNadeData}
-                userSubmissionFlag={this.props.userSubmissionFlag}
-                userSubmissionFlagUpdate={this.props.userSubmissionFlagUpdate}
-              />
-            )}
-          />
-          <Route path="/maps" component={Maps} />
-          <Route path="/recoils" component={Recoils} />
-          <Route path="/donate" component={Donate} />
-          <Route
-            path="/login"
-            render={props => (
-              <Login
-                {...props}
-                loggedIn={this.props.loggedIn}
-                loggedInUpdate={this.props.loggedInUpdate}
-                updateUser={this.props.updateUser}
-              />
-            )}
-          />
-          <Route
-            path="/register"
-            render={props => (
-              <Register
-                {...props}
-                loggedInUpdate={this.props.loggedInUpdate}
-                loggedIn={this.props.loggedIn}
-                updateUser={this.props.updateUser}
-              />
-            )}
-          />
-          <Route
-            path="/account"
-            render={props => (
-              <Account
-                {...props}
-                loggedIn={this.props.loggedIn}
-                user={this.props.user}
-                updateUsername={this.props.updateUsername}
-                updateEmail={this.props.updateEmail}
-              />
-            )}
-          />
-          <Route path="/forgot_password/:id" component={ResetPassword} />
-          <Route path="/forgot_password" component={ForgotPassword} />
-          <Route
-            path="/submit_nade"
-            render={props => (
-              <SubmitNade {...props} loggedIn={this.props.loggedIn} />
-            )}
-          />
-          <Route component={NoMatch} />
-        </Switch>
+        <Analytics id="UA-129029364-2">
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={props => <Index loggedIn={this.props.loggedIn} />}
+            />
+            <Route
+              path="/maps/:id/:id"
+              render={props => (
+                <NadePage
+                  {...props}
+                  userSubmissionFlag={this.props.userSubmissionFlag}
+                  loggedIn={this.props.loggedIn}
+                  user={this.props.user}
+                />
+              )}
+            />
+            <Route
+              path="/maps/:id"
+              render={props => (
+                <MapPage
+                  {...props}
+                  tOrCt={this.props.tOrCt}
+                  switchSides={this.props.switchSides}
+                  smokesFlag={this.props.smokesFlag}
+                  flashesFlag={this.props.flashesFlag}
+                  molotovsFlag={this.props.molotovsFlag}
+                  smokesFlagUpdate={this.props.smokesFlagUpdate}
+                  flashesFlagUpdate={this.props.flashesFlagUpdate}
+                  molotovsFlagUpdate={this.props.molotovsFlagUpdate}
+                  icon={this.props.icon}
+                  toggleView={this.props.toggleView}
+                  nadeData={this.props.nadeData}
+                  updateNadeData={this.props.updateNadeData}
+                  userSubmissionFlag={this.props.userSubmissionFlag}
+                  userSubmissionFlagUpdate={this.props.userSubmissionFlagUpdate}
+                />
+              )}
+            />
+            <Route path="/maps" component={Maps} />
+            <Route path="/recoils" component={Recoils} />
+            <Route path="/donate" component={Donate} />
+            <Route
+              path="/login"
+              render={props => (
+                <Login
+                  {...props}
+                  loggedIn={this.props.loggedIn}
+                  loggedInUpdate={this.props.loggedInUpdate}
+                  updateUser={this.props.updateUser}
+                />
+              )}
+            />
+            <Route
+              path="/register"
+              render={props => (
+                <Register
+                  {...props}
+                  loggedInUpdate={this.props.loggedInUpdate}
+                  loggedIn={this.props.loggedIn}
+                  updateUser={this.props.updateUser}
+                />
+              )}
+            />
+            <Route
+              path="/account"
+              render={props => (
+                <Account
+                  {...props}
+                  loggedIn={this.props.loggedIn}
+                  user={this.props.user}
+                  updateUsername={this.props.updateUsername}
+                  updateEmail={this.props.updateEmail}
+                />
+              )}
+            />
+            <Route path="/forgot_password/:id" component={ResetPassword} />
+            <Route path="/forgot_password" component={ForgotPassword} />
+            <Route
+              path="/submit_nade"
+              render={props => (
+                <SubmitNade {...props} loggedIn={this.props.loggedIn} />
+              )}
+            />
+            <Route component={NoMatch} />
+          </Switch>
+        </Analytics>
       </Router>
     );
   }
