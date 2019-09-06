@@ -24,7 +24,15 @@ class MolotovsSVG extends Component {
 
 function End(props) {
   if (props.endX !== 0) {
-    return <image xlinkHref="../molly.png" x={props.endX} y={props.endY} />;
+    return (
+      <image
+        href="../molly.png"
+        x={props.endX}
+        y={props.endY}
+        width="0.55em"
+        height="0.55em"
+      />
+    );
   } else {
     return null;
   }

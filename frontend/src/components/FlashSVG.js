@@ -26,7 +26,7 @@ function End(props) {
   if (props.endX !== 0) {
     return (
       <image
-        xlinkHref={"../flash.png"}
+        href={"../flash.png"}
         x={props.endX}
         y={props.endY}
         width="0.55em"
