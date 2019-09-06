@@ -24,7 +24,15 @@ class FlashSVG extends Component {
 
 function End(props) {
   if (props.endX !== 0) {
-    return <image xlinkHref={"../flash.png"} x={props.endX} y={props.endY} />;
+    return (
+      <image
+        xlinkHref={"../flash.png"}
+        x={props.endX}
+        y={props.endY}
+        width="0.55em"
+        height="0.55em"
+      />
+    );
   } else {
     return null;
   }

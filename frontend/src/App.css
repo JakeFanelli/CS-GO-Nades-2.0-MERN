@@ -211,8 +211,6 @@ a.thumbnail:hover {
   opacity: 1 !important;
 }
 g image {
-  width: 0.55em;
-  height: 0.55em;
   transform: translate(-0.275em, -0.275em);
 }
 .filterLabel {
