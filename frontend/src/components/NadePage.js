@@ -203,7 +203,7 @@ class NadePage extends Component {
                 <video
                 loop
                 muted
-                autoplay
+                autoPlay
                 controls
                 playsinline
                 src="${this.state.videoURL}"
