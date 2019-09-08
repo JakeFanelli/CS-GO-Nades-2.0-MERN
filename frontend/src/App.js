@@ -24,7 +24,6 @@ class App extends Component {
       nadeData: [],
       userSubmissionFlag: false
     };
-    document.title = "CS:GO Nades";
     axios(`${URL}/validateSession`, {
       method: "get",
       withCredentials: true
