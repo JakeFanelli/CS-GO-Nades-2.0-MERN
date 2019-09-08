@@ -464,6 +464,7 @@ input:checked + .slider:before {
   padding-bottom: 20px;
 }
 .likes-dislikes-span {
+  margin-left: 10px;
   width: 6em;
 }
 @media only screen and (max-width: 767px) {
@@ -496,9 +497,14 @@ input:checked + .slider:before {
     font-size: 16px;
   }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 768px) {
   .likes-dislikes-span {
-    width: 8em;
+    width: 5em;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .likes-dislikes-span {
+    width: 7em;
   }
 }
 @media only screen and (max-width: 360px) {
