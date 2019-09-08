@@ -497,12 +497,12 @@ input:checked + .slider:before {
     font-size: 16px;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 321px) {
   .likes-dislikes-span {
-    width: 5em;
+    width: 8em;
   }
 }
-@media only screen and (max-width: 410px) {
+@media only screen and (min-width: 321px) and (max-width: 410px) {
   .likes-dislikes-span {
     width: 7em;
   }
