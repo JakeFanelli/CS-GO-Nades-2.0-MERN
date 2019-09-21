@@ -9,6 +9,7 @@ import TextInput from "./TextInput";
 import axios from "axios";
 import { NotificationManager } from "react-notifications";
 import { URL } from "../helpers";
+import { Link } from "react-router-dom";
 
 class SubmitNade extends Component {
   constructor(props) {
@@ -164,7 +165,10 @@ class SubmitNade extends Component {
             />
           </div>
           <div className="form-group">
-            <label className="label">Gfycat URL: </label>
+            <label className="label">Gfycat URL:</label>
+            <Link to="/gfycat" className="forgotPassword">
+              What's this?
+            </Link>
             <TextInput
               inputText={this.state.nadeURL}
               name="nadeURL"

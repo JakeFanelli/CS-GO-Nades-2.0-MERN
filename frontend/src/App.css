@@ -467,6 +467,14 @@ input:checked + .slider:before {
   margin-left: 10px;
   width: 6em;
 }
+.whatsThis {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+}
+.whatsThis:hover {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
 @media only screen and (max-width: 767px) {
   .row2,
   .row3,

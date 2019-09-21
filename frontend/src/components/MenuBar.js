@@ -15,6 +15,7 @@ import SubmitNade from "./SubmitNade";
 import Donate from "./Donate";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import Gfycat from "./Gfycat";
 import Analytics from "react-router-ga";
 
 class MenuBar extends Component {
@@ -156,6 +157,7 @@ class MenuBar extends Component {
                 <SubmitNade {...props} loggedIn={this.props.loggedIn} />
               )}
             />
+            <Route path="/gfycat" component={Gfycat} />
             <Route component={NoMatch} />
           </Switch>
         </Analytics>
