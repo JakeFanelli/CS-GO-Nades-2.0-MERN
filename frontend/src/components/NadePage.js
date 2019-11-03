@@ -92,7 +92,7 @@ class NadePage extends Component {
             }
           }).then(res => {
             this.setState({
-              author: res.data.username
+              author: res.data
             });
           });
         }

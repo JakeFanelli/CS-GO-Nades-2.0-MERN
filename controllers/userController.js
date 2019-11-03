@@ -130,7 +130,7 @@ exports.getAuthorUserName = (req, res) => {
       if (err) {
         res.sendStatus(500);
       } else {
-        res.status(200).send(result);
+        res.status(200).send(result.username);
       }
     });
   }
@@ -236,9 +236,7 @@ exports.forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; //1 hr from now
     await user.save();
     //send email
-    const resetURL = `${req.headers.origin}/forgot_password/${
-      user.resetPasswordToken
-    }`;
+    const resetURL = `${req.headers.origin}/forgot_password/${user.resetPasswordToken}`;
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
