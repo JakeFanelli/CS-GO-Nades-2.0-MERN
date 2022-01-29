@@ -18,3 +18,9 @@ KEY=someKey -- express session key
 user=email address -- nodemailer
 <br>
 pass=password -- nodemailer
+
+
+### DB tables
+**nades**
+**sessions**
+**users**
