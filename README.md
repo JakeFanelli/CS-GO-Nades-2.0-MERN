@@ -3,7 +3,7 @@
 
 ### If running locally - few things to change.
 
-Server.js - Remove link 23 where we enforce HTTPS
+Server.js - Remove line 23 where we enforce HTTPS
 <br>
 helpers.js - change line 5 to "http://localhost:4000";
 
