@@ -20,6 +20,7 @@ require("dotenv").config({ path: "variables.env" });
 require("./handlers/passport");
 
 const app = express();
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 if (process.env.NODE_ENV === "production") {
   app.use(
     cors({ credentials: true, origin: "https://csgo-nades.herokuapp.com/" })
