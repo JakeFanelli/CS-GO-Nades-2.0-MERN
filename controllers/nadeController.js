@@ -4,37 +4,37 @@ const User = mongoose.model("User");
 
 exports.loadNades = (req, res) => {
   if (req.body.mapTitle) {
-    Nades.find({ map: req.body.mapTitle, verified: true }, function(
-      err,
-      result
-    ) {
-      if (err) {
-        res.sendStatus(500);
-      } else {
-        res.status(200).send(result);
+    Nades.find(
+      { map: req.body.mapTitle, verified: true },
+      function (err, result) {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          res.status(200).send(result);
+        }
       }
-    });
+    );
   }
 };
 
 exports.loadUnverifiedNades = (req, res) => {
   if (req.body.mapTitle) {
-    Nades.find({ map: req.body.mapTitle, verified: false }, function(
-      err,
-      result
-    ) {
-      if (err) {
-        res.sendStatus(500);
-      } else {
-        res.status(200).send(result);
+    Nades.find(
+      { map: req.body.mapTitle, verified: false },
+      function (err, result) {
+        if (err) {
+          res.sendStatus(500);
+        } else {
+          res.status(200).send(result);
+        }
       }
-    });
+    );
   }
 };
 
 exports.loadNadeVideo = (req, res) => {
   if (req.body.nadeID) {
-    Nades.findOne({ _id: req.body.nadeID }, function(err, result) {
+    Nades.findOne({ _id: req.body.nadeID }, function (err, result) {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -50,38 +50,50 @@ exports.validateNade = (req, res, next) => {
   req.checkBody("nadeTitle", "You must supply a title!").notEmpty();
   req
     .check("nadeTitle")
-    .custom(value => (value.length < 50 ? true : false))
+    .custom((value) => (value.length < 50 ? true : false))
     .withMessage("Title must be less than 50 characters");
   req.checkBody("nadeURL", "You must supply a url!").notEmpty();
   req
     .check("startX")
-    .custom(value => (value !== 0 ? true : false))
+    .custom((value) => (value !== 0 ? true : false))
     .withMessage("You must plot the nade below!");
   req
     .check("endX")
-    .custom(value => (value !== 0 ? true : false))
+    .custom((value) => (value !== 0 ? true : false))
     .withMessage("You must plot the nade below!");
   req
     .check("nadeURL")
-    .custom(value =>
-      value.substring(0, 25) === "https://giant.gfycat.com/" ? true : false
+    .custom((value) =>
+      value.substring(0, 25) === "https://giant.gfycat.com/"
+        ? true
+        : value.substring(0, 30) === "https://www.youtube.com/embed/"
+        ? true
+        : false
     )
-    .withMessage("Only submit gfycat urls!");
+    .withMessage("Only submit gfycat/youtube urls!");
   req
     .check("nadeURL")
-    .custom(value =>
-      value.substring(value.length - 3, value.length) === "mp4" ? true : false
-    )
+    .custom((value) => {
+      if (value.substring(0, 25) === "https://giant.gfycat.com/") {
+        if (value.substring(value.length - 3, value.length) === "mp4") {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    })
     .withMessage("Only submit mp4 gfycat urls!");
   if (req.body.lines === "2") {
     req
       .check("midX")
-      .custom(value => (value !== 0 ? true : false))
+      .custom((value) => (value !== 0 ? true : false))
       .withMessage("You have lines set to 2 and didn't include a 2nd line");
   }
   req
     .check("loggedIn")
-    .custom(value => (value !== false ? true : false))
+    .custom((value) => (value !== false ? true : false))
     .withMessage("You must be logged in!");
   let errors = req.validationErrors();
   if (errors) {
@@ -110,7 +122,7 @@ exports.submitNade = (req, res) => {
     likesArr: [],
     dislikesArr: []
   });
-  nade.save(function(err, results) {
+  nade.save(function (err, results) {
     if (err) {
       res.sendStatus(500);
     } else {
@@ -121,27 +133,27 @@ exports.submitNade = (req, res) => {
 
 exports.likeNadePost = (req, res) => {
   if (req.body.userID) {
-    User.findOne({ _id: req.body.userID }, function(err, result) {
+    User.findOne({ _id: req.body.userID }, function (err, result) {
       if (err) {
         res.sendStatus(401);
       } else {
         if (req.isAuthenticated()) {
           let nadeLikesArr = [];
           let nadeDislikesArr = [];
-          Nades.findOne({ _id: req.body.nadeID }).then(result => {
+          Nades.findOne({ _id: req.body.nadeID }).then((result) => {
             nadeLikesArr = result.likesArr;
             nadeDislikesArr = result.dislikesArr;
             //if the user already likes this nade
             if (nadeLikesArr.includes(req.body.userID)) {
               let index = nadeLikesArr.findIndex(
-                x => x.authorID === req.body.userID
+                (x) => x.authorID === req.body.userID
               );
               nadeLikesArr.splice(index, 1);
               Nades.findOneAndUpdate(
                 { _id: req.body.nadeID },
                 { $set: { likesArr: nadeLikesArr } },
                 { new: true }
-              ).then(result => {
+              ).then((result) => {
                 res.status(200).send({ result, msg: "removed" });
               });
               //if the user doesn't already like this nade
@@ -149,20 +161,20 @@ exports.likeNadePost = (req, res) => {
               //if the user already dislikes this nade
               if (nadeDislikesArr.includes(req.body.userID)) {
                 let index = nadeDislikesArr.findIndex(
-                  x => x.authorID === req.body.userID
+                  (x) => x.authorID === req.body.userID
                 );
                 nadeDislikesArr.splice(index, 1);
                 Nades.findOneAndUpdate(
                   { _id: req.body.nadeID },
                   { $set: { dislikesArr: nadeDislikesArr } },
                   { new: true }
-                ).then(result => {
+                ).then((result) => {
                   nadeLikesArr.push(req.body.userID);
                   Nades.findOneAndUpdate(
                     { _id: req.body.nadeID },
                     { $set: { likesArr: nadeLikesArr } },
                     { new: true }
-                  ).then(result => {
+                  ).then((result) => {
                     res.status(200).send({ result, msg: "removed and added" });
                   });
                 });
@@ -172,7 +184,7 @@ exports.likeNadePost = (req, res) => {
                   { _id: req.body.nadeID },
                   { $set: { likesArr: nadeLikesArr } },
                   { new: true }
-                ).then(result => {
+                ).then((result) => {
                   res.status(200).send({ result, msg: "added" });
                 });
               }
@@ -188,27 +200,27 @@ exports.likeNadePost = (req, res) => {
 
 exports.dislikeNadePost = (req, res) => {
   if (req.body.userID) {
-    User.findOne({ _id: req.body.userID }, function(err, result) {
+    User.findOne({ _id: req.body.userID }, function (err, result) {
       if (err) {
         res.sendStatus(401);
       } else {
         if (req.isAuthenticated()) {
           let nadeDislikesArr = [];
           let nadeLikesArr = [];
-          Nades.findOne({ _id: req.body.nadeID }).then(result => {
+          Nades.findOne({ _id: req.body.nadeID }).then((result) => {
             nadeDislikesArr = result.dislikesArr;
             nadeLikesArr = result.likesArr;
             //if user already dislikes this nade
             if (nadeDislikesArr.includes(req.body.userID)) {
               let index = nadeDislikesArr.findIndex(
-                x => x.authorID === req.body.userID
+                (x) => x.authorID === req.body.userID
               );
               nadeDislikesArr.splice(index, 1);
               Nades.findOneAndUpdate(
                 { _id: req.body.nadeID },
                 { $set: { dislikesArr: nadeDislikesArr } },
                 { new: true }
-              ).then(result => {
+              ).then((result) => {
                 res.status(200).send({ result, msg: "removed" });
               });
               //if user already doesn't dislike this nade
@@ -216,20 +228,20 @@ exports.dislikeNadePost = (req, res) => {
               //if user already likes this nade
               if (nadeLikesArr.includes(req.body.userID)) {
                 let index = nadeLikesArr.findIndex(
-                  x => x.authorID === req.body.userID
+                  (x) => x.authorID === req.body.userID
                 );
                 nadeLikesArr.splice(index, 1);
                 Nades.findOneAndUpdate(
                   { _id: req.body.nadeID },
                   { $set: { likesArr: nadeLikesArr } },
                   { new: true }
-                ).then(result => {
+                ).then((result) => {
                   nadeDislikesArr.push(req.body.userID);
                   Nades.findOneAndUpdate(
                     { _id: req.body.nadeID },
                     { $set: { dislikesArr: nadeDislikesArr } },
                     { new: true }
-                  ).then(result => {
+                  ).then((result) => {
                     res.status(200).send({ result, msg: "removed and added" });
                   });
                 });
@@ -240,7 +252,7 @@ exports.dislikeNadePost = (req, res) => {
                   { _id: req.body.nadeID },
                   { $set: { dislikesArr: nadeDislikesArr } },
                   { new: true }
-                ).then(result => {
+                ).then((result) => {
                   res.status(200).send({ result, msg: "added" });
                 });
               }

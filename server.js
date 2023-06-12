@@ -20,7 +20,6 @@ require("dotenv").config({ path: "variables.env" });
 require("./handlers/passport");
 
 const app = express();
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
 if (process.env.NODE_ENV === "production") {
   app.use(
     cors({ credentials: true, origin: "https://csgo-nades.herokuapp.com/" })
@@ -43,7 +42,7 @@ mongoose.connect(process.env.DATABASE, {
 });
 mongoose.Promise = global.Promise;
 const connection = mongoose.connection;
-connection.once("open", function() {
+connection.once("open", function () {
   console.log("MongoDB connection established successfully.");
 });
 
@@ -75,12 +74,12 @@ router.post(
   userController.validateRegister,
   userController.register,
   passport.authenticate("local", {}),
-  function(req, res) {
+  function (req, res) {
     res.sendStatus(200);
   }
 );
 
-router.post("/login", passport.authenticate("local", {}), function(req, res) {
+router.post("/login", passport.authenticate("local", {}), function (req, res) {
   res.sendStatus(200);
 });
 

@@ -37,7 +37,7 @@ class SubmitNade extends Component {
   }
 
   componentDidMount() {
-    DATA.forEach(mapObj => {
+    DATA.forEach((mapObj) => {
       if (mapObj.mapTitle === this.state.mapChoice) {
         this.setState({ mapImage: mapObj.overlaysrc, mapAlt: mapObj.mapAlt });
       }
@@ -46,7 +46,7 @@ class SubmitNade extends Component {
 
   handleMapChange(event) {
     this.setState({ mapChoice: event.target.value });
-    DATA.forEach(mapObj => {
+    DATA.forEach((mapObj) => {
       if (mapObj.mapTitle === event.target.value) {
         this.setState({ mapImage: mapObj.overlaysrc, mapAlt: mapObj.mapAlt });
       }
@@ -82,7 +82,7 @@ class SubmitNade extends Component {
         loggedIn: this.props.loggedIn
       }
     })
-      .then(res => {
+      .then((res) => {
         this.setState({
           nadeTitle: "",
           nadeURL: "",
@@ -96,10 +96,10 @@ class SubmitNade extends Component {
         });
         NotificationManager.success("Pending approval!", "Success!", 4000);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           if (error.response.data.errors) {
-            error.response.data.errors.map(err => {
+            error.response.data.errors.map((err) => {
               return NotificationManager.error(err.msg, "Error", 4000);
             });
           }
@@ -109,12 +109,12 @@ class SubmitNade extends Component {
       });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  mouseClicker = event => {
+  mouseClicker = (event) => {
     var root = document.getElementById("svgID");
     var uupos = root.createSVGPoint();
     uupos.x = event.clientX;
@@ -165,7 +165,7 @@ class SubmitNade extends Component {
             />
           </div>
           <div className="form-group">
-            <label className="label">Gfycat URL:</label>
+            <label className="label">Gfycat/YouTube URL:</label>
             <Link to="/gfycat" className="forgotPassword">
               What's this?
             </Link>
@@ -173,9 +173,7 @@ class SubmitNade extends Component {
               inputText={this.state.nadeURL}
               name="nadeURL"
               onChange={this.handleChange}
-              placeholder={
-                "https://giant.gfycat.com/OrdinaryPowerfulGannet.mp4"
-              }
+              placeholder={"https://www.youtube.com/embed/UCKJ5w81MjM"}
             />
           </div>
           <div className="form-group">

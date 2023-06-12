@@ -29,24 +29,24 @@ class NadePage extends Component {
       method: "get",
       withCredentials: true
     })
-      .then(res => {
+      .then((res) => {
         if (res.data.msg === "yes") {
           this.setState({ loggedIn: true });
         } else if (res.data.msg === "no") {
           this.setState({ loggedIn: false });
         }
       })
-      .then(res => {
+      .then((res) => {
         axios(`${URL}/user`, {
           method: "get",
           withCredentials: true
         })
-          .then(res => {
+          .then((res) => {
             if (res.data.email) {
               this.setState({ user: res.data });
             }
           })
-          .then(res => {
+          .then((res) => {
             if (this.state.loggedIn) {
               if (this.state.likesArr.includes(this.props.user._id)) {
                 this.setState({ like: "thumps-up liked" });
@@ -65,7 +65,7 @@ class NadePage extends Component {
         nadeID: this.props.match.params.id
       }
     })
-      .then(res => {
+      .then((res) => {
         if (res.data) {
           let dateReturned = new Date(res.data.date);
           let month = dateReturned.getMonth() + 1;
@@ -90,14 +90,14 @@ class NadePage extends Component {
             data: {
               authorID: this.state.authorID
             }
-          }).then(res => {
+          }).then((res) => {
             this.setState({
               author: res.data
             });
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           if (error.response.data) {
             if (error.response.data.name === "CastError") {
@@ -120,7 +120,7 @@ class NadePage extends Component {
           nadeID: this.props.match.params.id
         }
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.msg === "removed") {
             this.setState({
               likes: this.state.likes - 1,
@@ -142,7 +142,7 @@ class NadePage extends Component {
             });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           NotificationManager.error(error.toString(), "Error", 4000);
         });
     } else {
@@ -160,7 +160,7 @@ class NadePage extends Component {
           nadeID: this.props.match.params.id
         }
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.msg === "removed") {
             this.setState({
               dislikes: this.state.dislikes - 1,
@@ -182,7 +182,7 @@ class NadePage extends Component {
             });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           NotificationManager.error(error.toString(), "Error", 4000);
         });
     } else {
@@ -193,7 +193,7 @@ class NadePage extends Component {
   render() {
     if (this.state.showNoMatchComponent) {
       return <NoMatch />;
-    } else {
+    } else if (this.state.videoURL.includes("giant.gfycat")) {
       return (
         <div className="container">
           <div
@@ -232,6 +232,45 @@ class NadePage extends Component {
           </div>
         </div>
       );
+    } else if (this.state.videoURL.includes("https://www.youtube.com/embed/")) {
+      return (
+        <div className="container">
+          <div
+            className="embed-responsive embed-responsive-16by9"
+            dangerouslySetInnerHTML={{
+              __html: `
+                <iframe
+                  src="${this.state.videoURL}?autoplay=1"
+                  title="${this.state.nadeTitle}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>`
+            }}
+          ></div>
+          <div className="nadeTitleRow d-flex w-100 justify-content-between">
+            <h5>{this.state.nadeTitle}</h5>
+            <LikesDislikes
+              likes={this.state.likes}
+              dislikes={this.state.dislikes}
+              like={this.like}
+              dislike={this.dislike}
+              userLikes={this.state.like}
+              userDislikes={this.state.dislike}
+            />
+          </div>
+          <div>
+            <label className="label">Author</label>
+            <p>{this.state.author}</p>
+          </div>
+          <div>
+            <label className="label">Date Submitted</label>
+            <p>{this.state.dateSubmitted}</p>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
     }
   }
 }
