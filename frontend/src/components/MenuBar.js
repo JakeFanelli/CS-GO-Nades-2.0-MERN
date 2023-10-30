@@ -38,7 +38,7 @@ class MenuBar extends Component {
           <Navbar expand="lg" variant="dark">
             <div className="container">
               <Link to="/" className="navbar-brand">
-                CS:GO Nades
+                CS2 Nades
               </Link>
               <Navbar.Toggle
                 aria-controls="basic-navbar-nav"

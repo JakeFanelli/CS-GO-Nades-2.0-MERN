@@ -245,9 +245,9 @@ exports.forgotPassword = async (req, res) => {
       }
     });
     var mailOptions = {
-      from: "no_reply CS:GO Nades",
+      from: "no_reply CS2 Nades",
       to: user.email,
-      subject: "CS:GO Nades Password Reset",
+      subject: "CS2 Nades Password Reset",
       text:
         "You are receiving this because you have requested the reset of the password for your account.\n" +
         "If you did not request this, please ignore this email and your password will remain unchanged.\n\n" +
