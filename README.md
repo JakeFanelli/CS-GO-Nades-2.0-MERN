@@ -19,6 +19,7 @@ user=email address -- nodemailer
 pass=password -- nodemailer
 
 start server with `npm start` in root folder
+
 start frontend with `npm start` in frontend folder
 
 ### DB tables
