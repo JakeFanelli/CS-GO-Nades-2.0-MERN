@@ -165,8 +165,8 @@ class SubmitNade extends Component {
             />
           </div>
           <div className="form-group">
-            <label className="label">Gfycat/YouTube URL:</label>
-            <Link to="/gfycat" className="forgotPassword">
+            <label className="label">YouTube Embed URL:</label>
+            <Link to="/instructions" className="forgotPassword">
               What's this?
             </Link>
             <TextInput

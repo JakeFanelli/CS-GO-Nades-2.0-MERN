@@ -193,45 +193,6 @@ class NadePage extends Component {
   render() {
     if (this.state.showNoMatchComponent) {
       return <NoMatch />;
-    } else if (this.state.videoURL.includes("giant.gfycat")) {
-      return (
-        <div className="container">
-          <div
-            className="embed-responsive embed-responsive-16by9"
-            dangerouslySetInnerHTML={{
-              __html: `
-                <video
-                loop
-                muted
-                autoPlay
-                controls
-                playsinline
-                src="${this.state.videoURL}"
-                type=video/mp4
-                />`
-            }}
-          ></div>
-          <div className="nadeTitleRow d-flex w-100 justify-content-between">
-            <h5>{this.state.nadeTitle}</h5>
-            <LikesDislikes
-              likes={this.state.likes}
-              dislikes={this.state.dislikes}
-              like={this.like}
-              dislike={this.dislike}
-              userLikes={this.state.like}
-              userDislikes={this.state.dislike}
-            />
-          </div>
-          <div>
-            <label className="label">Author</label>
-            <p>{this.state.author}</p>
-          </div>
-          <div>
-            <label className="label">Date Submitted</label>
-            <p>{this.state.dateSubmitted}</p>
-          </div>
-        </div>
-      );
     } else if (this.state.videoURL.includes("https://www.youtube.com/embed/")) {
       return (
         <div className="container">

@@ -64,27 +64,11 @@ exports.validateNade = (req, res, next) => {
   req
     .check("nadeURL")
     .custom((value) =>
-      value.substring(0, 25) === "https://giant.gfycat.com/"
-        ? true
-        : value.substring(0, 30) === "https://www.youtube.com/embed/"
-        ? true
-        : false
+      value.substring(0, 30) === "https://www.youtube.com/embed/" ? true : false
     )
-    .withMessage("Only submit gfycat/youtube urls!");
-  req
-    .check("nadeURL")
-    .custom((value) => {
-      if (value.substring(0, 25) === "https://giant.gfycat.com/") {
-        if (value.substring(value.length - 3, value.length) === "mp4") {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return true;
-      }
-    })
-    .withMessage("Only submit mp4 gfycat urls!");
+    .withMessage(
+      "Only submit youtube urls! i.e.: https://www.youtube.com/embed/oWoG3uag1i0"
+    );
   if (req.body.lines === "2") {
     req
       .check("midX")
