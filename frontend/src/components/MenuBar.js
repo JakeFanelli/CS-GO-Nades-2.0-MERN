@@ -12,10 +12,9 @@ import Account from "./Account";
 import MapPage from "./MapPage";
 import NadePage from "./NadePage";
 import SubmitNade from "./SubmitNade";
-import Donate from "./Donate";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import Gfycat from "./Gfycat";
+import Instructions from "./Instructions";
 import Analytics from "react-router-ga";
 
 class MenuBar extends Component {
@@ -55,14 +54,6 @@ class MenuBar extends Component {
                   <Link to="/recoils" className="nav-link">
                     Recoils Patterns
                   </Link>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://www.paypal.me/JacobFanelli"
-                    className="nav-link"
-                  >
-                    Donate
-                  </a>
                 </Nav>
                 <LoggedInOrOut
                   loggedIn={this.props.loggedIn}
@@ -77,11 +68,11 @@ class MenuBar extends Component {
             <Route
               path="/"
               exact
-              render={props => <Index loggedIn={this.props.loggedIn} />}
+              render={(props) => <Index loggedIn={this.props.loggedIn} />}
             />
             <Route
               path="/maps/:id/:id"
-              render={props => (
+              render={(props) => (
                 <NadePage
                   {...props}
                   userSubmissionFlag={this.props.userSubmissionFlag}
@@ -92,7 +83,7 @@ class MenuBar extends Component {
             />
             <Route
               path="/maps/:id"
-              render={props => (
+              render={(props) => (
                 <MapPage
                   {...props}
                   tOrCt={this.props.tOrCt}
@@ -114,10 +105,9 @@ class MenuBar extends Component {
             />
             <Route path="/maps" component={Maps} />
             <Route path="/recoils" component={Recoils} />
-            <Route path="/donate" component={Donate} />
             <Route
               path="/login"
-              render={props => (
+              render={(props) => (
                 <Login
                   {...props}
                   loggedIn={this.props.loggedIn}
@@ -128,7 +118,7 @@ class MenuBar extends Component {
             />
             <Route
               path="/register"
-              render={props => (
+              render={(props) => (
                 <Register
                   {...props}
                   loggedInUpdate={this.props.loggedInUpdate}
@@ -139,7 +129,7 @@ class MenuBar extends Component {
             />
             <Route
               path="/account"
-              render={props => (
+              render={(props) => (
                 <Account
                   {...props}
                   loggedIn={this.props.loggedIn}
@@ -153,11 +143,11 @@ class MenuBar extends Component {
             <Route path="/forgot_password" component={ForgotPassword} />
             <Route
               path="/submit_nade"
-              render={props => (
+              render={(props) => (
                 <SubmitNade {...props} loggedIn={this.props.loggedIn} />
               )}
             />
-            <Route path="/gfycat" component={Gfycat} />
+            <Route path="/instructions" component={Instructions} />
             <Route component={NoMatch} />
           </Switch>
         </Analytics>

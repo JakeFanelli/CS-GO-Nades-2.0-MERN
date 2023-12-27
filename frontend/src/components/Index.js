@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import AccountAndSupportRow from "./AccountAndSupportRow";
+import AccountRow from "./AccountRow";
 
-const Index = props => (
+const Index = (props) => (
   <div className="container">
     <div className="row orient-right">
       <div className="rowImage col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -58,7 +58,7 @@ const Index = props => (
         </Link>
       </div>
     </div>
-    <AccountAndSupportRow loggedIn={props.loggedIn} />
+    <AccountRow loggedIn={props.loggedIn} />
   </div>
 );
 
