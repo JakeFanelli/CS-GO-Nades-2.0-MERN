@@ -1,4 +1,4 @@
-# **Live demo:** https://csgo-nades.herokuapp.com/
+# **Live demo:** https://cs2-nades.onrender.com/
 
 ### If running locally - few things to change.
 
